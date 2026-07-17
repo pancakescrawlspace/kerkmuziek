@@ -1,0 +1,28 @@
+% Verheerlijkt -- a hymn typeset with pitch marks above the syllables.
+% The typographic machinery lives in separate files, each covering one device:
+\input pitch-marks   % \rise/\risetwo/\risethree and \fall/... : slanted pitch marks
+\input hold          % \hold : underline a held syllable
+\input finalskip     % \finalskip : space before the final line
+\input layout        % body font, font measurement, uniform leading, page setup
+                     % (input last: it uses the geometry declared by the above)
+\raggedright
+
+\title{Tropaar (t. 3)}
+\falltwo{---} De liefde tot de wijsheid heeft vleugels geschonken aan uw geest,\par
+en in die wijsheid hebt gij de vreugden der wereld ge\-ring geacht.\par
+Daardoor zijt gij een vreugdevol verblijf der goddelijke liefde,\par
+want door uw askese en heiligheid\par
+zijt gij een Bruid geworden van uw Verlosser,\par
+tot Wie gij bidt voor ons die tot u roepen:\par
+\finalskip
+Verheug u, Goddragende Makrina! --- 
+
+\title{Kondak (t. 2)}
+--- Geheel vervuld van het licht der Gerechtigheid,\par
+zijt gij een voorbeeld geworden van Godwelgevallig leven,\par
+en een leidsvrouw tot alle deugden\par
+voor hen die in geloof tot u roepen:\par
+Verheug u, Makrina,\par
+die de stralende schoonheid der maagden zijt. ---
+
+\bye
