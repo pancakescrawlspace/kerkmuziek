@@ -44,6 +44,10 @@
 % 1 inch (25.4mm).  (The default \hsize of 6.5in is a US-Letter width, which on
 % narrower A4 paper left an asymmetric ~19.5mm right margin.)
 \hsize=\pdfpagewidth \advance\hsize by-2in
+% Likewise \vsize: plain TeX's default of 8.9in left a ~45mm bottom margin on
+% A4 (vs. the 25.4mm top), leaving the page more room than it needed to break
+% into. \vsize = pageheight - 2in makes the bottom margin 1 inch too.
+\vsize=\pdfpageheight \advance\vsize by-2in
 % Plain TeX's default \footline sets the page number in \tenrm (Computer
 % Modern); switch it to Helvetica, at a plain 10pt since the footer sits well
 % below the pitch marks and needs no matching height to them.
