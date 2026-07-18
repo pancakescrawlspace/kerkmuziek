@@ -1,32 +1,38 @@
 % Pitch marks above syllables.  A rising pitch is marked with one or more rising
-% diagonal strokes and a falling pitch with falling ones.  The strokes are the
-% AMS symbols \diagup ("/") and \diagdown ("\"), ordinary glyphs set in
-% \markfont, so -- unlike the \pdfliteral strokes used before -- nothing here
-% depends on the output driver, and the file is fully portable.  These are used
-% rather than an ordinary "/" and "\" because their diagonal sits at ~45 degrees
-% to the horizontal, a shallower (more slanted) angle than the ~70-degree
-% solidus of a text font.  \risetwo/\risethree and \falltwo/\fallthree use two
-% and three strokes.  \hold{...} (see hold.tex) underlines a held syllable;
-% since it sits below the baseline it composes with the marks above,
-% e.g. \rise{\hold{heer}}.
+% diagonal strokes and a falling pitch with falling ones.  The strokes are
+% \diagup ("/") and \diagdown ("\"), ordinary glyphs set in \markfont, so --
+% unlike the \pdfliteral strokes used before -- nothing here depends on the
+% output driver, and the file is fully portable.  \risetwo/\risethree and
+% \falltwo/\fallthree stack two and three strokes vertically, one above
+% another.  \hold{...} (see hold.tex) underlines a held syllable; since it
+% sits below the baseline it composes with the marks above, e.g.
+% \rise{\hold{heer}}.
 %
 % \markfont sizes the marks (its \diagup/\diagdown glyphs are the strokes);
-% scale it to make the marks bigger or smaller.  \diagup lives at code 30 and
-% \diagdown at code 31 of the AMS symbol font msbm10 (part of amsfonts, present
-% in every TeX installation).  msbm10 has a 10pt design size.
-\font\markfont=msbm10 scaled 600    % marks: AMS symbols; \diagup = rise, \diagdown = fall
-\chardef\diagup=30                  % rising diagonal stroke  ("/")
-\chardef\diagdown=31                % falling diagonal stroke ("\")
-% msbm10 has no bold variant, so the strokes are emboldened the way LaTeX's own
-% \boldsymbol does for AMS symbols -- "poor man's bold": overprint the glyph
-% \boldcopies times, each copy shifted \markbold further to the right, so the
-% copies merge sideways into one heavier stroke.  A horizontal shift thickens
-% the /-- and \--diagonals equally (perpendicular to a 45-degree line).
+% scale it to make the marks bigger or smaller.  \diagup lives at code 8 and
+% \diagdown at code 72 of line10 -- the line-segment font LaTeX's own
+% \line(dx,dy) picture-mode command draws with, present in every TeX
+% installation.  Its characters are straight strokes at fixed slopes rather
+% than a symbol-font glyph; code 8 is \line(2,1) (slope 1/2, ~26.6 degrees
+% from the horizontal -- shallower than the ~45-degree diagonal used before)
+% and code 72 is \line(2,-1), its mirror image falling instead of rising.
+% line10 has a 10pt design size.
+\font\markfont=line10 scaled 840    % marks: line10 line segments; \diagup = rise, \diagdown = fall
+\chardef\diagup=8                   % rising diagonal stroke  ("/"), slope 1/2
+\chardef\diagdown=72                % falling diagonal stroke ("\"), slope 1/2
+% line10 draws each stroke with a round pen (a fixed perpendicular width, at
+% this scale about 0.45pt) too thin on its own, so it's emboldened the way
+% LaTeX's own \boldsymbol does for AMS symbols -- "poor man's bold": overprint
+% the glyph \boldcopies times, each copy shifted \markbold further to the
+% right, so the copies merge sideways into one heavier stroke.  A horizontal
+% shift thickens a line perpendicular to itself by shift*sin(angle from the
+% horizontal), so the same \markbold does less work at this shallower ~26.6
+% degrees than it would nearer 45; \markbold is sized up to compensate.
 % \markbold is the step between copies: it must stay smaller than the base stroke
 % width or the copies show as separate lines instead of merging.  The perpendicular
-% thickness added is (\boldcopies-1)*\markbold/sqrt2, so together with the thin
-% base glyph the strokes here are tuned to match the \hold underline (~1.44pt).
-\newdimen\markbold \markbold=0.15pt      % step between overprinted copies
+% thickness added is (\boldcopies-1)*\markbold*sin(26.6deg), so together with the
+% thin base glyph the strokes here are tuned to match the \hold underline (~1.44pt).
+\newdimen\markbold \markbold=0.24pt      % step between overprinted copies
 \newcount\boldcopies \boldcopies=12      % number of copies (weight of the stroke)
 \newdimen\boldshift                      % scratch: recentring offset, set per mark
 % The strokes are drawn in colour.  Colour is inherently a driver feature, so --
@@ -75,12 +81,53 @@
 \def\risemark#1#2{\risemarkalign{\hss}{\hss}{#1}{#2}}      % strokes centred over the syllable
 \def\risemarkleft#1#2{\risemarkalign{}{\hss}{#1}{#2}}      % strokes flush with the syllable's left edge
 \def\rise{\risemark{\diagup}}
-\def\risetwo{\risemark{\diagup\diagup}}
-\def\risethree{\risemark{\diagup\diagup\diagup}}
+% \risemarkstackalign{leftglue}{rightglue}{stroke}{count}{syllable}: like
+% \risemarkalign, but stacks \stroke \count times vertically -- one directly
+% above another -- rather than side by side, for \risetwo/\risethree and
+% \falltwo/\fallthree.  Rows are separated by \markstackgap; the vbox's own
+% reference point sits at the bottom row's baseline, so \raise\riseheight
+% below puts that bottom stroke exactly where a single \rise/\fall would
+% sit, with the rest stacking upward from it.  Otherwise the same as
+% \risemarkalign: poor-man's-bold smear, colour, then the syllable itself.
+% \diagup/\diagdown carry several points of empty padding in their own
+% bounding box (msbm10's design, not this file's doing), so a small positive
+% \markstackgap is invisible against it -- closing the visible gap needs a
+% negative value, overlapping the boxes.
+\newdimen\markstackgap \markstackgap=-0.75pt   % vertical gap between stacked strokes
+\def\risemarkstackalign#1#2#3#4#5{%
+  \leavevmode
+  \setbox0=\hbox{#5}%
+  \setbox2=\vbox{%
+    \offinterlineskip          % rows are spaced by \markstackgap alone, not
+                                % the document's normal interline glue
+    \count255=0
+    \loop \ifnum\count255<#4
+      \ifnum\count255>0 \kern\markstackgap\fi
+      \hbox to\wd0{#1\markfont#3#2}%
+      \advance\count255 by1
+    \repeat
+  }%
+  \boldshift=\markbold \multiply\boldshift by\boldcopies \advance\boldshift by-\markbold
+  \divide\boldshift by2
+  \rlap{\raise\riseheight\hbox{%
+    \markcolor
+    \kern-\boldshift
+    \count255=0
+    \loop \ifnum\count255<\boldcopies
+      \rlap{\copy2}\kern\markbold
+      \advance\count255 by1
+    \repeat
+    \markcolorreset
+  }}%
+  \box0
+}
+\def\risemarkstack#1#2{\risemarkstackalign{\hss}{\hss}{#1}{#2}}
+\def\risetwo{\risemarkstack{\diagup}{2}}
+\def\risethree{\risemarkstack{\diagup}{3}}
 % \fall, \falltwo, \fallthree: the same, with falling diagonals for the falling pitch.
 \def\fall{\risemark{\diagdown}}
-\def\falltwo{\risemark{\diagdown\diagdown}}
-\def\fallthree{\risemark{\diagdown\diagdown\diagdown}}
+\def\falltwo{\risemarkstack{\diagdown}{2}}
+\def\fallthree{\risemarkstack{\diagdown}{3}}
 % "Spaced" marks: several strokes over one syllable, each corresponding to a
 % separate note, so they need clear air between them -- more than the plain
 % multi-stroke marks above, which just butt the glyphs together.  \markgap is
