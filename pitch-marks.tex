@@ -20,19 +20,22 @@
 \font\markfont=line10 scaled 840    % marks: line10 line segments; \diagup = rise, \diagdown = fall
 \chardef\diagup=8                   % rising diagonal stroke  ("/"), slope 1/2
 \chardef\diagdown=72                % falling diagonal stroke ("\"), slope 1/2
-% line10 draws each stroke with a round pen (a fixed perpendicular width, at
-% this scale about 0.45pt) too thin on its own, so it's emboldened the way
-% LaTeX's own \boldsymbol does for AMS symbols -- "poor man's bold": overprint
-% the glyph \boldcopies times, each copy shifted \markbold further to the
-% right, so the copies merge sideways into one heavier stroke.  A horizontal
-% shift thickens a line perpendicular to itself by shift*sin(angle from the
-% horizontal), so the same \markbold does less work at this shallower ~26.6
-% degrees than it would nearer 45; \markbold is sized up to compensate.
+% line10 draws each stroke with a round pen (a fixed perpendicular width,
+% proportional to \markfont's scale -- about 0.34pt at the current 840) too
+% thin on its own, so it's emboldened the way LaTeX's own \boldsymbol does
+% for AMS symbols -- "poor man's bold": overprint the glyph \boldcopies
+% times, each copy shifted \markbold further to the right, so the copies
+% merge sideways into one heavier stroke.  A horizontal shift thickens a
+% line perpendicular to itself by shift*sin(angle from the horizontal), so
+% the same \markbold does less work at this shallower ~26.6 degrees than it
+% would nearer 45; \markbold is sized up to compensate.
 % \markbold is the step between copies: it must stay smaller than the base stroke
 % width or the copies show as separate lines instead of merging.  The perpendicular
 % thickness added is (\boldcopies-1)*\markbold*sin(26.6deg), so together with the
-% thin base glyph the strokes here are tuned to match the \hold underline (~1.44pt).
-\newdimen\markbold \markbold=0.24pt      % step between overprinted copies
+% thin base glyph the strokes here are tuned to match the \hold underline (1.44pt,
+% measured directly off the rendered strokes -- not just calculated, since both
+% \markfont's angle and its scale factor into the base glyph's own thickness).
+\newdimen\markbold \markbold=0.23pt      % step between overprinted copies
 \newcount\boldcopies \boldcopies=12      % number of copies (weight of the stroke)
 \newdimen\boldshift                      % scratch: recentring offset, set per mark
 % The strokes are drawn in colour.  Colour is inherently a driver feature, so --
