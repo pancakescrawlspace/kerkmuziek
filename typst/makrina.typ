@@ -27,7 +27,7 @@ zijt gij een Bruid geworden van uw #rise[Ver]#rise[#hold[los]]#fall[#hold[ser]],
 tot Wie gij bidt voor ons die tot u #rise[#hold[roe]]#fall[#hold[pen]]:
 
 #finalskip
-Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((down-stroke, down-stroke, down-stroke, up-stroke), [kri-])#rise[#hold[na]]! ---
+Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((up-stroke, up-stroke, up-stroke, down-stroke, down-stroke, down-stroke), [kri-~~~~~~~])#rise[#hold[~~~]]#fall[#hold[na]]! ---
 
 #title[Kondak (t. 2)]
 #rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold[tig]]#fall[#hold[heid]],
