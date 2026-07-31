@@ -17,7 +17,7 @@
 #let conf(body) = {
   set page(paper: "a4", margin: 1in, numbering: none)
   set text(font: body-font, size: body-size)
-  set par(leading: 1em, first-line-indent: 0pt, hanging-indent: hang-indent, justify: false)
+  set par(leading: 0.65em, spacing: 0.65em, first-line-indent: 0pt, hanging-indent: hang-indent, justify: false)
   body
 }
 
