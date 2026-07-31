@@ -51,9 +51,13 @@
 
 // ---- overlay core -----------------------------------------------------------
 
-// Overlay `mark` above `body` without consuming any of its own horizontal
-// space: a negative-spacing stack pulls the mark up so it sits
-// mark-clearance above the syllable rather than after it.
+// Stack `mark` directly above `body`, separated by mark-clearance, without
+// consuming any of the body's own horizontal space (the stack becomes one
+// inline box in the surrounding text, exactly like the syllable alone
+// would). The strokes are bare `line()`s with no padding around their own
+// ink, so this gap has to be real stack spacing -- not a negative one
+// (which would pull the two together and eat straight into the drawn
+// stroke instead of blank margin, overlapping the letters below).
 //
 // This also gives every mark the same height above the baseline for free:
 // Typst boxes a run of same-size, same-font text to a fixed ascent/descent
@@ -62,7 +66,7 @@
 // version had to measure that height once by hand (\hbox{Ahg}) and store it
 // in \riseheight because \hbox there sizes to each glyph's own metrics;
 // here it falls out of how Typst lays out text.
-#let mark-above(mark, body, align-mark: center) = box(stack(dir: ttb, spacing: -mark-clearance,
+#let mark-above(mark, body, align-mark: center) = box(stack(dir: ttb, spacing: mark-clearance,
   align(align-mark, mark),
   body,
 ))
