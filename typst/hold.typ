@@ -53,11 +53,24 @@
 // thickness added on top of hold-clearance because the stroke is centered
 // on the line's path, not drawn above it -- otherwise half the stroke
 // would still eat into that gap.
+//
+// hold-clearance itself is sized for ordinary letters, not the deepest
+// descenders: Typst sizes a body's box to font metrics regardless of its
+// actual glyphs (see mark-above's own comment on this in pitch-marks.typ),
+// but the metrics box isn't a true bound on every glyph's ink -- this
+// font's lowercase "g", specifically, draws its tail below even that box,
+// so a body's own bottom edge doesn't reliably sit below all of its ink.
+// hold-clearance big enough to clear "g" everywhere would push the rule
+// needlessly far from every syllable that isn't "g" (or similarly deep).
+// `extra` is the escape hatch for the syllables that do need it: a per-call
+// nudge added on top of hold-clearance, for makrina.typ to supply at the
+// specific syllables where a render shows the rule touching a descender --
+// found by looking, since nothing here can measure actual ink either.
 #let hold-thickness = 1.3pt
-#let hold-clearance = 1.5pt   // gap between the syllable's own bottom edge and the rule
+#let hold-clearance = 3pt     // gap between the syllable's own bottom edge and the rule
 #let hold-gap = 4pt           // shrink/extend the rule by this much in total
 
-#let hold-below(delta, body) = context {
+#let hold-below(delta, body, extra: 0pt) = context {
   let w = measure(body).width
   let len = w + delta
   let x0 = (w - len) / 2
@@ -70,19 +83,19 @@
   // wider rule still renders in full -- Typst does not clip a box's
   // overflowing content by default -- it just no longer counts against
   // line-breaking.
-  box(width: w, inset: (bottom: hold-clearance + hold-thickness))[
+  box(width: w, inset: (bottom: hold-clearance + hold-thickness + extra))[
     #body
-    #place(bottom, dx: x0, dy: hold-clearance + hold-thickness / 2, line(start: (0pt, 0pt), end: (len, 0pt), stroke: hold-thickness))
+    #place(bottom, dx: x0, dy: hold-clearance + hold-thickness / 2 + extra, line(start: (0pt, 0pt), end: (len, 0pt), stroke: hold-thickness))
   ]
 }
 
-#let hold(body) = hold-below(-hold-gap, body)
+#let hold(body, extra: 0pt) = hold-below(-hold-gap, body, extra: extra)
 
 // The mirror image of hold: extends the rule *beyond* the syllable on each
 // side instead of falling short, for a syllable that should read as held
 // even wider than its own width.
-#let hold-wide(body) = hold-below(hold-gap, body)
+#let hold-wide(body, extra: 0pt) = hold-below(hold-gap, body, extra: extra)
 
 // Underlines the syllable's full width exactly, neither shortened (hold) nor
 // lengthened (hold-wide).
-#let hold-exact(body) = hold-below(0pt, body)
+#let hold-exact(body, extra: 0pt) = hold-below(0pt, body, extra: extra)
