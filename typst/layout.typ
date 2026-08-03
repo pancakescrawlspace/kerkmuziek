@@ -16,7 +16,7 @@
 
 #let conf(body) = {
   set page(paper: "a4", margin: 1in, numbering: none)
-  set text(font: body-font, size: body-size)
+  set text(font: body-font, size: body-size, weight: 525)
   // 6pt is the smallest gap that clears a pitch mark on one line from a
   // descender (g, j, ...) on the line above -- found by shrinking it until
   // the tallest mark used (falltwo) just touched a "gg jjj" test line, then
