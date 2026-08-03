@@ -51,47 +51,68 @@
 
 // ---- overlay core -----------------------------------------------------------
 
-// Stack `mark` directly above `body`, separated by mark-clearance, without
-// consuming any of the body's own horizontal space (the stack becomes one
-// inline box in the surrounding text, exactly like the syllable alone
-// would). The strokes are bare `line()`s with no padding around their own
-// ink, so this gap has to be real stack spacing -- not a negative one
-// (which would pull the two together and eat straight into the drawn
-// stroke instead of blank margin, overlapping the letters below).
+// Height contributed by a stroke-column of `count` stacked strokes -- for
+// sizing the space mark-above reserves above body. Not measured off the
+// mark itself: `measure()` reports a bare `line()` as zero-height
+// regardless of slope (only start/end.x feed into it), so a diagonal
+// up-/down-stroke would otherwise be treated as flat. Computed from the
+// same constants the strokes are drawn with instead.
+#let mark-column-height(count) = count * rise-height + (count - 1) * mark-stack-gap
+
+// Place `mark` above `body` without disturbing body's own position or
+// baseline: body is the box's only flow content (so it keeps exactly the
+// baseline it would have alone, held syllable or not -- see hold.typ's own
+// comment for why that matters), and mark is a place() overlay floating in
+// space the box's top inset reserves for it, sized from `mark-height`
+// (see mark-column-height above for why that can't just be measured).
 //
-// This also gives every mark the same height above the baseline for free:
-// Typst boxes a run of same-size, same-font text to a fixed ascent/descent
-// (font metrics), not to the ink height of whichever letters happen to be in
-// it -- so "x", "hA" and "g" all measure the same box height. The TeX
-// version had to measure that height once by hand (\hbox{Ahg}) and store it
-// in \riseheight because \hbox there sizes to each glyph's own metrics;
-// here it falls out of how Typst lays out text.
-#let mark-above(mark, body, align-mark: center) = box(stack(dir: ttb, spacing: mark-clearance,
-  align(align-mark, mark),
-  body,
-))
+// This route -- rather than the more obvious `stack(dir: ttb, mark, body)`
+// -- exists because that stack() only forwards a correct baseline to the
+// box wrapping it when it can read one straight off a plain child. A body
+// with any internal structure of its own throws that off -- concretely,
+// hold.typ's rule is a place() overlay inside body rather than a plain run
+// of text -- and the held syllable then sits noticeably higher than its
+// neighbors. Wrapping body in its own inner box didn't fix it either: the
+// stack still has mark as a second, sibling child, and that alone is
+// enough to break the detection regardless of how body itself is wrapped.
+// Removing the stack (and mark as a sibling in it) entirely was the only
+// approach that held up under both a bare `hold[geest]` and one nested
+// under a mark, checked against plain text down to the pixel.
+#let mark-above(mark, mark-height, body, align-mark: center) = context {
+  let bw = measure(body).width
+  let mw = measure(mark).width
+  let w = calc.max(bw, mw)
+  let dx = if align-mark == left { 0pt } else { (w - mw) / 2 }
+  box(width: w, inset: (top: mark-height + mark-clearance))[
+    #body
+    #place(top, dx: dx, dy: -(mark-height + mark-clearance), mark)
+  ]
+}
 
 // ---- pitch marks --------------------------------------------------------
 
-#let rise(body) = mark-above(up-stroke, body)
-#let risetwo(body) = mark-above(stroke-column(up-stroke, count: 2), body)
-#let risethree(body) = mark-above(stroke-column(up-stroke, count: 3), body)
+#let rise(body) = mark-above(up-stroke, rise-height, body)
+#let risetwo(body) = mark-above(stroke-column(up-stroke, count: 2), mark-column-height(2), body)
+#let risethree(body) = mark-above(stroke-column(up-stroke, count: 3), mark-column-height(3), body)
 
-#let fall(body) = mark-above(down-stroke, body)
-#let falltwo(body) = mark-above(stroke-column(down-stroke, count: 2), body)
-#let fallthree(body) = mark-above(stroke-column(down-stroke, count: 3), body)
+#let fall(body) = mark-above(down-stroke, rise-height, body)
+#let falltwo(body) = mark-above(stroke-column(down-stroke, count: 2), mark-column-height(2), body)
+#let fallthree(body) = mark-above(stroke-column(down-stroke, count: 3), mark-column-height(3), body)
 
 // Several strokes over one syllable, each a separate note (side by side, not stacked).
-#let risetwice(body) = mark-above(stroke-row(up-stroke, count: 2), body)
-#let falltwice(body) = mark-above(stroke-row(down-stroke, count: 2), body)
-#let fallthreespaced(body) = mark-above(stroke-row(down-stroke, count: 3), body)
+// A row is exactly as tall as one stroke, however many sit side by side.
+#let risetwice(body) = mark-above(stroke-row(up-stroke, count: 2), rise-height, body)
+#let falltwice(body) = mark-above(stroke-row(down-stroke, count: 2), rise-height, body)
+#let fallthreespaced(body) = mark-above(stroke-row(down-stroke, count: 3), rise-height, body)
 
 // Level (unchanging) pitch: a short flat bar over the syllable.
-#let level(body) = mark-above(flat-stroke, body)
+#let level(body) = mark-above(flat-stroke, 0pt, body)
 
 // A row of arbitrary strokes (mix up-stroke/down-stroke/flat-stroke), flush
 // left over the syllable instead of centred -- for runs like "three falls
-// then a rise" over one long syllable.
+// then a rise" over one long syllable. Assumes the row includes at least
+// one sloped stroke (true of every use in makrina.typ), same height as a
+// single stroke either way.
 #let spaced-left(strokes, body) = mark-above(
-  stack(dir: ltr, spacing: mark-spaced-gap, ..strokes), body, align-mark: left,
+  stack(dir: ltr, spacing: mark-spaced-gap, ..strokes), rise-height, body, align-mark: left,
 )

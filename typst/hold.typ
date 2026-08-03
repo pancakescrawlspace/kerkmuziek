@@ -11,15 +11,39 @@
 // ink), but its *automatic* choice of a box's inline baseline is not: for
 // invisible content it picks the wrong reference point.
 //
-// The fix is the same trick used for mark-above in pitch-marks.typ, plus
-// one more step: an explicit `baseline` on the box, computed purely from
-// hold-clearance/hold-thickness (never from the content), so the result is
-// identical whether body is real letters or blank space. That explicit
-// value was found by comparing renders of this construction against
-// Typst's own automatic baseline for ordinary text (where the automatic
-// choice is correct) until the two matched pixel-for-pixel; it is not
-// derived from font metrics, since Typst does not expose the ascent/descent
-// split needed to compute it directly.
+// Two earlier versions of this file got the rule's placement wrong in two
+// different ways -- worth recording since both looked fine until checked
+// closely:
+//
+// - One gave the box an explicit `baseline: (at: bottom, shift:
+//   hold-clearance + hold-thickness)`, found by eye-matching a render
+//   against plain text. The number was wrong: it substituted the rule's own
+//   thickness for the body's font descent (the gap between its baseline and
+//   the bottom of its own metrics box, which is what the box's bottom edge
+//   actually sits `hold-clearance` below), and a font's descent is several
+//   times an underline's stroke width. Every held syllable sat too high by
+//   (descent - hold-thickness).
+// - The next version stacked body directly above a bare, undecorated
+//   line() and let Typst's automatic baseline detection handle the rest --
+//   which does work, confirmed next to plain text down to the pixel,
+//   *provided* the line's own start point is exactly (0pt, 0pt). The
+//   moment the rule needs centering under a body narrower or wider than it
+//   (shrunk for `hold`, widened for `hold-wide`) and picks up any nonzero
+//   horizontal offset -- however it's applied: line() coordinates, pad(),
+//   align(), a grid cell -- that detection breaks and every held syllable
+//   sits too high again, by a gap that shrinks as the font grows (so a
+//   60pt test render looked fine and an 18pt one, matching this document's
+//   actual body size, didn't). Root cause not fully diagnosed -- Typst's
+//   stack() apparently keys its baseline forwarding to a child sitting flush
+//   at the cross-axis origin, and a centered rule never does regardless of
+//   how the centering is achieved.
+//
+// The fix sidesteps the whole question: body is the box's only *flow*
+// child (still auto-detects correctly, alone), and the rule is a place()
+// overlay instead of a stack sibling -- place() doesn't participate in
+// that detection at all, so its own horizontal offset can't disturb it.
+// The box's bottom inset reserves the room the rule is drawn into, since
+// place() itself doesn't grow the box the way a stack child would.
 #let hold-thickness = 1.3pt
 #let hold-clearance = 1.5pt   // gap between the syllable's own bottom edge and the rule
 #let hold-gap = 4pt           // shrink/extend the rule by this much in total
@@ -27,6 +51,7 @@
 #let hold-below(delta, body) = context {
   let w = measure(body).width
   let len = w + delta
+  let x0 = (w - len) / 2
   // Force the box's own layout width to the syllable's width, same as the
   // syllable alone would take up: hold-wide's rule is longer than the
   // syllable and would otherwise widen the box, consuming extra horizontal
@@ -36,10 +61,10 @@
   // wider rule still renders in full -- Typst does not clip a box's
   // overflowing content by default -- it just no longer counts against
   // line-breaking.
-  box(width: w, baseline: (at: bottom, shift: hold-clearance + hold-thickness), stack(dir: ttb, spacing: hold-clearance,
-    body,
-    align(center, line(start: (0pt, 0pt), end: (len, 0pt), stroke: hold-thickness)),
-  ))
+  box(width: w, inset: (bottom: hold-clearance + hold-thickness))[
+    #body
+    #place(bottom, dx: x0, line(start: (0pt, 0pt), end: (len, 0pt), stroke: hold-thickness))
+  ]
 }
 
 #let hold(body) = hold-below(-hold-gap, body)
