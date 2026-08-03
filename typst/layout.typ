@@ -17,7 +17,16 @@
 #let conf(body) = {
   set page(paper: "a4", margin: 1in, numbering: none)
   set text(font: body-font, size: body-size)
-  set par(leading: 0.65em, spacing: 0.65em, first-line-indent: 0pt, hanging-indent: hang-indent, justify: false)
+  // 6pt is the smallest gap that clears a pitch mark on one line from a
+  // descender (g, j, ...) on the line above -- found by shrinking it until
+  // the tallest mark used (falltwo) just touched a "gg jjj" test line, then
+  // adding a little back. Not proportional to body-size like a typical
+  // em-based leading would be: the marks' own dimensions in pitch-marks.typ
+  // are fixed point values, not relative to text size, so this is tied to
+  // body-size only through this file's specific choice of it, and would
+  // need rechecking (by the same shrink-until-it-touches process) if either
+  // changed.
+  set par(leading: 6pt, spacing: 6pt, first-line-indent: 0pt, hanging-indent: hang-indent, justify: false)
   body
 }
 
@@ -25,10 +34,13 @@
 // separating it from whatever came before, and from the hymn's own line
 // spacing (sized for the pitch marks) that follows.
 #let title(body) = {
-  v(6pt)
+  v(10pt)
   align(center, text(weight: "bold", size: 16pt, body))
   v(5pt)
 }
 
 #let heading-line(body) = align(center, text(weight: "bold", size: 21pt, body))
-#let date-line(body) = align(center, text(size: 14pt, body))
+#let date-line(body) = {
+  v(3pt)
+  align(center, text(size: 14pt, body))
+}
