@@ -22,7 +22,14 @@
 #let mark-thickness = 1.3pt
 #let mark-length = 7pt        // horizontal run of one stroke
 #let mark-slope = 0.5         // rise/run of one stroke (0.5 => ~27deg, 1 => 45deg)
-#let mark-clearance = 3pt     // gap between the syllable's top and the mark
+// State, not a plain length: mark-above reads it back via .get() inside its
+// own context block, so a caller can override it with mark-clearance.update()
+// after importing this file. A plain #let here would still let another file
+// write `#let mark-clearance = ...`, but that only shadows the name in the
+// *importing* file's own scope -- mark-above's closure was defined in this
+// module and keeps resolving mark-clearance to this module's own binding
+// regardless, so the override would silently do nothing.
+#let mark-clearance = state("pitch-marks-mark-clearance", 3pt) // gap between the syllable's top and the mark
 #let mark-stack-gap = .75pt   // vertical gap between stacked strokes (risetwo/risethree)
 #let mark-spaced-gap = 3pt    // horizontal gap between side-by-side strokes over one syllable
 
@@ -125,9 +132,9 @@
 // not measured off the stroke itself: `measure()` reports a bare `line()`
 // as zero-height regardless of slope (only start/end.x feed into it), so a
 // diagonal up-/down-stroke would otherwise be treated as flat. The
-// placement puts `stroke`'s own low point exactly mark-clearance above
-// body, so it (not the arbitrary local origin) is what ends up level with
-// every other mark's low point.
+// placement puts `stroke`'s own low point exactly mark-clearance.get()
+// above body, so it (not the arbitrary local origin) is what ends up level
+// with every other mark's low point.
 //
 // This route -- rather than the more obvious `stack(dir: ttb, mark, body)`
 // -- exists because that stack() only forwards a correct baseline to the
@@ -142,14 +149,15 @@
 // approach that held up under both a bare `hold[geest]` and one nested
 // under a mark, checked against plain text down to the pixel.
 #let mark-above(stroke, body, align-mark: center) = context {
+  let clearance = mark-clearance.get()
   let span = stroke.low - stroke.high
   let bw = measure(body).width
   let mw = measure(stroke.shape).width
   let w = calc.max(bw, mw)
   let dx = if align-mark == left { 0pt } else { (w - mw) / 2 }
-  box(width: w, inset: (top: span + mark-clearance))[
+  box(width: w, inset: (top: span + clearance))[
     #body
-    #place(top, dx: dx, dy: -(mark-clearance + stroke.low), stroke.shape)
+    #place(top, dx: dx, dy: -(clearance + stroke.low), stroke.shape)
   ]
 }
 
