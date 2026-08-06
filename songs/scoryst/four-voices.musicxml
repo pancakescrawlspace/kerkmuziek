@@ -7,10 +7,10 @@
       <group-barline>no</group-barline>
     </part-group>
     <score-part id="P1">
-      <part-name>Soprano/Alto</part-name>
+      <part-name print-object="no">Soprano/Alto</part-name>
     </score-part>
     <score-part id="P2">
-      <part-name>Tenor/Bass</part-name>
+      <part-name print-object="no">Tenor/Bass</part-name>
     </score-part>
     <part-group type="stop" number="1"/>
   </part-list>
