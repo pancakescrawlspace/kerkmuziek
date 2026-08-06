@@ -24,11 +24,11 @@ De ge#rise[#hold[daan]]#fall[te] #fall[U]wer heerlijkheid, o Chris#rise[tus] #ri
 
 hebt Gij op de berg aange#hold[no]#fall[#hold[men]],
 
-om #rise[Uw] #fall[dis]#fall[ci]pelen Uw glorie te #spaced-left((flat-stroke, up-stroke),[to-])#rise[#hold[nen]],
+om #rise[Uw] #fall[dis]#fall[ci]pelen Uw glorie te #spaced-left((flat-stroke-bottom, up-stroke),[to-])#rise[#hold[nen]],
 
 voorzover deze te aan#hold[schou]wen #fall[#hold[was]].
 
-Laat #rise[voor] #fall[ons] #fall[zon]daren Uw eeuwig licht ook #spaced-center((flat-stroke, up-stroke),[stra-])#rise[#hold[len]],
+Laat #rise[voor] #fall[ons] #fall[zon]daren Uw eeuwig licht ook #spaced-center((flat-stroke-bottom, up-stroke),[stra-])#rise[#hold[len]],
 
 door de gebeden van de #hold[Moe]der #fall[#hold[Gods]],
 

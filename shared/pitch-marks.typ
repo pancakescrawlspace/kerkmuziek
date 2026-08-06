@@ -80,6 +80,19 @@
   high: rise-height / 2,
 )
 
+// Same drawn line as flat-stroke, but aligned with the *bottom* of the two
+// diagonal strokes instead of their vertical midpoint. up-stroke and
+// down-stroke share one absolute low point once placed (see the comment
+// above flat-stroke), and that shared low point is exactly up-stroke's own
+// low: 0pt. Giving flat-stroke-bottom the same low: 0pt (with the line drawn
+// at its local y: 0pt, i.e. right at that low point) puts its ink at that
+// same absolute height, rather than rise-height/2 above it.
+#let flat-stroke-bottom = (
+  shape: line(start: (0pt, 0pt), end: (mark-length, 0pt), stroke: mark-stroke),
+  low: 0pt,
+  high: 0pt,
+)
+
 // `count` copies of `stroke`, side by side (one note each) -- for the
 // "spaced" variants. All copies share one low/high (unchanged from a single
 // stroke): laid out side by side rather than stacked, none of them sit any
@@ -197,6 +210,8 @@
 
 // Level (unchanging) pitch: a short flat bar over the syllable.
 #let level(body, clearance: auto) = mark-above(flat-stroke, body, clearance: clearance)
+// Same, but bottom-aligned with the diagonal strokes -- see flat-stroke-bottom.
+#let level-bottom(body, clearance: auto) = mark-above(flat-stroke-bottom, body, clearance: clearance)
 
 // A row of arbitrary strokes (mix up-stroke/down-stroke/flat-stroke), flush
 // left over the syllable instead of centred -- for runs like "three falls
