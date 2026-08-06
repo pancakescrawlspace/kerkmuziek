@@ -1,6 +1,6 @@
 #import "@preview/typed-scores:0.3.0": score
 
-#set page(paper: "a4", margin: 1in, numbering: none)
+#set page(paper: "a4", margin: (x: 0.6in, y: 1in), numbering: none)
 #set text(font: "Helvetica", size: 11pt)
 
 #align(center, text(weight: "bold", size: 16pt)[Twinkle, Twinkle, Little Star])
@@ -10,7 +10,7 @@
   clef: "treble",
   key: "C",
   time: "4/4",
-  lyric-size: 1.05,   // default is 0.9 (~7pt); a modest bump to ~8.4pt
+  lyric-size: 1.15,   // default is 0.9 (~7pt); a modest bump to ~9.2pt
   bars: (
     (notes: "c5:q c5 g5 g5", lyrics: "Twin -- kle, twin -- kle,"),
     (notes: "a5 a5 g5:h", lyrics: "lit -- tle star,"),
