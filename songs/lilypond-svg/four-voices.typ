@@ -21,5 +21,11 @@
 // only renders correctly because Typst can resolve that font locally --
 // LilyPond's PDF backend, by contrast, embeds subset fonts and is fully
 // self-contained.
-#set page(paper: "a4", margin: 1in, numbering: none)
-#image("../lilypond/four-voices.svg", width: 100%)
+// Page sized to the image's own content rather than a fixed A4 sheet: a
+// fixed page left a lot of blank space below the (comparatively short)
+// score, and constraining the image to a fixed page's content width was
+// also scaling it down from the size LilyPond's own crop already gave it.
+// width/height: auto lets the page shrink to exactly fit the image plus
+// this margin instead.
+#set page(width: auto, height: auto, margin: 1cm, numbering: none)
+#image("../lilypond/four-voices.svg")
