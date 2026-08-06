@@ -23,7 +23,7 @@
 #let mark-length = 7pt        // horizontal run of one stroke
 #let mark-slope = 0.5         // rise/run of one stroke (0.5 => ~27deg, 1 => 45deg)
 #let mark-clearance = 3pt     // gap between the syllable's top and the mark
-#let mark-stack-gap = 1.5pt   // vertical gap between stacked strokes (risetwo/risethree)
+#let mark-stack-gap = .75pt   // vertical gap between stacked strokes (risetwo/risethree)
 #let mark-spaced-gap = 3pt    // horizontal gap between side-by-side strokes over one syllable
 
 // ---- stroke primitives ------------------------------------------------------
