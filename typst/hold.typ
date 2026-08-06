@@ -53,6 +53,7 @@
 // thickness added on top of hold-clearance because the stroke is centered
 // on the line's path, not drawn above it -- otherwise half the stroke
 // would still eat into that gap.
+#let hold-color = red
 #let hold-thickness = 1.3pt
 #let hold-clearance = 1.5pt   // gap between the syllable's own bottom edge and the rule
 #let hold-gap = 4pt           // shrink/extend the rule by this much in total
@@ -70,9 +71,15 @@
   // wider rule still renders in full -- Typst does not clip a box's
   // overflowing content by default -- it just no longer counts against
   // line-breaking.
+  //
+  // The rule is drawn before body, not after: Typst paints box content in
+  // document order, so whichever comes last ends up on top. Letters with a
+  // descender that reaches into the clearance gap (e.g. "g") should have
+  // their own black ink cover the red rule there, not the other way
+  // around, so body has to be the one painted last.
   box(width: w, inset: (bottom: hold-clearance + hold-thickness))[
+    #place(bottom, dx: x0, dy: hold-clearance + hold-thickness / 2, line(start: (0pt, 0pt), end: (len, 0pt), stroke: (paint: hold-color, thickness: hold-thickness)))
     #body
-    #place(bottom, dx: x0, dy: hold-clearance + hold-thickness / 2, line(start: (0pt, 0pt), end: (len, 0pt), stroke: hold-thickness))
   ]
 }
 
