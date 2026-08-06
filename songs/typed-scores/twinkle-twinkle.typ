@@ -10,6 +10,9 @@
   clef: "treble",
   key: "C",
   time: "4/4",
+  lyric-size: 2.2,   // default is 0.9 (~7pt); this gives ~18pt, readable across a choir stand
+  lyric-gap: 1.4,    // extra clearance between staff and the larger lyric text
+  verse-gap: 2.5,    // must stay >= lyric-size
   bars: (
     (notes: "c5:q c5 g5 g5", lyrics: "Twin -- kle, twin -- kle,"),
     (notes: "a5 a5 g5:h", lyrics: "lit -- tle star,"),
