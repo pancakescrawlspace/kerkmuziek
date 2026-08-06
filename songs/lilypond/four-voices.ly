@@ -97,20 +97,17 @@ sopranoWordsTwo = \lyricmode {
 }
 
 \paper {
-  % Default indent/short-indent are fixed distances, not sized to fit
-  % whatever instrumentName/shortInstrumentName text is given -- "Soprano /
-  % Alto" and "S / A" overflowed past the left edge of the page under the
-  % defaults, so these are widened enough to fit them.
-  indent = 45\mm
-  short-indent = 20\mm
+  #(define fonts
+    (set-global-fonts
+     #:roman "Helvetica"
+     #:sans "Helvetica"
+     #:typewriter "Helvetica"
+    ))
 }
 
 \score {
   \new ChoirStaff <<
-    \new Staff = "upper" \with {
-      instrumentName = "Soprano / Alto"
-      shortInstrumentName = "S / A"
-    } <<
+    \new Staff = "upper" <<
       \clef treble
       \key c \major
       \time 4/4
@@ -119,10 +116,7 @@ sopranoWordsTwo = \lyricmode {
     >>
     \new Lyrics \lyricsto "soprano" { \sopranoWordsOne }
     \new Lyrics \lyricsto "soprano" { \sopranoWordsTwo }
-    \new Staff = "lower" \with {
-      instrumentName = "Tenor / Bass"
-      shortInstrumentName = "T / B"
-    } <<
+    \new Staff = "lower" <<
       \clef bass
       \key c \major
       \time 4/4
