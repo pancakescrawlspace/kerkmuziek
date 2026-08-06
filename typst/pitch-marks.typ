@@ -175,3 +175,4 @@
 // left over the syllable instead of centred -- for runs like "three falls
 // then a rise" over one long syllable.
 #let spaced-left(strokes, body) = mark-above(stroke-row-mixed(strokes), body, align-mark: left)
+#let spaced-center(strokes, body) = mark-above(stroke-row-mixed(strokes), body, align-mark: center)
