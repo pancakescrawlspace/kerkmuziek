@@ -10,6 +10,7 @@
   clef: "treble",
   key: "C",
   time: "4/4",
+  lyric-size: 1.05,   // default is 0.9 (~7pt); a modest bump to ~8.4pt
   bars: (
     (notes: "c5:q c5 g5 g5", lyrics: "Twin -- kle, twin -- kle,"),
     (notes: "a5 a5 g5:h", lyrics: "lit -- tle star,"),
