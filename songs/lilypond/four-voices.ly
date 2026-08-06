@@ -54,13 +54,28 @@ bassMusic = {
   f,4 f, c, c, | g, g, c,2 |
 }
 
-sopranoWords = \lyricmode {
+sopranoWordsOne = \lyricmode {
+  \set stanza = "1."
   Twin -- kle, twin -- kle, lit -- tle star,
   How I won -- der what you are!
   Up a -- bove the world so high,
   Like a dia -- mond in the sky.
   Twin -- kle, twin -- kle, lit -- tle star,
   How I won -- der what you are!
+}
+
+% Second verse: same note-per-syllable shape as the first (four lines, the
+% first two repeated at the end), so it drops onto the same 12 bars with no
+% change to the music -- this is the traditional second verse of Jane
+% Taylor's poem, sung to the same repeating tune as the first.
+sopranoWordsTwo = \lyricmode {
+  \set stanza = "2."
+  When the blaz -- ing sun is gone,
+  When he noth -- ing shines up -- on,
+  Then you show your lit -- tle light,
+  Twin -- kle, twin -- kle, all the night.
+  When the blaz -- ing sun is gone,
+  When he noth -- ing shines up -- on,
 }
 
 \score {
@@ -75,7 +90,8 @@ sopranoWords = \lyricmode {
       \new Voice = "soprano" { \sopranoMusic }
       \new Voice = "alto" { \altoMusic }
     >>
-    \new Lyrics \lyricsto "soprano" { \sopranoWords }
+    \new Lyrics \lyricsto "soprano" { \sopranoWordsOne }
+    \new Lyrics \lyricsto "soprano" { \sopranoWordsTwo }
     \new Staff = "lower" \with {
       instrumentName = "Tenor / Bass"
       shortInstrumentName = "T / B"
