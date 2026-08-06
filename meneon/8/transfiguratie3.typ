@@ -1,8 +1,8 @@
-#import "pitch-marks.typ": *  // rise/risetwo/risethree and fall/... : pitch marks; level: flat mark
+#import "../../shared/pitch-marks.typ": *  // rise/risetwo/risethree and fall/... : pitch marks; level: flat mark
 #mark-clearance.update(5pt)   // override from pitch-marks.typ (a #let here wouldn't reach mark-above's closure)
-#import "hold.typ": *          // hold : underline a held syllable
-#import "finalskip.typ": *     // finalskip : space before the final line
-#import "layout.typ": *        // page setup, body font, paragraph spacing, headings
+#import "../../shared/hold.typ": *          // hold : underline a held syllable
+#import "../../shared/finalskip.typ": *     // finalskip : space before the final line
+#import "../../shared/layout.typ": *        // page setup, body font, paragraph spacing, headings
 
 #show: conf
 

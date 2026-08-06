@@ -2,10 +2,10 @@
 // The typographic machinery lives in separate files, each covering one device
 // (mirrors the pitch-marks.tex / hold.tex / finalskip.tex / layout.tex split
 // of the TeX version this is a Typst port of):
-#import "pitch-marks.typ": *  // rise/risetwo/risethree and fall/... : pitch marks; level: flat mark
-#import "hold.typ": *          // hold : underline a held syllable
-#import "finalskip.typ": *     // finalskip : space before the final line
-#import "layout.typ": *        // page setup, body font, paragraph spacing, headings
+#import "../../shared/pitch-marks.typ": *  // rise/risetwo/risethree and fall/... : pitch marks; level: flat mark
+#import "../../shared/hold.typ": *          // hold : underline a held syllable
+#import "../../shared/finalskip.typ": *     // finalskip : space before the final line
+#import "../../shared/layout.typ": *        // page setup, body font, paragraph spacing, headings
 
 #show: conf
 
