@@ -10,13 +10,14 @@
 // just by importing -- so page/text/par setup has to be wrapped in a
 // function like this and threaded through explicitly.
 
-#let body-font = "Helvetica"
+#let body-font = "Helvetica Neue"
 #let body-size = 18pt
+#let body-font-weight = 500
 #let hang-indent = 1.5em      // wrapped (non-first) lines of a paragraph are indented this much
 
 #let conf(body) = {
   set page(paper: "a4", margin: 1in, numbering: none)
-  set text(font: body-font, size: body-size, weight: 525)
+  set text(font: body-font, size: body-size, weight: body-font-weight)
   // 6pt is the smallest gap that clears a pitch mark on one line from a
   // descender (g, j, ...) on the line above -- found by shrinking it until
   // the tallest mark used (falltwo) just touched a "gg jjj" test line, then
