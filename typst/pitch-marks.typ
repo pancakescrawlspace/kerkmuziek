@@ -136,6 +136,21 @@
 // above body, so it (not the arbitrary local origin) is what ends up level
 // with every other mark's low point.
 //
+// Deliberately, `clearance` feeds only the place()'s dy, not the inset: the
+// inset is what Typst charges against this line's height when it lays out
+// the paragraph, while dy is a free-floating offset place() doesn't get
+// charged for. Folding clearance into the inset too (as an earlier version
+// did) reserved exactly enough box height that the ink never crossed the
+// box's own top edge -- tidy, but it meant every bump to mark-clearance
+// grew the box and pushed neighbouring lines apart. Leaving the inset fixed
+// at `span` keeps line height constant no matter how large clearance gets;
+// the mark instead bleeds upward past the box's own top edge (place()
+// overlays aren't clipped to their container) into the ordinary whitespace
+// between lines. That's exactly the room mark-clearance is meant to use --
+// it's only a problem if it grows large enough to reach the line above,
+// which is on whoever sets mark-clearance to watch for, the same way
+// oversized ordinary text would be.
+//
 // This route -- rather than the more obvious `stack(dir: ttb, mark, body)`
 // -- exists because that stack() only forwards a correct baseline to the
 // box wrapping it when it can read one straight off a plain child. A body
@@ -155,7 +170,7 @@
   let mw = measure(stroke.shape).width
   let w = calc.max(bw, mw)
   let dx = if align-mark == left { 0pt } else { (w - mw) / 2 }
-  box(width: w, inset: (top: span + clearance))[
+  box(width: w, inset: (top: span))[
     #body
     #place(top, dx: dx, dy: -(clearance + stroke.low), stroke.shape)
   ]
