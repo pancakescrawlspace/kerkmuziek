@@ -20,6 +20,10 @@ sopranoMusic = {
   g'4 g' f' f' | e' e' d'2 |
   c'4 c' g' g' | a' a' g'2 |
   f'4 f' e' e' | d' d' c'2 |
+  % Closing "Amen" (plagal cadence, IV-I): sung once, not per-verse -- see
+  % sopranoWordsOne/sopranoWordsTwo below for why this bar has only one
+  % lyrics line under it.
+  c'2 c'2 |
   \bar "|."
 }
 
@@ -31,6 +35,7 @@ altoMusic = {
   e'4 e' d' d' | c' c' b2 |
   a4 a e' e' | f' f' e'2 |
   d'4 d' c' c' | b b a2 |
+  a2 g2 |
 }
 
 tenorMusic = {
@@ -41,6 +46,7 @@ tenorMusic = {
   c'4 c' b b | a a g2 |
   f4 f c' c' | d' d' c'2 |
   b4 b a a | g g f2 |
+  f2 e2 |
   \bar "|."
 }
 
@@ -52,6 +58,7 @@ bassMusic = {
   g,4 g, f, f, | c, c, g,2 |
   c,4 c, g, g, | a, a, g,2 |
   f,4 f, c, c, | g, g, c,2 |
+  f,2 c,2 |
 }
 
 sopranoWordsOne = \lyricmode {
@@ -62,6 +69,7 @@ sopranoWordsOne = \lyricmode {
   Like a dia -- mond in the sky.
   Twin -- kle, twin -- kle, lit -- tle star,
   How I won -- der what you are!
+  A -- men.
 }
 
 % Second verse: same note-per-syllable shape as the first (four lines, the
@@ -76,6 +84,10 @@ sopranoWordsTwo = \lyricmode {
   Twin -- kle, twin -- kle, all the night.
   When the blaz -- ing sun is gone,
   When he noth -- ing shines up -- on,
+  % Deliberately no "Amen" entry here: \lyricsto just stops assigning
+  % syllables once a lyric line runs out, so the final bar's notes get no
+  % verse-2 text -- exactly the "one lyrics line only" bar this was added
+  % to demonstrate.
 }
 
 \paper {
