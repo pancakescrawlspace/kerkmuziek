@@ -29,6 +29,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>Twin</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>When</text></lyric>
       </note>
       <note>
         <pitch><step>C</step><octave>4</octave></pitch>
@@ -37,6 +38,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>the</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -45,6 +47,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>twin</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>blaz</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -53,6 +56,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>ing</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -94,6 +98,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>lit</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>sun</text></lyric>
       </note>
       <note>
         <pitch><step>A</step><octave>4</octave></pitch>
@@ -102,6 +107,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>tle</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>is</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -110,6 +116,7 @@
         <type>half</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>star,</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>gone,</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -144,6 +151,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>How</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>When</text></lyric>
       </note>
       <note>
         <pitch><step>F</step><octave>4</octave></pitch>
@@ -152,6 +160,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>I</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>he</text></lyric>
       </note>
       <note>
         <pitch><step>E</step><octave>4</octave></pitch>
@@ -160,6 +169,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>won</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>noth</text></lyric>
       </note>
       <note>
         <pitch><step>E</step><octave>4</octave></pitch>
@@ -168,6 +178,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>der</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>ing</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -209,6 +220,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>what</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>shines</text></lyric>
       </note>
       <note>
         <pitch><step>D</step><octave>4</octave></pitch>
@@ -217,6 +229,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>you</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>up</text></lyric>
       </note>
       <note>
         <pitch><step>C</step><octave>4</octave></pitch>
@@ -225,6 +238,7 @@
         <type>half</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>are!</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>on,</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -259,6 +273,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>Up</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>Then</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -267,6 +282,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>a</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>you</text></lyric>
       </note>
       <note>
         <pitch><step>F</step><octave>4</octave></pitch>
@@ -275,6 +291,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>bove</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>show</text></lyric>
       </note>
       <note>
         <pitch><step>F</step><octave>4</octave></pitch>
@@ -283,6 +300,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>the</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>your</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -324,6 +342,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>world</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>lit</text></lyric>
       </note>
       <note>
         <pitch><step>E</step><octave>4</octave></pitch>
@@ -332,6 +351,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>so</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>tle</text></lyric>
       </note>
       <note>
         <pitch><step>D</step><octave>4</octave></pitch>
@@ -340,6 +360,7 @@
         <type>half</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>high,</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>light,</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -374,6 +395,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>Like</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>Twin</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -382,6 +404,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>a</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>kle,</text></lyric>
       </note>
       <note>
         <pitch><step>F</step><octave>4</octave></pitch>
@@ -390,6 +413,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>dia</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>twin</text></lyric>
       </note>
       <note>
         <pitch><step>F</step><octave>4</octave></pitch>
@@ -398,6 +422,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>mond</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>kle,</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -439,6 +464,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>in</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>all</text></lyric>
       </note>
       <note>
         <pitch><step>E</step><octave>4</octave></pitch>
@@ -447,6 +473,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>the</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>the</text></lyric>
       </note>
       <note>
         <pitch><step>D</step><octave>4</octave></pitch>
@@ -455,6 +482,7 @@
         <type>half</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>sky.</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>night.</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -489,6 +517,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>Twin</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>When</text></lyric>
       </note>
       <note>
         <pitch><step>C</step><octave>4</octave></pitch>
@@ -497,6 +526,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>the</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -505,6 +535,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>twin</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>blaz</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -513,6 +544,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>ing</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -554,6 +586,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>lit</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>sun</text></lyric>
       </note>
       <note>
         <pitch><step>A</step><octave>4</octave></pitch>
@@ -562,6 +595,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>tle</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>is</text></lyric>
       </note>
       <note>
         <pitch><step>G</step><octave>4</octave></pitch>
@@ -570,6 +604,7 @@
         <type>half</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>star,</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>gone,</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -604,6 +639,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>How</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>When</text></lyric>
       </note>
       <note>
         <pitch><step>F</step><octave>4</octave></pitch>
@@ -612,6 +648,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>I</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>he</text></lyric>
       </note>
       <note>
         <pitch><step>E</step><octave>4</octave></pitch>
@@ -620,6 +657,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>begin</syllabic><text>won</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>noth</text></lyric>
       </note>
       <note>
         <pitch><step>E</step><octave>4</octave></pitch>
@@ -628,6 +666,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>end</syllabic><text>der</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>ing</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
@@ -669,6 +708,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>what</text></lyric>
+        <lyric number="2"><syllabic>single</syllabic><text>shines</text></lyric>
       </note>
       <note>
         <pitch><step>D</step><octave>4</octave></pitch>
@@ -677,6 +717,7 @@
         <type>quarter</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>you</text></lyric>
+        <lyric number="2"><syllabic>begin</syllabic><text>up</text></lyric>
       </note>
       <note>
         <pitch><step>C</step><octave>4</octave></pitch>
@@ -685,6 +726,7 @@
         <type>half</type>
         <stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>are!</text></lyric>
+        <lyric number="2"><syllabic>end</syllabic><text>on,</text></lyric>
       </note>
       <backup>
         <duration>4</duration>
