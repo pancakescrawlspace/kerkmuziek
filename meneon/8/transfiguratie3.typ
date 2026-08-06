@@ -7,15 +7,15 @@
 #show: conf
 
 #title[Tropaar van Transfiguratie (t.~7)]
-
+#v(.5em)
 #set text(top-edge: .5em)
 #mark-clearance.update(6pt)
-De ge#rise[#hold[daan]]#fall[te] #fall[U]wer heerlijkheid, o Chris#rise[tus] #rise[#hold[God]],
+De ge#rise[#hold[daan]]#fall[te] #fall(clearance: 7pt)[U]wer heerlijkheid, o Chris#rise[tus] #rise[#hold[God]],
 
 #mark-clearance.update(5pt)
 hebt Gij op de berg aange#hold[no]#fall[#hold[men]],
 
-om #rise[Uw] #fall[dis]#fall[ci]pelen Uw glorie te #spaced-left((flat-stroke, up-stroke),[to-])#rise[#hold[nen]],
+om #rise(clearance: 6pt)[Uw] #fall[dis]#fall[ci]pelen Uw glorie te #spaced-left((flat-stroke, up-stroke),[to-])#rise[#hold[nen]],
 
 #mark-clearance.update(4pt)
 voorzover deze te aan#hold[schou]wen #fall[#hold[was]].
