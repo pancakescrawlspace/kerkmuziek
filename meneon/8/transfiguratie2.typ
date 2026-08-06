@@ -10,6 +10,7 @@
 #set text(size: 14pt)
 P.: Wijsheid!
 
+#v(3pt)
 #hide[P.:] Heer, zend Uw licht en Uw waarheid,
 
 #hide[P.:] zij zullen mij leiden en brengen naar Uw heilige berg.
