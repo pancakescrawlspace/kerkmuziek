@@ -7,11 +7,14 @@
 
 #heading-line[Kleine intocht]
 #v(8pt)
+#set text(size: 14pt)
 P.: Wijsheid!
 
 #hide[P.:] Heer, zend Uw licht en Uw waarheid,
 
 #hide[P.:] zij zullen mij leiden en brengen naar Uw heilige berg.
+
+#set text(size: 18pt)
 
 #v(8pt)
 
