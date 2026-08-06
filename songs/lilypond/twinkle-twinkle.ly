@@ -1,5 +1,16 @@
 \version "2.24.4"
 
+% Shrink the page to the content's own bounding box (with a small built-in
+% margin) instead of a full A4 sheet that's mostly blank. 'print-pages #f
+% suppresses the separate full-page PDF that 'crop would otherwise still
+% produce alongside the cropped one. Output is written as
+% twinkle-twinkle.cropped.pdf (LilyPond always adds that suffix in crop
+% mode) plus a .cropped.png preview -- rename/copy the .pdf to
+% twinkle-twinkle.pdf after compiling to keep this repo's one-name.pdf-per-
+% one-name.ly convention.
+#(ly:set-option 'crop #t)
+#(ly:set-option 'print-pages #f)
+
 \header {
   title = "Twinkle, Twinkle, Little Star"
   tagline = ##f
