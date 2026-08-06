@@ -13,7 +13,7 @@
 #date-line[19 juli]
 #v(8pt)
 
-#title[Tropaar (t. 3)]
+#title[Tropaar (t.~3)]
 #falltwo[---] De liefde tot #rise[de] #rise[wijs]heid heeft vleugels geschon#fall[ken] #rise[aan] #risetwice[uw] #level[#hold[geest]],
 
 en in die wijsheid hebt gij de vreugden der wereld ge#fall[#hold-wide[ri]]#fall[ng] #fall[ge]#fall[#hold[acht]].
@@ -30,7 +30,7 @@ tot Wie gij bidt voor ons die tot u #rise[#hold[roe]]#fall[#hold[pen]]:
 Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((up-stroke, up-stroke, up-stroke, down-stroke, down-stroke, down-stroke), [kri-~~~~~~~])#rise[#hold[~~~]]#fall[#hold[na]]! ---
 #v(8pt)
 
-#title[Kondak (t. 2)]
+#title[Kondak (t.~2)]
 #rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold[tig]]#fall[#hold[heid]],
 
 zijt gij een voorbeeld geworden van Godwelgevallig #fall[#hold[le-]]#fall[#hold[ven]],
