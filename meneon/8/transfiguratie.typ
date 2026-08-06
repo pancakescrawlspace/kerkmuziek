@@ -10,7 +10,7 @@
 
 Van de gunstbewijzen des Heren wil ik eeuwig #hold[zin]#rise[#hold[gen]],
 
-van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall[#hold[kon]]di#hold[gen].
+van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall(clearance: 1pt)[#hold[kon]]di#hold[gen].
 
 #v(5pt)
 #subtitle[Tropaar van Transfiguratie (t.~7)]
