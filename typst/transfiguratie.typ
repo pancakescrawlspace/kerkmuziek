@@ -12,8 +12,9 @@ Van de gunstbewijzen des Heren wil ik eeuwig #hold[zin]#rise[#hold[gen]],
 
 van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall[#hold[kon]]di#hold[gen].
 
+#v(5pt)
+#subtitle[Tropaar van Transfiguratie (t.~7)]
 #set par(first-line-indent: 20pt)
-#v(12pt)
 De ge#rise[#hold[daan]]#fall[te] #fall[U]wer heerlijkheid, o Chris#rise[tus] #rise[#hold[God]],
 
 hebt Gij op de berg aange#hold[no]#fall[#hold[men]],
@@ -60,6 +61,8 @@ Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij op de berg, o Chris#rise[tus] 
 #align(right)[#text(size:14pt)[#emph[(zie volgende pagina)]]]
 
 #pagebreak()
+#set par(first-line-indent: 0pt)
+#subtitle[Kondak van Transfiguratie (t.~7)]
 
 Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij op de berg, o Chris#rise[tus] #rise[#hold[God]],
 

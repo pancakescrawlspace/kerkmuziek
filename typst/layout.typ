@@ -39,6 +39,11 @@
   v(5pt)
 }
 
+#let subtitle(body) = {
+  v(5pt)
+  align(center, text(weight: "bold", size: 14pt, body))
+  v(3pt)
+}
 #let heading-line(body) = align(center, text(weight: "bold", size: 21pt, body))
 #let date-line(body) = {
   v(3pt)
