@@ -54,7 +54,7 @@
 // on the line's path, not drawn above it -- otherwise half the stroke
 // would still eat into that gap.
 #let hold-color = red
-#let hold-thickness = 1.3pt
+#let hold-thickness = 2pt
 #let hold-clearance = 1.5pt   // gap between the syllable's own bottom edge and the rule
 #let hold-gap = 4pt           // shrink/extend the rule by this much in total
 
