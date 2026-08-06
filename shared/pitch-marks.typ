@@ -134,7 +134,9 @@
 // diagonal up-/down-stroke would otherwise be treated as flat. The
 // placement puts `stroke`'s own low point exactly mark-clearance.get()
 // above body, so it (not the arbitrary local origin) is what ends up level
-// with every other mark's low point.
+// with every other mark's low point. Pass `clearance:` to override that for
+// a single mark (e.g. `rise(clearance: 5pt)[geest]`) without touching the
+// shared mark-clearance state, so neighbouring marks are unaffected.
 //
 // Deliberately, `clearance` feeds only the place()'s dy, not the inset: the
 // inset is what Typst charges against this line's height when it lays out
@@ -163,8 +165,8 @@
 // Removing the stack (and mark as a sibling in it) entirely was the only
 // approach that held up under both a bare `hold[geest]` and one nested
 // under a mark, checked against plain text down to the pixel.
-#let mark-above(stroke, body, align-mark: center) = context {
-  let clearance = mark-clearance.get()
+#let mark-above(stroke, body, align-mark: center, clearance: auto) = context {
+  let clearance = if clearance == auto { mark-clearance.get() } else { clearance }
   let span = stroke.low - stroke.high
   let bw = measure(body).width
   let mw = measure(stroke.shape).width
@@ -178,24 +180,26 @@
 
 // ---- pitch marks --------------------------------------------------------
 
-#let rise(body) = mark-above(up-stroke, body)
-#let risetwo(body) = mark-above(stroke-column(up-stroke, count: 2), body)
-#let risethree(body) = mark-above(stroke-column(up-stroke, count: 3), body)
+// `clearance:` on every mark below overrides mark-clearance for that single
+// call only -- see mark-above's own comment for why.
+#let rise(body, clearance: auto) = mark-above(up-stroke, body, clearance: clearance)
+#let risetwo(body, clearance: auto) = mark-above(stroke-column(up-stroke, count: 2), body, clearance: clearance)
+#let risethree(body, clearance: auto) = mark-above(stroke-column(up-stroke, count: 3), body, clearance: clearance)
 
-#let fall(body) = mark-above(down-stroke, body)
-#let falltwo(body) = mark-above(stroke-column(down-stroke, count: 2), body)
-#let fallthree(body) = mark-above(stroke-column(down-stroke, count: 3), body)
+#let fall(body, clearance: auto) = mark-above(down-stroke, body, clearance: clearance)
+#let falltwo(body, clearance: auto) = mark-above(stroke-column(down-stroke, count: 2), body, clearance: clearance)
+#let fallthree(body, clearance: auto) = mark-above(stroke-column(down-stroke, count: 3), body, clearance: clearance)
 
 // Several strokes over one syllable, each a separate note (side by side, not stacked).
-#let risetwice(body) = mark-above(stroke-row(up-stroke, count: 2), body)
-#let falltwice(body) = mark-above(stroke-row(down-stroke, count: 2), body)
-#let fallthreespaced(body) = mark-above(stroke-row(down-stroke, count: 3), body)
+#let risetwice(body, clearance: auto) = mark-above(stroke-row(up-stroke, count: 2), body, clearance: clearance)
+#let falltwice(body, clearance: auto) = mark-above(stroke-row(down-stroke, count: 2), body, clearance: clearance)
+#let fallthreespaced(body, clearance: auto) = mark-above(stroke-row(down-stroke, count: 3), body, clearance: clearance)
 
 // Level (unchanging) pitch: a short flat bar over the syllable.
-#let level(body) = mark-above(flat-stroke, body)
+#let level(body, clearance: auto) = mark-above(flat-stroke, body, clearance: clearance)
 
 // A row of arbitrary strokes (mix up-stroke/down-stroke/flat-stroke), flush
 // left over the syllable instead of centred -- for runs like "three falls
 // then a rise" over one long syllable.
-#let spaced-left(strokes, body) = mark-above(stroke-row-mixed(strokes), body, align-mark: left)
-#let spaced-center(strokes, body) = mark-above(stroke-row-mixed(strokes), body, align-mark: center)
+#let spaced-left(strokes, body, clearance: auto) = mark-above(stroke-row-mixed(strokes), body, align-mark: left, clearance: clearance)
+#let spaced-center(strokes, body, clearance: auto) = mark-above(stroke-row-mixed(strokes), body, align-mark: center, clearance: clearance)
