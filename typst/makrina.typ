@@ -28,18 +28,18 @@ tot Wie gij bidt voor ons die tot u #rise[#hold[roe]]#fall[#hold[pen]]:
 
 #finalskip
 Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((up-stroke, up-stroke, up-stroke, down-stroke, down-stroke, down-stroke), [kri-~~~~~~~])#rise[#hold[~~~]]#fall[#hold[na]]! ---
-#v(.5em)
+#v(8pt)
 
 #title[Kondak (t. 2)]
 #rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold[tig]]#fall[#hold[heid]],
 
-zijt gij een voorbeeld geworden van Godwelgevallig #fall[#hold[le]]#fall[#hold[ven]],
+zijt gij een voorbeeld geworden van Godwelgevallig #fall[#hold[le-]]#fall[#hold[ven]],
 
-#rise[en] een #rise[#hold[leids]]vrouw tot al#rise[le] #rise[#hold[deug]]#fall[#hold[den]]
+#rise[en] een #rise[#hold[leids]]vrouw tot al#rise[le] #rise[#hold[deug]]#fall[#hold[-~~]]#fall[#hold[den]]
 
 voor hen die in geloof tot u #fall[#hold[roe]]#fall[#hold[pen]]:
 
-#rise[Ver]#rise[#hold[heug]] u, #rise[Ma]#rise[#hold[kri]]#fall[#hold[na]],
+#rise[Ver]#rise[#hold[heug]] u, #rise[Ma]#rise[#hold[kri]]#fall[#hold[-~~]]#fall[#hold[na]],
 
 #finalskip
 die de stra#fall[len]#rise[de] #rise[#hold[schoon]]#fall[heid] #rise[der] #fall[#hold[maag]]#fall[#hold[den]] #fall[#hold[zijt]]. ---
