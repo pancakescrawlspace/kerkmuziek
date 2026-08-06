@@ -12,6 +12,17 @@
 // supported" and collapses every V: line onto its own single-voice treble
 // staff), but MusicXML's native multi-staff/multi-voice model renders
 // correctly.
+//
+// Encoded as two separate <part>s (Soprano/Alto, Tenor/Bass) joined by a
+// braced <part-group>, rather than one <part> with <staves>2</staves>:
+// Verovio renders a single multi-staff part as a piano-style grand staff,
+// with barlines running continuously through the lyrics area between the
+// staves. Two parts grouped by a brace get the choir-style barline break
+// between staves instead -- <group-barline>no</group-barline> makes this
+// explicit rather than relying on the (undocumented, and untested here)
+// default for an omitted group-barline. Side effect: each part's
+// <part-name> now also prints as a system label ("Soprano/Alto",
+// "Tenor/Bass"), where the single-part version had none.
 #align(center, text(weight: "bold", size: 16pt)[Twinkle, Twinkle, Little Star])
 #align(center, text(size: 10pt, style: "italic")[SATB, simple demo harmonization])
 #v(12pt)
