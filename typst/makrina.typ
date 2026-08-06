@@ -14,13 +14,13 @@
 #v(8pt)
 
 #title[Tropaar (t. 3)]
-#falltwo[---] De liefde tot #rise[de] #rise[wijs]heid heeft vleugels geschon#fall[ken] #rise[aan] #risetwice[uw] #level[#hold(extra: 3pt)[geest]],
+#falltwo[---] De liefde tot #rise[de] #rise[wijs]heid heeft vleugels geschon#fall[ken] #rise[aan] #risetwice[uw] #level[#hold[geest]],
 
 en in die wijsheid hebt gij de vreugden der wereld ge#fall[#hold-wide[ri]]#fall[ng] #fall[ge]#fall[#hold[acht]].
 
 Daardoor zijt gij #rise[een] #rise[vreug]devol verblijf der godde#fall[lij]#rise[ke] #risetwice[lief]#level[#hold[de]],
 
-want door uw askese en #rise[#hold[hei]]#level[#hold(extra: 3pt)[lig]]#fall[#hold[heid]]
+want door uw askese en #rise[#hold[hei]]#level[#hold[lig]]#fall[#hold[heid]]
 
 zijt gij een Bruid geworden van uw #rise[Ver]#rise[#hold[los]]#fall[#hold[ser]],
 
@@ -30,15 +30,15 @@ tot Wie gij bidt voor ons die tot u #rise[#hold[roe]]#fall[#hold[pen]]:
 Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((up-stroke, up-stroke, up-stroke, down-stroke, down-stroke, down-stroke), [kri-~~~~~~~])#rise[#hold[~~~]]#fall[#hold[na]]! ---
 
 #title[Kondak (t. 2)]
-#rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold(extra: 3pt)[tig]]#fall[#hold[heid]],
+#rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold[tig]]#fall[#hold[heid]],
 
 zijt gij een voorbeeld geworden van Godwelgevallig #fall[#hold[le]]#fall[#hold[ven]],
 
-#rise[en] een #rise[#hold[leids]]vrouw tot al#rise[le] #rise[#hold(extra: 3pt)[deug]]#fall[#hold[den]]
+#rise[en] een #rise[#hold[leids]]vrouw tot al#rise[le] #rise[#hold[deug]]#fall[#hold[den]]
 
 voor hen die in geloof tot u #fall[#hold[roe]]#fall[#hold[pen]]:
 
 #rise[Ver]#rise[#hold[heug]] u, #rise[Ma]#rise[#hold[kri]]#fall[#hold[na]],
 
 #finalskip
-die de stra#fall[len]#rise[de] #rise[#hold[schoon]]#fall[heid] #rise[der] #fall[#hold(extra: 3pt)[maag]]#fall[#hold[den]] #fall[#hold(extra: 3pt)[zijt]]. ---
+die de stra#fall[len]#rise[de] #rise[#hold[schoon]]#fall[heid] #rise[der] #fall[#hold[maag]]#fall[#hold[den]] #fall[#hold[zijt]]. ---
