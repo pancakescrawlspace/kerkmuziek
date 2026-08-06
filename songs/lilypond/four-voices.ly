@@ -78,6 +78,15 @@ sopranoWordsTwo = \lyricmode {
   When he noth -- ing shines up -- on,
 }
 
+\paper {
+  % Default indent/short-indent are fixed distances, not sized to fit
+  % whatever instrumentName/shortInstrumentName text is given -- "Soprano /
+  % Alto" and "S / A" overflowed past the left edge of the page under the
+  % defaults, so these are widened enough to fit them.
+  indent = 45\mm
+  short-indent = 20\mm
+}
+
 \score {
   \new ChoirStaff <<
     \new Staff = "upper" \with {
