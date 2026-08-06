@@ -22,12 +22,13 @@ Daardoor zijt gij #rise[een] #rise[vreug]devol verblijf der godde#fall[lij]#rise
 
 want door uw askese en #rise[#hold[hei]]#level[#hold[lig]]#fall[#hold[heid]]
 
-zijt gij een Bruid geworden van uw #rise[Ver]#rise[#hold[los]]#fall[#hold[ser]],
+zijt gij een Bruid geworden van uw #rise[Ver]#rise[#hold[los]]#fall[#hold[-~~]]#fall[#hold[ser]],
 
 tot Wie gij bidt voor ons die tot u #rise[#hold[roe]]#fall[#hold[pen]]:
 
 #finalskip
 Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((up-stroke, up-stroke, up-stroke, down-stroke, down-stroke, down-stroke), [kri-~~~~~~~])#rise[#hold[~~~]]#fall[#hold[na]]! ---
+#v(.5em)
 
 #title[Kondak (t. 2)]
 #rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold[tig]]#fall[#hold[heid]],
