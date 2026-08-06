@@ -10,14 +10,22 @@
 // just by importing -- so page/text/par setup has to be wrapped in a
 // function like this and threaded through explicitly.
 
-#let body-font = "Helvetica Neue"
+#let body-font = "Helvetica"
 #let body-size = 18pt
-#let body-font-weight = 500
+#let body-font-weight = 400
+// Helvetica only has Regular (400) and Bold (700) faces -- no weight in
+// between actually exists, so asking Typst for e.g. 500 or 525 just snaps to
+// whichever of those two is numerically closer (Regular, in that case) with
+// no visible change. This stroke, drawn on top of the Regular glyph fill, is
+// what actually makes the text a little bolder without jumping all the way
+// to Bold or switching to a different family/letterforms (Helvetica Neue's
+// Medium was tried and looked too heavy).
+#let body-font-stroke = 0.18pt + black
 #let hang-indent = 1.5em      // wrapped (non-first) lines of a paragraph are indented this much
 
 #let conf(body) = {
   set page(paper: "a4", margin: 1in, numbering: none)
-  set text(font: body-font, size: body-size, weight: body-font-weight)
+  set text(font: body-font, size: body-size, weight: body-font-weight, stroke: body-font-stroke)
   // 6pt is the smallest gap that clears a pitch mark on one line from a
   // descender (g, j, ...) on the line above -- found by shrinking it until
   // the tallest mark used (falltwo) just touched a "gg jjj" test line, then
