@@ -57,8 +57,7 @@ In Uw Naam juichen zij te allen #hold[tij]#rise[#hold[de]],
 en door Uw gerechtigheid #fall[#hold[wor]]den zij ver#hold[hoogd].
 #set par(first-line-indent: 20pt)
 #v(12pt)
-Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij op de berg, o Chris#rise[tus] #rise[#hold[God]]...
-#align(right)[#text(size:14pt)[#emph[(zie volgende pagina)]]]
+Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij...#h(1fr);#text(size:14pt)[#emph[(zie volgende pagina)]]
 
 #pagebreak()
 #set par(first-line-indent: 0pt)
