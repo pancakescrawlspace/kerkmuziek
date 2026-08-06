@@ -21,11 +21,13 @@
 // only renders correctly because Typst can resolve that font locally --
 // LilyPond's PDF backend, by contrast, embeds subset fonts and is fully
 // self-contained.
-// Page sized to the image's own content rather than a fixed A4 sheet: a
-// fixed page left a lot of blank space below the (comparatively short)
-// score, and constraining the image to a fixed page's content width was
-// also scaling it down from the size LilyPond's own crop already gave it.
-// width/height: auto lets the page shrink to exactly fit the image plus
-// this margin instead.
-#set page(width: auto, height: auto, margin: 1cm, numbering: none)
+// A4 page, but the image is left at its own intrinsic width (193.36mm, per
+// the SVG's own width= attribute) rather than being scaled to fill the
+// content box -- that print width already matches the plain, uncropped
+// four-voices.pdf almost exactly (verified with `gs -sDEVICE=bbox`: ink
+// bounding box there is ~193.06mm wide). Left/right margins are kept small
+// enough (210mm page - 193.36mm image = 16.64mm to split) that the content
+// box doesn't force a shrink; top/bottom stay a normal page margin since
+// there's no similar width constraint vertically.
+#set page(paper: "a4", margin: (x: 8mm, y: 1in), numbering: none)
 #image("../lilypond/four-voices.svg")
