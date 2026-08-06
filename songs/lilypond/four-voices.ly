@@ -131,4 +131,5 @@ sopranoWordsTwo = \lyricmode {
     >>
   >>
   \layout { }
+  \midi { }
 }
