@@ -103,6 +103,10 @@ sopranoWordsTwo = \lyricmode {
      #:sans "Helvetica"
      #:typewriter "Helvetica"
     ))
+  % Default indent still reserves first-system space for an instrument
+  % name even with none set; zero it so the first system isn't indented
+  % relative to the rest.
+  indent = 0
 }
 
 \score {
