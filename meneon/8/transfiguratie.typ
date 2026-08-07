@@ -10,7 +10,7 @@
 
 Van de gunstbewijzen des Heren wil ik eeuwig #hold[zin]#rise[#hold[gen]],
 
-van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall(clearance: 1pt)[#hold[kon]]di#hold[gen].#h(1fr)#text(fill: gray)[(Ps. 88.)]
+van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall(clearance: 1pt)[#hold[kon]]di#hold[gen].
 
 #v(5pt)
 #subtitle[Tropaar van Transfiguratie (t.~7)]
@@ -33,7 +33,7 @@ Gij #rise[li]#fall[cht]#fall[#hold[schen]]ken#rise[de] #rise[#hold[Heer]],
 
 #set par(first-line-indent: 0pt)
 #v(12pt)
-De hemelen roemen Gods #hold[heer]lijk#rise[#hold[heid]],#h(1fr)#text(fill: gray)[(Ps. 18.)]
+De hemelen roemen Gods #hold[heer]lijk#rise[#hold[heid]],
 
 en het uitspansel verkondigt het werk Zijner #fall[#hold[han]]#hold[den].
 
@@ -43,7 +43,7 @@ De ge#rise[#hold[daan]]#fall[te] #fall[U]wer heerlijkheid, o Chris#rise[tus] #ri
 
 #set par(first-line-indent: 0pt)
 #v(12pt)
-Welzalig het volk dat de #hold[ju]belroep #rise[#hold[kent]],#h(1fr)#text(fill: gray)[(Ps. 88.)]
+Welzalig het volk dat de #hold[ju]belroep #rise[#hold[kent]],
 
 o Heer, zij zullen in het licht van Uw aanschijn #fall[#hold[wan]]de#hold[len].
 
@@ -54,8 +54,7 @@ De ge#rise[#hold[daan]]#fall[te] #fall[U]wer heerlijkheid, o Chris#rise[tus] #ri
 #v(12pt)
 In Uw Naam juichen zij te allen #hold[tij]#rise[#hold[de]],
 
-en door Uw gerechtigheid #fall[#hold[wor]]den zij ver#hold[hoogd].#h(1fr)#text(fill: gray)[(Ps. 88.)]
-
+en door Uw gerechtigheid #fall[#hold[wor]]den zij ver#hold[hoogd].
 #set par(first-line-indent: 20pt)
 #v(12pt)
 Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij...#h(.5em)#text(size:14pt, weight: 700)[#emph[(zie volgende pagina)]]
