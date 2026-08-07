@@ -21,7 +21,7 @@
 // to Bold or switching to a different family/letterforms (Helvetica Neue's
 // Medium was tried and looked too heavy).
 #let body-font-stroke = 0.18pt + black
-#let hang-indent = 1.5em      // wrapped (non-first) lines of a paragraph are indented this much
+#let hang-indent = 20pt      // wrapped (non-first) lines of a paragraph are indented this much
 
 #let conf(body) = {
   set page(paper: "a4", margin: 1in, numbering: none)
