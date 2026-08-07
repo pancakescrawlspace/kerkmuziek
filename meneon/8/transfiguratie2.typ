@@ -13,7 +13,7 @@ P.: Wijsheid!
 #v(3pt)
 #hide[P.:] Heer, zend Uw licht en Uw waarheid,
 
-#hide[P.:] zij zullen mij leiden en brengen naar Uw heilige berg.
+#hide[P.:] zij zullen mij leiden en brengen naar Uw heilige berg. #h(1fr) #text(fill: luma(90))[(Ps. 42.)]
 
 #set text(size: 18pt)
 
