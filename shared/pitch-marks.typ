@@ -18,7 +18,7 @@
 
 // ---- tunable parameters ---------------------------------------------------
 
-#let mark-color = black
+#let mark-color = luma(90)
 #let mark-thickness = 1.3pt
 #let mark-length = 7pt        // horizontal run of one stroke
 #let mark-slope = 0.5         // rise/run of one stroke (0.5 => ~27deg, 1 => 45deg)
