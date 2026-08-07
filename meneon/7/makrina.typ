@@ -33,7 +33,7 @@ Verheug u, Goddragen#fall[de] #fall[Ma]#spaced-left((up-stroke, up-stroke, up-st
 #title[Kondak (t.~2)]
 #rise[---] Geheel ver#rise[#hold[vuld]] van het licht der #rise[Ge]#rise[#hold[rech]]#fall[#hold[tig]]#fall[#hold[heid]],
 
-zijt gij een voorbeeld geworden van Godwelgevallig #fall[#hold[le-]]#fall[#hold[ven]],
+zijt gij een voorbeeld geworden van Godwelgevallig \ #fall(clearance: 1pt)[#hold[le-]]#fall(clearance: 1pt)[#hold[ven]],
 
 #rise[en] een #rise[#hold[leids]]vrouw tot al#rise[le] #rise[#hold[deug]]#fall[#hold[-~~]]#fall[#hold[den]]
 
