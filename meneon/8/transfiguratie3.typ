@@ -4,6 +4,7 @@
 #import "../../shared/layout.typ": *        // page setup, body font, paragraph spacing, headings
 
 #show: conf
+#set page(width: auto, height: auto, margin: 6pt, fill: none)
 
 #title[Tropaar van Transfiguratie (t.~7)]
 #v(.5em)
