@@ -7,15 +7,16 @@
 
 #heading-line[Kleine intocht]
 #v(8pt)
-#set text(size: 14pt)
-P.: Wijsheid!
+// spoken, not sung: keep the font's natural line height (no pitch-mark reservation)
+#spoken[
+  #set text(size: 14pt)
+  P.: Wijsheid!
 
-#v(3pt)
-#hide[P.:] Heer, zend Uw licht en Uw waarheid,
+  #v(3pt)
+  #hide[P.:] Heer, zend Uw licht en Uw waarheid,
 
-#hide[P.:] zij zullen mij leiden en brengen naar Uw heilige berg. #h(1fr) #text(fill: luma(90))[(Ps. 42.)]
-
-#set text(size: 18pt)
+  #hide[P.:] zij zullen mij leiden en brengen naar Uw heilige berg. #h(1fr) #text(fill: luma(90))[(Ps. 42.)]
+]
 
 #v(8pt)
 

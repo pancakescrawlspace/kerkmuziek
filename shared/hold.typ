@@ -77,9 +77,20 @@
   // descender that reaches into the clearance gap (e.g. "g") should have
   // their own black ink cover the red rule there, not the other way
   // around, so body has to be the one painted last.
+  // Reset the text edges to the font's own defaults for this syllable
+  // (cap-height/baseline), so the enlarged global bottom-edge set in layout.typ
+  // (which makes every plain line reserve a hold's worth of space below)
+  // doesn't stack on top of this box's own `inset: (bottom: ...)` and push the
+  // rule down. A local `set` wins over layout.typ's blanket one. Only when the
+  // reservation is on: a document that opts out (conf(reserve: false)) keeps
+  // its own edges. See mark-above and reserve-line-height in layout.typ.
+  // Spread from a dict that is empty when reset is off, so the `set` governs
+  // `body` -- a `set` inside `if reset {}` would scope to the if-block instead.
+  let reset = state("pitchmarks-reserve-line-height", true).get()
+  let reset-edges = if reset { (top-edge: "cap-height", bottom-edge: "baseline") } else { (:) }
   box(width: w, inset: (bottom: hold-clearance + hold-thickness))[
     #place(bottom, dx: x0, dy: hold-clearance + hold-thickness / 2, line(start: (0pt, 0pt), end: (len, 0pt), stroke: (paint: hold-color, thickness: hold-thickness)))
-    #body
+    #{ set text(..reset-edges); body }
   ]
 }
 

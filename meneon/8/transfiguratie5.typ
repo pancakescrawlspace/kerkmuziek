@@ -3,7 +3,9 @@
 #import "../../shared/finalskip.typ": *     // finalskip : space before the final line
 #import "../../shared/layout.typ": *        // page setup, body font, paragraph spacing, headings
 
-#show: conf
+// This crop-to-fit variant sets its own top-edge and tunes mark clearances by
+// hand, so it opts out of conf's constant-line-height reservation.
+#show: conf.with(reserve: false)
 #set page(width: auto, height: auto, margin: 6pt, fill: none)
 
 #title[Kondak van Transfiguratie (t.~7)]

@@ -3,7 +3,9 @@
 #import "../../shared/finalskip.typ": *     // finalskip : space before the final line
 #import "../../shared/layout.typ": *        // page setup, body font, paragraph spacing, headings
 
-#show: conf
+// This variant sets its own top-edge and tunes mark clearances by hand, so it
+// opts out of conf's constant-line-height reservation.
+#show: conf.with(reserve: false)
 
 #title[Tropaar van Transfiguratie (t.~7)]
 #v(.5em)

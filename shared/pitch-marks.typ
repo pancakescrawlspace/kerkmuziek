@@ -185,8 +185,22 @@
   let mw = measure(stroke.shape).width
   let w = calc.max(bw, mw)
   let dx = if align-mark == left { 0pt } else { (w - mw) / 2 }
+  // Reset the text edges back to the font's own defaults for this syllable
+  // (cap-height/baseline) -- but only when layout.typ's constant-line-height
+  // reservation is on. That reservation enlarges the global top-/bottom-edge so
+  // every plain line reserves a mark's and a hold's worth of space; here the
+  // reservation comes from this box's own `inset: (top: span)` instead, so the
+  // enlarged edge must not stack on top of it or the mark would drift upward. A
+  // local `set` wins over layout.typ's blanket one. When a document opts out
+  // (conf(reserve: false)), leave the syllable's edges alone so it inherits the
+  // document's own top-edge -- see reserve-line-height in layout.typ.
+  // Spread from a dict that is empty when reset is off, so the `set` governs
+  // `body` -- a `set` written inside `if reset {}` would scope to the if-block
+  // and never reach body.
+  let reset = state("pitchmarks-reserve-line-height", true).get()
+  let reset-edges = if reset { (top-edge: "cap-height", bottom-edge: "baseline") } else { (:) }
   box(width: w, inset: (top: span))[
-    #body
+    #{ set text(..reset-edges); body }
     #place(top, dx: dx, dy: -(clearance + stroke.low), stroke.shape)
   ]
 }
