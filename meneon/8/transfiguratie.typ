@@ -10,7 +10,7 @@
 
 Van de gunstbewijzen des Heren wil ik eeuwig #hold[zin]#rise[#hold[gen]],
 
-van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall(clearance: 1pt)[#hold[kon]]di#hold[gen].
+van geslacht tot geslacht zal ik Uw trouw met mijn mond ver#fall[#hold[kon]]di#hold[gen].
 
 #v(5pt)
 #subtitle[Tropaar van Transfiguratie (t.~7)]
@@ -65,7 +65,7 @@ Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij...#h(.5em)#text(size:14pt, wei
 
 Ver#rise[#hold[heer]]#fall[lijkt] #fall[werd] Gij op de berg, o Chris#rise[tus] #rise[#hold[God]],
 
-en Uw discipelen aanschouwden Uw glorie voorzover zij dit #hold[kon]#fall(clearance: 1pt)[#hold[den]],
+en Uw discipelen aanschouwden Uw glorie voorzover zij dit #hold[kon]#fall[#hold[den]],
 
 op#rise[dat], #fall[wan]#fall[neer] zij U gekruisigd zou#rise[den] #rise[#hold[zien]],
 
