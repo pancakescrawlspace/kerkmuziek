@@ -35,7 +35,7 @@ door de gebeden van de #hold[Moe]der #fall[#hold[Gods]],
 
 Gij #rise[li]#fall[cht]#fall[#hold[schen]]ken#rise[de] #rise[#hold[Heer]],
 
-#fall[#hold[e-]]#falltwice[~~~~]#rise[re] zij #fall[#hold[U]]!
+#spaced-left((down-stroke, down-stroke, down-stroke), [e-~~~])#rise[re] zij #fall[#hold[U]]!
 
 #v(16pt)
 
