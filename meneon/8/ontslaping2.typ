@@ -59,6 +59,6 @@ hei#fall[ligt] #fall[Zijn] #rise[#hold[woon]]#fall[#hold[tent]].
 #v(5pt)
 #set par(first-line-indent: 0pt)
 
-Eer aan #rise[de] #rise[Va]der, de Zoon #fall[en] #rise[de] #rise[#hold[Hei]]lige #fall[#hold[Geest]],
+Eer aan #rise[de] #rise[Va]der, de Zoon #fall[en] #rise[de] #rise[#hold[Hei]]lige #fall[#hold[Geest]].
 
 #h(1fr)#text(size:14pt, weight: 700)[#emph[(verder met "Eniggeboren Zoon")]]
