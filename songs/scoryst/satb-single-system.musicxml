@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<!--
+  A three-measure SATB phrase on TWO staves: Soprano+Alto share a treble staff,
+  Tenor+Bass share a bass staff. It is short on purpose so the whole thing
+  engraves as a single system (one line of music).
+
+  Two ideas drive the structure:
+
+  1. TWO STAVES = TWO PARTS joined by a brace.
+     Rather than one <part> with <staves>2</staves> (which Verovio draws as a
+     piano grand staff, with barlines cutting through the lyric area between the
+     staves), this uses two separate <part>s -- P1 (S/A) and P2 (T/B) -- wrapped
+     in a braced <part-group>. <group-barline>no</group-barline> keeps the
+     barlines from joining across the gap, the usual choral look, so the lyrics
+     printed under the top staff are not crossed by barlines.
+
+  2. TWO VOICES PER STAFF via <backup>.
+     A measure is written one voice at a time. Within P1 we lay down the whole
+     measure for voice 1 (Soprano, stems up), then <backup> rewinds the "cursor"
+     by a full measure (4 divisions) so voice 2 (Alto, stems down) can be
+     written over the same beats. P2 does the same for Tenor (up) and Bass
+     (down). <stem> is given explicitly because two voices on one staff must
+     point their stems in opposite directions. The lyric is attached to the
+     Soprano voice only, as is conventional.
+
+  divisions=1, so 1 = quarter, 2 = half, 4 = whole. Harmony: C F C G | Am G C | C.
+-->
+<score-partwise version="4.0">
+  <part-list>
+    <part-group type="start" number="1">
+      <group-symbol>brace</group-symbol>
+      <group-barline>no</group-barline>
+    </part-group>
+    <score-part id="P1">
+      <part-name>S/A</part-name>
+    </score-part>
+    <score-part id="P2">
+      <part-name>T/B</part-name>
+    </score-part>
+    <part-group type="stop" number="1"/>
+  </part-list>
+
+  <!-- ===== Treble staff: Soprano (voice 1, up) + Alto (voice 2, down) ===== -->
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+        <key><fifths>0</fifths></key>
+        <time><beats>4</beats><beat-type>4</beat-type></time>
+        <clef><sign>G</sign><line>2</line></clef>
+      </attributes>
+      <!-- Soprano -->
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>Let</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>us</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>all</text></lyric>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>now</text></lyric>
+      </note>
+      <backup><duration>4</duration></backup>
+      <!-- Alto -->
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>B</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+    </measure>
+    <measure number="2">
+      <!-- Soprano -->
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>sing</text></lyric>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>with</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>2</duration><voice>1</voice><type>half</type><stem>up</stem>
+        <lyric number="1"><syllabic>single</syllabic><text>great</text></lyric>
+      </note>
+      <backup><duration>4</duration></backup>
+      <!-- Alto -->
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>B</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>2</duration><voice>2</voice><type>half</type><stem>down</stem>
+      </note>
+    </measure>
+    <measure number="3">
+      <!-- Soprano -->
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>4</duration><voice>1</voice><type>whole</type>
+        <lyric number="1"><syllabic>single</syllabic><text>joy.</text></lyric>
+      </note>
+      <backup><duration>4</duration></backup>
+      <!-- Alto -->
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>4</duration><voice>2</voice><type>whole</type>
+      </note>
+      <barline location="right"><bar-style>light-heavy</bar-style></barline>
+    </measure>
+  </part>
+
+  <!-- ===== Bass staff: Tenor (voice 1, up) + Bass (voice 2, down) ===== -->
+  <part id="P2">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+        <key><fifths>0</fifths></key>
+        <time><beats>4</beats><beat-type>4</beat-type></time>
+        <clef><sign>F</sign><line>4</line></clef>
+      </attributes>
+      <!-- Tenor -->
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+      </note>
+      <note>
+        <pitch><step>A</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+      </note>
+      <backup><duration>4</duration></backup>
+      <!-- Bass -->
+      <note>
+        <pitch><step>C</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>2</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+    </measure>
+    <measure number="2">
+      <!-- Tenor -->
+      <note>
+        <pitch><step>A</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>2</duration><voice>1</voice><type>half</type><stem>up</stem>
+      </note>
+      <backup><duration>4</duration></backup>
+      <!-- Bass -->
+      <note>
+        <pitch><step>A</step><octave>2</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>2</octave></pitch>
+        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>3</octave></pitch>
+        <duration>2</duration><voice>2</voice><type>half</type><stem>down</stem>
+      </note>
+    </measure>
+    <measure number="3">
+      <!-- Tenor -->
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>4</duration><voice>1</voice><type>whole</type>
+      </note>
+      <backup><duration>4</duration></backup>
+      <!-- Bass -->
+      <note>
+        <pitch><step>C</step><octave>3</octave></pitch>
+        <duration>4</duration><voice>2</voice><type>whole</type>
+      </note>
+      <barline location="right"><bar-style>light-heavy</bar-style></barline>
+    </measure>
+  </part>
+</score-partwise>
