@@ -16,8 +16,7 @@ b#falltwo[re]#rise[n]g #rise[lof] #fall[aan] #fall[zijn] #rise[#hold[heer]]lijk#
 #v(5pt)
 #set par(first-line-indent: 20pt)
 
-//TODO: nice to have: de 'falltwo' moet iets omhoog
-Door de #rise[ge]#rise[be]den van #falltwo[de] #rise[Moe]#rise[der] #fall[Gods] #rise[en] #rise[#hold[Maagd]],
+Door de #rise[ge]#rise[be]den van #mark-clearance.update(5pt) #falltwo[de] #mark-clearance.update(3pt) #rise[Moe]#rise[der] #fall[Gods] #rise[en] #rise[#hold[Maagd]],
 #spaced-center((down-stroke, up-stroke),[ver])#falltwice([los]) #fall[#hold[ons]], #spaced-center((flat-stroke-bottom, up-stroke),[#h(3pt)o]) #rise[#hold[He]]#fall[#hold[-~~]]#fall[#hold[re]].
 
 #v(5pt)
