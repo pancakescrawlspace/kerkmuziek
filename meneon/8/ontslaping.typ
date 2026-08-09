@@ -11,7 +11,7 @@
 --- Juich #rise[voor] #rise[God], ge#fall[he]#rise[le] #rise[#hold[aar]]#fall[#hold[de]],
 
 //TODO:"breng": dit is wel een beetje een hack...
-b#falltwo[re]#rise[n]g #rise[lof] #fall[aan] #fall[zijn] #rise[#hold[heer]]lijk#fall[#hold[heid]].
+b#falltwo[re]#rise[n]g #rise[lof] #fall[aan] #fall[Zijn] #rise[#hold[heer]]lijk#fall[#hold[heid]].
 
 #v(5pt)
 #set par(first-line-indent: 20pt)
