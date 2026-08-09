@@ -29,8 +29,7 @@ Belijd #rise[de] #rise[Heer], en #fall[roep] #rise[Zijn] #rise[#hold[Naam]] #fal
 #v(5pt)
 #set par(first-line-indent: 20pt)
 
-//TODO: nice to have (zelfde als boven): de 'falltwo' moet iets omhoog
-Door de #rise[ge]#rise[be]den van #falltwo[de] #rise[Moe]#rise[der] #fall[Gods]...
+Door de #rise[ge]#rise[be]den...
 
 #v(5pt)
 #set par(first-line-indent: 0pt)
@@ -42,7 +41,7 @@ In #rise[de] #rise[Stad] van de #fall[Heer] #rise[der] #rise[#hold[Krach]]#fall[
 #v(5pt)
 #set par(first-line-indent: 20pt)
 
-Door de #rise[ge]#rise[be]den van #falltwo[de] #rise[Moe]#rise[der] #fall[Gods]...
+Door de #rise[ge]#rise[be]den...
 
 #v(5pt)
 #set par(first-line-indent: 0pt)
@@ -54,7 +53,7 @@ Zijn #rise[ver]#rise[blijf]plaats #fall[is] #rise[in] #rise[#hold[Vre]]#fall[#ho
 #v(5pt)
 #set par(first-line-indent: 20pt)
 
-Door de #rise[ge]#rise[be]den van #falltwo[de] #rise[Moe]#rise[der] #fall[Gods]...
+Door de #rise[ge]#rise[be]den...
 
 #v(5pt)
 #set par(first-line-indent: 0pt)
@@ -66,4 +65,4 @@ Eer aan #rise[de] #rise[Va]der, de Zoon #fall[en] #rise[de] #rise[#hold[Hei]]lig
 #v(5pt)
 #set par(first-line-indent: 20pt)
 
-Door de #rise[ge]#rise[be]den van #falltwo[de] #rise[Moe]#rise[der] #fall[Gods]...
+Door de #rise[ge]#rise[be]den...
