@@ -36,6 +36,20 @@
     a hyphenated multi-syllable word (e.g. Twin-kle), which draws the hyphen.
 -->
 <score-partwise version="4.0">
+  <!--
+    A song's title normally lives here, in a <work> block placed just before
+    <part-list>:
+
+        <work><work-title>Twinkle, Twinkle, Little Star</work-title></work>
+
+    <work-title> is the MusicXML counterpart of the ABC "T:" field. It is
+    deliberately omitted from this file, though: scoryst's bundled Verovio
+    mis-centers a work-title (it prints off the left edge of the cropped SVG)
+    and its `header` option does not suppress it, so leaving it in yields a
+    broken, duplicated title. Instead the title is typeset in Typst by
+    twinkle-twinkle-musicxml.typ -- the same approach as four-voices.typ. In a
+    different MusicXML tool you would keep the <work> block and let it render.
+  -->
   <part-list>
     <score-part id="P1">
       <part-name>Voice</part-name>
