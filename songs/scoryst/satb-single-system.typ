@@ -2,6 +2,11 @@
 
 #set page(paper: "a4", margin: 1in, numbering: none)
 
+// Render all text in Helvetica. This covers both the Typst-drawn title and the
+// score's own text (lyrics, part labels): scoryst emits the score's text as SVG
+// <text> elements, so Typst's text font applies to them too.
+#set text(font: "Helvetica")
+
 // A single system with two staves: Soprano/Alto on the treble staff,
 // Tenor/Bass on the bass staff, braced together. The music (three measures)
 // is short enough that Verovio lays it out on one system. See
