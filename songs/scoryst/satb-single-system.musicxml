@@ -24,7 +24,7 @@
      point their stems in opposite directions. The lyric is attached to the
      Soprano voice only, as is conventional.
 
-  divisions=1, so 1 = quarter, 2 = half, 4 = whole. Harmony: C F C G | Am G C | C.
+  divisions=1, so 1 = quarter, 2 = half, 4 = whole. Harmony: G C G D | Em D G | G.
 -->
 <score-partwise version="4.0">
   <part-list>
@@ -46,93 +46,93 @@
     <measure number="1">
       <attributes>
         <divisions>1</divisions>
-        <key><fifths>0</fifths></key>
+        <key><fifths>1</fifths></key>
         <time><beats>4</beats><beat-type>4</beat-type></time>
         <clef><sign>G</sign><line>2</line></clef>
       </attributes>
       <!-- Soprano -->
       <note>
-        <pitch><step>E</step><octave>4</octave></pitch>
+        <pitch><step>B</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>Let</text></lyric>
       </note>
       <note>
-        <pitch><step>F</step><octave>4</octave></pitch>
+        <pitch><step>C</step><octave>5</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>us</text></lyric>
       </note>
       <note>
-        <pitch><step>E</step><octave>4</octave></pitch>
+        <pitch><step>B</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>all</text></lyric>
       </note>
       <note>
-        <pitch><step>D</step><octave>4</octave></pitch>
+        <pitch><step>A</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>now</text></lyric>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Alto -->
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch><step>G</step><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch><step>G</step><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch><step>G</step><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>B</step><octave>3</octave></pitch>
+        <pitch><step>F</step><alter>1</alter><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
     </measure>
     <measure number="2">
       <!-- Soprano -->
       <note>
-        <pitch><step>E</step><octave>4</octave></pitch>
+        <pitch><step>B</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>sing</text></lyric>
       </note>
       <note>
-        <pitch><step>D</step><octave>4</octave></pitch>
+        <pitch><step>A</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>with</text></lyric>
       </note>
       <note>
-        <pitch><step>E</step><octave>4</octave></pitch>
+        <pitch><step>B</step><octave>4</octave></pitch>
         <duration>2</duration><voice>1</voice><type>half</type><stem>up</stem>
         <lyric number="1"><syllabic>single</syllabic><text>great</text></lyric>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Alto -->
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch><step>G</step><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>B</step><octave>3</octave></pitch>
+        <pitch><step>F</step><alter>1</alter><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch><step>G</step><octave>4</octave></pitch>
         <duration>2</duration><voice>2</voice><type>half</type><stem>down</stem>
       </note>
     </measure>
     <measure number="3">
       <!-- Soprano -->
       <note>
-        <pitch><step>E</step><octave>4</octave></pitch>
+        <pitch><step>B</step><octave>4</octave></pitch>
         <duration>4</duration><voice>1</voice><type>whole</type>
         <lyric number="1"><syllabic>single</syllabic><text>joy.</text></lyric>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Alto -->
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch><step>G</step><octave>4</octave></pitch>
         <duration>4</duration><voice>2</voice><type>whole</type>
       </note>
       <barline location="right"><bar-style>light-heavy</bar-style></barline>
@@ -144,85 +144,85 @@
     <measure number="1">
       <attributes>
         <divisions>1</divisions>
-        <key><fifths>0</fifths></key>
+        <key><fifths>1</fifths></key>
         <time><beats>4</beats><beat-type>4</beat-type></time>
         <clef><sign>F</sign><line>4</line></clef>
       </attributes>
       <!-- Tenor -->
       <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
+        <pitch><step>D</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
       </note>
       <note>
-        <pitch><step>A</step><octave>3</octave></pitch>
+        <pitch><step>E</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
       </note>
       <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
+        <pitch><step>D</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
       </note>
       <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
+        <pitch><step>D</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Bass -->
       <note>
-        <pitch><step>C</step><octave>3</octave></pitch>
+        <pitch><step>G</step><octave>3</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>F</step><octave>3</octave></pitch>
+        <pitch><step>C</step><octave>4</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>C</step><octave>3</octave></pitch>
+        <pitch><step>G</step><octave>3</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>G</step><octave>2</octave></pitch>
+        <pitch><step>D</step><octave>3</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
     </measure>
     <measure number="2">
       <!-- Tenor -->
       <note>
-        <pitch><step>A</step><octave>3</octave></pitch>
+        <pitch><step>E</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
       </note>
       <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
+        <pitch><step>D</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
       </note>
       <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
+        <pitch><step>D</step><octave>4</octave></pitch>
         <duration>2</duration><voice>1</voice><type>half</type><stem>up</stem>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Bass -->
       <note>
-        <pitch><step>A</step><octave>2</octave></pitch>
+        <pitch><step>E</step><octave>3</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>G</step><octave>2</octave></pitch>
+        <pitch><step>D</step><octave>3</octave></pitch>
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
       <note>
-        <pitch><step>C</step><octave>3</octave></pitch>
+        <pitch><step>G</step><octave>3</octave></pitch>
         <duration>2</duration><voice>2</voice><type>half</type><stem>down</stem>
       </note>
     </measure>
     <measure number="3">
       <!-- Tenor -->
       <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
+        <pitch><step>D</step><octave>4</octave></pitch>
         <duration>4</duration><voice>1</voice><type>whole</type>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Bass -->
       <note>
-        <pitch><step>C</step><octave>3</octave></pitch>
+        <pitch><step>G</step><octave>3</octave></pitch>
         <duration>4</duration><voice>2</voice><type>whole</type>
       </note>
       <barline location="right"><bar-style>light-heavy</bar-style></barline>
