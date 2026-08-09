@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<!--
+  A minimal, single-voice MusicXML transcription of "Twinkle, Twinkle,
+  Little Star" -- the exact same melody and lyrics as the ABC version in
+  twinkle-twinkle.typ, re-encoded so you can compare the two formats.
+
+  How to read this file, top to bottom:
+
+  * <score-partwise> is the root. "partwise" means the music is organized
+    part-by-part, and within each part, measure-by-measure. (The other
+    flavor, score-timewise, inverts this nesting; partwise is far more common.)
+
+  * <part-list> is the table of contents: it declares which parts (voices/
+    instruments) exist. Here there is exactly one, <score-part id="P1">.
+    The id ("P1") is the link between this declaration and the actual notes.
+
+  * <part id="P1"> holds the notes, grouped into <measure> elements.
+
+  * The first measure carries an <attributes> block: the "clef, key, time"
+    setup you'd see at the start of a staff. It applies until changed.
+      - <divisions>1</divisions> sets the time unit: 1 division = 1 quarter
+        note. So every <duration> below is counted in quarter notes:
+        a quarter is 1, a half is 2.
+      - <key><fifths>0</fifths></key> is C major / A minor (0 sharps/flats).
+      - <time> is 4/4.
+      - <clef> is treble (G clef on line 2).
+
+  * Each <note> gives a <pitch> (step + octave; octave 4 starts at middle C),
+    a <duration> (in divisions), and a <type> (the notated note-head shape).
+    duration and type are separate on purpose: duration is arithmetic for
+    playback/spacing, type is the visual symbol.
+
+  * <lyric> attaches a syllable under a note. <syllabic> says how the syllable
+    joins its neighbours: "single" is a whole word, and "begin"/"end" bracket
+    a hyphenated multi-syllable word (e.g. Twin-kle), which draws the hyphen.
+-->
+<score-partwise version="4.0">
+  <part-list>
+    <score-part id="P1">
+      <part-name>Voice</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <!-- Measure 1: "Twin-kle twin-kle" -->
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+        <key><fifths>0</fifths></key>
+        <time><beats>4</beats><beat-type>4</beat-type></time>
+        <clef><sign>G</sign><line>2</line></clef>
+      </attributes>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>Twin</text></lyric>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>twin</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 2: "lit-tle star," -->
+    <measure number="2">
+      <note>
+        <pitch><step>A</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>lit</text></lyric>
+      </note>
+      <note>
+        <pitch><step>A</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>tle</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>2</duration>
+        <type>half</type>
+        <lyric number="1"><syllabic>single</syllabic><text>star,</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 3: "How I won-der" -->
+    <measure number="3">
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>How</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>I</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>won</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>der</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 4: "what you are!" -->
+    <measure number="4">
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>what</text></lyric>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>you</text></lyric>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>2</duration>
+        <type>half</type>
+        <lyric number="1"><syllabic>single</syllabic><text>are!</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 5: "Up a-bove" -->
+    <measure number="5">
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>Up</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>a</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>bove</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>the</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 6: "world so high," -->
+    <measure number="6">
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>world</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>so</text></lyric>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>2</duration>
+        <type>half</type>
+        <lyric number="1"><syllabic>single</syllabic><text>high,</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 7: "Like a dia-mond" -->
+    <measure number="7">
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>Like</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>a</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>dia</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>mond</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 8: "in the sky." -->
+    <measure number="8">
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>in</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>the</text></lyric>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>2</duration>
+        <type>half</type>
+        <lyric number="1"><syllabic>single</syllabic><text>sky.</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 9: "Twin-kle twin-kle" (reprise) -->
+    <measure number="9">
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>Twin</text></lyric>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>twin</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>kle</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 10: "lit-tle star," -->
+    <measure number="10">
+      <note>
+        <pitch><step>A</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>lit</text></lyric>
+      </note>
+      <note>
+        <pitch><step>A</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>tle</text></lyric>
+      </note>
+      <note>
+        <pitch><step>G</step><octave>4</octave></pitch>
+        <duration>2</duration>
+        <type>half</type>
+        <lyric number="1"><syllabic>single</syllabic><text>star,</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 11: "How I won-der" -->
+    <measure number="11">
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>How</text></lyric>
+      </note>
+      <note>
+        <pitch><step>F</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>I</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>begin</syllabic><text>won</text></lyric>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>end</syllabic><text>der</text></lyric>
+      </note>
+    </measure>
+    <!-- Measure 12: "what you are!" (final barline) -->
+    <measure number="12">
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>what</text></lyric>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>1</duration>
+        <type>quarter</type>
+        <lyric number="1"><syllabic>single</syllabic><text>you</text></lyric>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>2</duration>
+        <type>half</type>
+        <lyric number="1"><syllabic>single</syllabic><text>are!</text></lyric>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+</score-partwise>
