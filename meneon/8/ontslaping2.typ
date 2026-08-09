@@ -35,7 +35,7 @@ O#rise[ver] #rise[U] zijn roem#fall[rij]#rise[ke] #rise[#hold[din]]gen ge#fall[#
 #v(5pt)
 #set par(first-line-indent: 0pt)
 
-God heeft haar #rise[ge]#rise[grond]#fall[vest] #rise[voor] #rise[#hold[eeu]]#fall[#hold[wig]];
+God heeft haar #rise[ge]#rise[grond]#fall[vest] #rise[voor] #rise[#hold[eeu]]#fall[#hold[wig]]#text[;]
 
 #mark-clearance.update(5pt) #falltwo[God],#mark-clearance.update(3pt) wij #rise[ver]#rise[wach]ten Uw barmhartigheid in het mid#fall[den] #fall[van] #rise[#hold[Uw]] #fall[#hold[volk]].
 
