@@ -14,13 +14,13 @@ Tot het #rise[#hold[le]]#rise[#hold[ven]] #mark-clearance.update(6pt) #falltwo[z
 
 #fall[Door] Uw gebeden worden onze zielen van de #rise[#hold[dood]] \ #hold[ver]#fall[#hold[lost]]. #risetwo[---]
 
-#v(12pt)
+#v(16pt)
 
 #risetwo[---] Eer aan de Vader, de Zoon en de Heilige #hold[Geest],
 
 Nu en altijd en in de eeuwen der eeuwen. #hold-wide[A]men. #risetwo[---]
 
-#v(4pt)
+#v(8pt)
 #title[Kondak van de Ontslaping van de Moeder Gods (t.~2)]
 
 #rise[---] De Moeder #rise[#hold[Gods]] die onvermoeibaar on#rise[ze] \ #rise[#hold[voor]]#fall[#hold[spraak]] #fall[#hold[is]],
