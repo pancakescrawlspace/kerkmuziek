@@ -8,7 +8,12 @@
 // it to its bundled Verovio engraver, which auto-detects the input format.
 // See twinkle-twinkle.musicxml for a heavily annotated walk-through of the
 // MusicXML structure.
+// `lyric-word-space` (Verovio's lyricWordSpace, in staff-space units) sets the
+// minimum gap between separate lyric words. The default leaves "How I" and
+// "what you" looking cramped here; 1.6 gives them room while keeping the music
+// on two systems. See the note below about why this needs setting explicitly.
 #score(
   read("twinkle-twinkle.musicxml"),
+  options: (lyric-word-space: 1.6),
   width: 100%,
 )
