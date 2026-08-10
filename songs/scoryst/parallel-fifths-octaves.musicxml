@@ -33,7 +33,7 @@
         <direction-type><metronome parentheses="no"><beat-unit>quarter</beat-unit><per-minute>88</per-minute></metronome></direction-type><sound tempo="88"/>
       </direction>
       <direction placement="above">
-        <direction-type><words font-weight="bold">Parallel fifths</words></direction-type>
+        <direction-type><words font-weight="bold" default-y="48">Parallel fifths</words></direction-type>
       </direction>
       <note><pitch><step>G</step><octave>4</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>5</text></lyric></note>
       <note><pitch><step>A</step><octave>4</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>5</text></lyric></note>
@@ -60,7 +60,7 @@
     <measure number="3">
       <print new-system="yes"/>
       <direction placement="above">
-        <direction-type><words font-weight="bold">Corrected</words></direction-type>
+        <direction-type><words font-weight="bold" default-y="48">Corrected</words></direction-type>
       </direction>
       <note><pitch><step>G</step><octave>4</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
       <note><pitch><step>A</step><octave>4</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
@@ -87,7 +87,7 @@
     <measure number="5">
       <print new-system="yes"/>
       <direction placement="above">
-        <direction-type><words font-weight="bold">Parallel octaves</words></direction-type>
+        <direction-type><words font-weight="bold" default-y="48">Parallel octaves</words></direction-type>
       </direction>
       <note><pitch><step>C</step><octave>5</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>8</text></lyric></note>
       <note><pitch><step>D</step><octave>5</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>8</text></lyric></note>
@@ -114,7 +114,7 @@
     <measure number="7">
       <print new-system="yes"/>
       <direction placement="above">
-        <direction-type><words font-weight="bold">Corrected</words></direction-type>
+        <direction-type><words font-weight="bold" default-y="48">Corrected</words></direction-type>
       </direction>
       <note><pitch><step>C</step><octave>5</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
       <note><pitch><step>D</step><octave>5</octave></pitch><duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
