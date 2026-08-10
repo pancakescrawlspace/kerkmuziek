@@ -24,7 +24,8 @@
      point their stems in opposite directions. The lyric is attached to the
      Soprano voice only, as is conventional.
 
-  divisions=1, so 1 = quarter, 2 = half, 4 = whole. Harmony: G C G D | Em D G | G.
+  divisions=1, so 1 = quarter, 2 = half, 4 = whole. Harmony: G C G D | (empty) | G.
+  Lyric: "Let us now be" -- [silent bar] -- "joyful!".
 -->
 <score-partwise version="4.0">
   <part-list>
@@ -66,12 +67,12 @@
       <note>
         <pitch><step>B</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
-        <lyric number="1"><syllabic>single</syllabic><text>all</text></lyric>
+        <lyric number="1"><syllabic>single</syllabic><text>now</text></lyric>
       </note>
       <note>
         <pitch><step>A</step><octave>4</octave></pitch>
         <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
-        <lyric number="1"><syllabic>single</syllabic><text>now</text></lyric>
+        <lyric number="1"><syllabic>single</syllabic><text>be</text></lyric>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Alto -->
@@ -92,47 +93,17 @@
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
     </measure>
+    <!-- An entirely empty bar: no notes and no rests. MusicXML permits a measure
+         with no timed content, and Verovio draws just the barlines and the blank
+         space -- a silent bar, the dramatic pause between "be" and "joyful!". -->
     <measure number="2">
-      <!-- The "Singers wave their hands." instruction that prints above this bar
-           is NOT encoded here: it is drawn as a Typst text overlay in
-           satb-single-system.typ, keeping this MusicXML pure musical content. -->
-      <!-- Soprano -->
-      <note>
-        <pitch><step>B</step><octave>4</octave></pitch>
-        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
-        <lyric number="1"><syllabic>single</syllabic><text>sing</text></lyric>
-      </note>
-      <note>
-        <pitch><step>A</step><octave>4</octave></pitch>
-        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
-        <lyric number="1"><syllabic>single</syllabic><text>with</text></lyric>
-      </note>
-      <note>
-        <pitch><step>B</step><octave>4</octave></pitch>
-        <duration>2</duration><voice>1</voice><type>half</type><stem>up</stem>
-        <lyric number="1"><syllabic>single</syllabic><text>great</text></lyric>
-      </note>
-      <backup><duration>4</duration></backup>
-      <!-- Alto -->
-      <note>
-        <pitch><step>G</step><octave>4</octave></pitch>
-        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
-      </note>
-      <note>
-        <pitch><step>F</step><alter>1</alter><octave>4</octave></pitch>
-        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
-      </note>
-      <note>
-        <pitch><step>G</step><octave>4</octave></pitch>
-        <duration>2</duration><voice>2</voice><type>half</type><stem>down</stem>
-      </note>
     </measure>
     <measure number="3">
       <!-- Soprano -->
       <note>
         <pitch><step>B</step><octave>4</octave></pitch>
         <duration>4</duration><voice>1</voice><type>whole</type>
-        <lyric number="1"><syllabic>single</syllabic><text>joy.</text></lyric>
+        <lyric number="1"><syllabic>single</syllabic><text>joyful!</text></lyric>
       </note>
       <backup><duration>4</duration></backup>
       <!-- Alto -->
@@ -189,34 +160,8 @@
         <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
       </note>
     </measure>
+    <!-- Empty bar, matching P1's measure 2. -->
     <measure number="2">
-      <!-- Tenor -->
-      <note>
-        <pitch><step>E</step><octave>4</octave></pitch>
-        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
-      </note>
-      <note>
-        <pitch><step>D</step><octave>4</octave></pitch>
-        <duration>1</duration><voice>1</voice><type>quarter</type><stem>up</stem>
-      </note>
-      <note>
-        <pitch><step>D</step><octave>4</octave></pitch>
-        <duration>2</duration><voice>1</voice><type>half</type><stem>up</stem>
-      </note>
-      <backup><duration>4</duration></backup>
-      <!-- Bass -->
-      <note>
-        <pitch><step>E</step><octave>3</octave></pitch>
-        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
-      </note>
-      <note>
-        <pitch><step>D</step><octave>3</octave></pitch>
-        <duration>1</duration><voice>2</voice><type>quarter</type><stem>down</stem>
-      </note>
-      <note>
-        <pitch><step>G</step><octave>3</octave></pitch>
-        <duration>2</duration><voice>2</voice><type>half</type><stem>down</stem>
-      </note>
     </measure>
     <measure number="3">
       <!-- Tenor -->

@@ -46,20 +46,19 @@
 // MusicXML, which stays pure musical content. scoryst returns the score as an
 // opaque SVG image, so the text is positioned against measured anchors, each a
 // fraction of the image so they scale with the score:
-//   - `text-left`  : the text's left edge over bar 2, tuned to taste. For
-//                    reference, bar 2's barline is at 0.429 and beat 1's stems
-//                    are at 0.448 (alto, down) and 0.467 (soprano, up); this
-//                    sits a little right of those, comfortably inside bar 2;
-//   - `lyric-frac` : the lyric glyph size, so the text matches the lyrics;
-//   - `staff-top`  : where the music's top edge sits within the image;
-//   - `gap`        : the space left between the text and the staff.
+//   - `bar2-centre` : the centre of bar 2. Bar 2 is now an empty (silent) bar,
+//                     so the instruction is centred in its blank space; bar 2
+//                     spans 0.523..0.675 of the music width, centre 0.599;
+//   - `lyric-frac`  : the lyric glyph size, so the text matches the lyrics;
+//   - `staff-top`   : where the music's top edge sits within the image;
+//   - `gap`         : the space left between the text and the staff.
 // These were measured once from this score (see the sibling MusicXML). They do
 // NOT track edits to the music -- if the notes change, re-measure them. Line
 // wrapping, on the other hand, is free here: `\` starts a new line, something
 // Verovio cannot do in a <direction>. See the git history for the MusicXML
 // <direction> alternative.
 #let instruction = [Singers wave \ their hands.]
-#let text-left = 48.6%
+#let bar2-centre = 59.9%
 #let lyric-frac = 3.59%
 #let staff-top = 14.2%
 #let gap = 3pt
@@ -71,10 +70,10 @@
   let img = score(music, options: opts, width: base * factor)
   let dims = measure(img)
 
-  // The annotation as its own measured block: left-justified, sized to match the
-  // lyrics (lyric-frac of the music width).
+  // The annotation as its own measured block: centred (it sits over an empty
+  // bar), sized to match the lyrics (lyric-frac of the music width).
   let note = box(text(style: "italic", size: lyric-frac * dims.width,
-    align(left, instruction)))
+    align(center, instruction)))
   let nd = measure(note)
 
   // Desired top of the text: `gap` above the music's top edge. If that would
@@ -83,9 +82,10 @@
   let band = if y < 0pt { -y } else { 0pt }
 
   // `place` is out-of-flow, so both the score and the text float inside one box
-  // without disturbing each other. The text is anchored by its left edge.
+  // without disturbing each other. The text is centred over bar 2 (its centre at
+  // `bar2-centre`, offset left by half the text width).
   align(center, box(width: dims.width, height: dims.height + band, {
     place(bottom + left, img)
-    place(top + left, dx: text-left * dims.width, dy: band + y, note)
+    place(top + left, dx: bar2-centre * dims.width - nd.width / 2, dy: band + y, note)
   }))
 })
