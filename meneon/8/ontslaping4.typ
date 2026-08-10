@@ -9,7 +9,7 @@
 #heading-line[3#super[e] antifoon]
 #v(vskip)
 
-#risethree[---] Mijn hart is bereid, o God, mijn #hold[hart] is #rise[#hold[bereid]],
+#mark-clearance.update(1pt) #risetwo[---] #mark-clearance.update(3pt) Mijn hart is bereid, o God, mijn #hold[hart] is #rise[#hold[bereid]],
 
 ik wil zingen en psalmodiëren in mijn #fall[#hold[Glo]]#hold[rie].
 
