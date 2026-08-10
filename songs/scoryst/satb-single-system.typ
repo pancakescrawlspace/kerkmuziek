@@ -15,11 +15,30 @@
 #align(center, text(weight: "bold", size: 16pt)[A Little SATB Phrase])
 #v(12pt)
 
-// `adjust-page-width` shrinks Verovio's page to the music's natural width, so
-// this short single system then scales up to fill the page (width: 100%) rather
-// than sitting small at the left. It also gives the lyrics room to breathe.
-#score(
-  read("satb-single-system.musicxml"),
-  options: (adjust-page-width: true),
-  width: 100%,
-)
+// Enlarge the score by a constant factor.
+//
+// `#scale` does NOT work here: scoryst returns an auto-sized SVG `image` that
+// fills the text column (padded on the right with Verovio's uncropped page), so
+// scaling just re-fills the same box and nothing grows. The size knob is the
+// image's `width` instead. `adjust-page-width: true` crops that right-hand
+// padding so the width drives the music itself, not the empty page.
+//
+// `base` is the width at which the cropped score matches its default (un-widthed)
+// drawn size, so `factor` reads as a plain multiplier: 1.0 = as-is, 1.5 = 150%.
+// It is derived from the file, not hard-coded, so it still holds if the MusicXML
+// changes. The default size is the cropped music shrunk to fit inside Verovio's
+// uncropped page, i.e. (cropped width / uncropped width) of the text column;
+// `layout` supplies that column width. Above ~2.0 the system starts to exceed
+// the A4 portrait column.
+#let factor = 1.5
+#let music = read("satb-single-system.musicxml")
+#layout(size => {
+  let cropped = measure(score(music, options: (adjust-page-width: true))).width
+  let uncropped = measure(score(music)).width
+  let base = cropped / uncropped * size.width
+  align(center, score(
+    music,
+    options: (adjust-page-width: true),
+    width: base * factor,
+  ))
+})
