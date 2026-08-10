@@ -108,11 +108,16 @@ choir timbre differs from one soundfont to the next. GM "Choir Aahs" is a
 sustained "aah" pad -- atmospheric, but not a lifelike chorus; a dedicated choir
 soundfont gives richer results.
 
-The `*.choir-chorium.mp3` files are the same music and program, rendered instead
-with the **Chorium** soundfont (openwrld, 2003), long prized for warmer, fuller
-choir/vox pads (<https://www.pistonsoft.com/soundfonts.html>). Only the `.sf2`
-changed -- a demonstration that the instrument choice lives in the music, not the
-soundfont.
+The `*.choir-chorium.mp3` and `*.choir-musescore.mp3` files are the same music
+and program rendered with two other soundfonts, for comparison:
+
+- **Chorium** (openwrld, 2003) -- warmer, fuller choir/vox pads
+  (<https://www.pistonsoft.com/soundfonts.html>).
+- **MuseScore General** -- MuseScore's default GM soundfont, an `.sf3`
+  (<https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/>).
+
+Only the `.sf2`/`.sf3` changed across the three -- a demonstration that the
+instrument choice lives in the music, not the soundfont.
 
 ## Notes
 
