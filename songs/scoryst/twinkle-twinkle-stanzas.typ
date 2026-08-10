@@ -42,12 +42,19 @@ w: How I won-der what you are!",
   How I wonder what you are!
 ]
 
-// Print the verse four times, each numbered and centred, with space between.
-#for n in range(1, 5) {
-  align(center, block(breakable: false, {
-    text(weight: "bold")[#n.]
-    v(0.35em, weak: true)
-    verse
+// Print the verse four times. The verse lines are left-justified, so their
+// first letters line up; but the whole block is only as wide as its widest line
+// and is centred on the page, so the white space around it is even. `measure`
+// gives that width, `block(width: ...)` fixes it, and `align(center, ...)`
+// centres the block. The verse number is centred within that width.
+#context {
+  let w = measure(verse).width
+  align(center, block(width: w, {
+    for n in range(1, 5) {
+      if n > 1 { v(1.4em, weak: true) }
+      align(center, text(weight: "bold")[#n.])
+      v(0.35em, weak: true)
+      align(left, verse)
+    }
   }))
-  v(1.4em, weak: true)
 }
