@@ -62,18 +62,18 @@ The lower-level pieces below are still available if you already have a `.mid`.
 ## Score → MIDI
 
 `score2midi.sh` exports a MusicXML score to a Standard MIDI File — this is how
-the committed `songs/scoryst/*.mid` were made (Verovio's `renderToMIDI`, the
+the committed `songs/audio/*.mid` were made (Verovio's `renderToMIDI`, the
 same conversion `score2mp3.sh` runs before FluidSynth). It's deterministic, so
 it reproduces those `.mid` byte-for-byte.
 
 ```sh
 tools/score2midi.sh songs/musicxml/twinkle-fugue.musicxml            # -> songs/musicxml/twinkle-fugue.mid
-tools/score2midi.sh songs/musicxml/twinkle-fugue.musicxml songs/scoryst/twinkle-fugue.mid
+tools/score2midi.sh songs/musicxml/twinkle-fugue.musicxml songs/audio/twinkle-fugue.mid
 tools/score2midi.sh -p 53 songs/musicxml/four-voices.musicxml out.mid  # Choir Aahs
 ```
 
 Output defaults to `<score>.mid`; pass an explicit path to write it elsewhere
-(e.g. next to the other artifacts in `songs/scoryst/`). `-p N` picks a 1-based
+(e.g. alongside the other audio in `songs/audio/`). `-p N` picks a 1-based
 General MIDI program via `choirify.py` (omit to keep the score's own
 instrument). Requires only `python3` with the `verovio` package.
 
@@ -101,7 +101,7 @@ Install (FluidSynth + a GM soundfont + ffmpeg):
 Usage:
 
 ```sh
-tools/mid2mp3-fluidsynth.sh songs/scoryst/twinkle-fugue.mid
+tools/mid2mp3-fluidsynth.sh songs/audio/twinkle-fugue.mid
 # override the soundfont if autodetection misses it:
 SOUNDFONT=~/soundfonts/FluidR3_GM.sf2 tools/mid2mp3-fluidsynth.sh foo.mid out.mp3
 ```
@@ -118,7 +118,7 @@ soundfont — only the Xcode command line tools (`swiftc`) and `ffmpeg`. Handy o
 stock Mac, but not portable.
 
 ```sh
-tools/mid2mp3.sh songs/scoryst/twinkle-fugue.mid           # -> twinkle-fugue.mp3
+tools/mid2mp3.sh songs/audio/twinkle-fugue.mid           # -> twinkle-fugue.mp3
 tools/mid2mp3.sh in.mid out.mp3 3                           # 3s reverb/release tail
 ```
 
@@ -140,7 +140,7 @@ of the MusicXML (the file on disk is untouched) and exports the MIDI via Verovio
 Useful General MIDI voices: **53 Choir Aahs**, **54 Voice Oohs**, **55 Synth
 Voice**.
 
-The committed `songs/scoryst/*.choir.mp3` files were made exactly this way -- GM
+The committed `songs/audio/*.choir.mp3` files were made exactly this way -- GM
 program 53 (Choir Aahs) -- rendered with the **MuseScore General** soundfont
 (<https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/>), chosen for
 its choir after comparing several. Any GM soundfont works; the choir timbre

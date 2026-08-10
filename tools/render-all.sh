@@ -1,5 +1,5 @@
 #!/bin/sh
-# render-all.sh -- (re)generate the canonical MP3s in songs/scoryst from the
+# render-all.sh -- (re)generate the canonical MP3s in songs/audio from the
 # MusicXML scores in songs/musicxml: a piano render of every piece, plus a choir render of the
 # choral pieces (four-voices, twinkle-fugue). Portable -- it drives FluidSynth
 # via score2mp3.sh, so it runs anywhere with fluidsynth + a soundfont + ffmpeg +
@@ -24,7 +24,7 @@ set -eu
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/.." && pwd)
 scores="$root/songs/musicxml"   # MusicXML sources live here
-songs="$root/songs/scoryst"     # generated MP3s are written here
+songs="$root/songs/audio"       # generated MP3s are written here
 s2m="$here/score2mp3.sh"
 
 # Every piece gets a piano render; the choral pieces also get a choir render.

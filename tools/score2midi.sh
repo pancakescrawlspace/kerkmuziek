@@ -1,6 +1,6 @@
 #!/bin/sh
 # score2midi.sh -- export a MusicXML score to a Standard MIDI File. This is how
-# the committed songs/scoryst/*.mid were made: Verovio's renderToMIDI (the same
+# the committed songs/audio/*.mid were made: Verovio's renderToMIDI (the same
 # conversion score2mp3.sh runs before handing off to FluidSynth). Portable:
 # works anywhere Python + the `verovio` package is installed (Linux/macOS/WSL).
 #
@@ -14,7 +14,7 @@
 # To (re)generate the committed MIDI next to its artifacts, name the output
 # explicitly, e.g.:
 #   tools/score2midi.sh songs/musicxml/twinkle-fugue.musicxml \
-#     songs/scoryst/twinkle-fugue.mid
+#     songs/audio/twinkle-fugue.mid
 #
 # Requirements: python3 with the `verovio` package (`pip install verovio`).
 set -eu
