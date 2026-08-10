@@ -93,6 +93,29 @@
       </note>
     </measure>
     <measure number="2">
+      <!-- A performance instruction printed above the staff. A <direction> is
+           not a note (it takes no beats), so it sits at the start of the measure
+           and attaches to the following beat; placement="above" puts it over the
+           top staff.
+
+           Verovio has no line break inside a single <words>, and multiple
+           <words> in one direction just run together on one line. To wrap the
+           instruction onto two stacked lines (so it stays over this bar instead
+           of running on above bar 3), we use two separate <direction>s at the
+           same beat: Verovio stacks them vertically. The FIRST one sits nearest
+           the staff, so the second line ("their hands.") is written first and
+           the first line ("Singers wave") second, giving top-to-bottom reading
+           order. -->
+      <direction placement="above">
+        <direction-type>
+          <words>their hands.</words>
+        </direction-type>
+      </direction>
+      <direction placement="above">
+        <direction-type>
+          <words>Singers wave</words>
+        </direction-type>
+      </direction>
       <!-- Soprano -->
       <note>
         <pitch><step>B</step><octave>4</octave></pitch>
