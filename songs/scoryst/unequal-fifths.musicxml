@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<!--
+  Voice-leading series: UNEQUAL FIFTHS.
+
+  An "unequal fifth" is a diminished fifth and a perfect fifth in succession
+  between the same two voices (in similar motion). The direction matters:
+    P5 -> d5 : always fine (leaving a perfect consonance for a dissonant one).
+    d5 -> P5 : the restricted case -- avoided between the OUTER voices and in
+               strict two-part writing, but tolerated between inner voices.
+    best     : resolve the diminished fifth INWARD; it contracts to a third,
+               as in V7 -> I (seventh down by step, leading tone up).
+
+  All three examples use the same tritone B-F. Two voices on one treble staff
+  (the outer pair); the text under each chord is the interval class.
+  divisions=1 (2 = half note). Title drawn in unequal-fifths.typ.
+-->
+<score-partwise version="4.0">
+  <part-list>
+    <score-part id="P1"><part-name print-object="no">Two voices</part-name></score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes><divisions>1</divisions><key><fifths>0</fifths></key><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>G</sign><line>2</line></clef></attributes>
+      <sound tempo="72"/>
+      <direction placement="above"><direction-type><words font-weight="bold" default-y="34">1.</words></direction-type></direction>
+      <note><pitch><step>G</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>P5</text></lyric></note>
+      <note><pitch><step>F</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>d5</text></lyric></note>
+      <backup><duration>4</duration></backup>
+      <note><pitch><step>C</step><octave>4</octave></pitch><duration>2</duration><voice>2</voice><type>half</type><stem>down</stem></note>
+      <note><pitch><step>B</step><octave>3</octave></pitch><duration>2</duration><voice>2</voice><type>half</type><stem>down</stem></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="2">
+      <direction placement="above"><direction-type><words font-weight="bold" default-y="34">2.</words></direction-type></direction>
+      <note><pitch><step>F</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>d5</text></lyric></note>
+      <note><pitch><step>G</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>P5</text></lyric></note>
+      <backup><duration>4</duration></backup>
+      <note><pitch><step>B</step><octave>3</octave></pitch><duration>2</duration><voice>2</voice><type>half</type><stem>down</stem></note>
+      <note><pitch><step>C</step><octave>4</octave></pitch><duration>2</duration><voice>2</voice><type>half</type><stem>down</stem></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="3">
+      <direction placement="above"><direction-type><words font-weight="bold" default-y="34">3.</words></direction-type></direction>
+      <note><pitch><step>F</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>d5</text></lyric></note>
+      <note><pitch><step>E</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><stem>up</stem><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
+      <backup><duration>4</duration></backup>
+      <note><pitch><step>B</step><octave>3</octave></pitch><duration>2</duration><voice>2</voice><type>half</type><stem>down</stem></note>
+      <note><pitch><step>C</step><octave>4</octave></pitch><duration>2</duration><voice>2</voice><type>half</type><stem>down</stem></note>
+      <barline location="right"><bar-style>light-heavy</bar-style></barline>
+    </measure>
+  </part>
+</score-partwise>
