@@ -33,10 +33,12 @@
       <group-barline>no</group-barline>
     </part-group>
     <score-part id="P1">
-      <part-name>S/A</part-name>
+      <!-- print-object="no" keeps the S/A label for readers of the source but
+           suppresses it in the engraving. -->
+      <part-name print-object="no">S/A</part-name>
     </score-part>
     <score-part id="P2">
-      <part-name>T/B</part-name>
+      <part-name print-object="no">T/B</part-name>
     </score-part>
     <part-group type="stop" number="1"/>
   </part-list>
