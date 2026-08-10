@@ -3,6 +3,27 @@
 Utilities for the scoryst song sources. Currently: turning the generated MIDI
 files into audio you can play (VLC, etc.).
 
+## Score → MP3 in one step (recommended)
+
+`score2mp3.sh` renders a MusicXML score straight to MP3, optionally choosing the
+instrument -- the simplest entry point, and portable (Linux/macOS/WSL):
+
+```sh
+tools/score2mp3.sh songs/scoryst/twinkle-fugue.musicxml            # piano
+tools/score2mp3.sh -p 53 songs/scoryst/four-voices.musicxml out.mp3  # Choir Aahs
+```
+
+It chains MusicXML → MIDI (Verovio, via `choirify.py` when `-p` is given) →
+WAV (FluidSynth) → MP3 (ffmpeg). `-p N` is a 1-based General MIDI program
+(53 Choir Aahs, 54 Voice Oohs, 55 Synth Voice, …); omit it to keep the score's
+own instrument (piano by default). Pick the soundfont with `SOUNDFONT=…`.
+
+Requirements: `python3` with the `verovio` package (`pip install verovio`),
+`fluidsynth` + a `.sf2` soundfont, and `ffmpeg` with `libmp3lame`. On Debian/
+Ubuntu: `sudo apt install fluidsynth fluid-soundfont-gm ffmpeg && pip install verovio`.
+
+The lower-level pieces below are still available if you already have a `.mid`.
+
 ## MIDI → MP3
 
 Two routes render a `.mid` to an `.mp3`. Both need `ffmpeg` (built with
