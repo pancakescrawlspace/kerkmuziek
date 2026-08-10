@@ -12,9 +12,11 @@
 #   macOS (port):  sudo port install fluidsynth ffmpeg
 #
 # A good free soundfont is FluidR3_GM.sf2 (the fluid-soundfont-gm package on
-# Linux installs it under /usr/share/sounds/sf2/). On macOS/brew, download one
-# and point SOUNDFONT at it, e.g.
-#   SOUNDFONT=~/soundfonts/FluidR3_GM.sf2 tools/mid2mp3-fluidsynth.sh foo.mid
+# Linux installs it under /usr/share/sounds/sf2/). On macOS, drop a .sf2 into
+# ~/soundfonts and it is autodetected; this repo's canonical piano soundfont is
+# GeneralUser-GS.sf2 (https://github.com/mrbumpy409/GeneralUser-GS). Or point
+# SOUNDFONT at any .sf2/.sf3 explicitly, e.g.
+#   SOUNDFONT=~/soundfonts/GeneralUser-GS.sf2 tools/mid2mp3-fluidsynth.sh foo.mid
 #
 # Usage: tools/mid2mp3-fluidsynth.sh <input.mid> [output.mp3]
 #        (output defaults to <input>.mp3; set SOUNDFONT to override autodetect)
@@ -27,6 +29,8 @@ out=${2:-${in%.*}.mp3}
 sf=${SOUNDFONT:-}
 if [ -z "$sf" ]; then
   for c in \
+    "$HOME"/soundfonts/GeneralUser-GS.sf2 \
+    "$HOME"/soundfonts/*.sf2 \
     /usr/share/sounds/sf2/FluidR3_GM.sf2 \
     /usr/share/sounds/sf2/default-GM.sf2 \
     /usr/share/soundfonts/FluidR3_GM.sf2 \
