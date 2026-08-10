@@ -73,6 +73,12 @@ choir timbre differs from one soundfont to the next. GM "Choir Aahs" is a
 sustained "aah" pad -- atmospheric, but not a lifelike chorus; a dedicated choir
 soundfont gives richer results.
 
+The `*.choir-chorium.mp3` files are the same music and program, rendered instead
+with the **Chorium** soundfont (openwrld, 2003), long prized for warmer, fuller
+choir/vox pads (<https://www.pistonsoft.com/soundfonts.html>). Only the `.sf2`
+changed -- a demonstration that the instrument choice lives in the music, not the
+soundfont.
+
 ## Notes
 
 - Both default to the General MIDI **piano** (program 0), which suits the
