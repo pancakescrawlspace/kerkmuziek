@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<!--
+  Companion to parallel-fifths-octaves: HIDDEN (a.k.a. DIRECT) fifths and octaves.
+
+  A hidden fifth/octave arises when two voices move in the SAME direction into a
+  perfect fifth or octave. It is chiefly avoided between the OUTER voices (here
+  soprano + bass) when the TOP voice reaches the perfect interval by LEAP: the
+  ear supplies the skipped note and "hears" the latent parallel. It is fine when
+  the voices move in contrary motion, or when the top voice moves by step.
+
+  Grand staff, four two-chord examples; the number under each chord is the
+  interval class (compound intervals labelled by their simple class: a twelfth
+  is a "5"). Unlike true parallels, this fault is more visible than audible.
+
+  divisions=1 (2 = half note). Title drawn in hidden-fifths-octaves.typ.
+-->
+<score-partwise version="4.0">
+  <part-list>
+    <part-group type="start" number="1"><group-symbol>brace</group-symbol></part-group>
+    <score-part id="P1"><part-name print-object="no">Soprano</part-name></score-part>
+    <score-part id="P2"><part-name print-object="no">Bass</part-name></score-part>
+    <part-group type="stop" number="1"/>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes><divisions>1</divisions><key><fifths>0</fifths></key><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>G</sign><line>2</line></clef></attributes>
+      <sound tempo="88"/>
+      <direction placement="above"><direction-type><words font-weight="bold">Direct 8ve</words></direction-type></direction>
+      <note><pitch><step>D</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>6</text></lyric></note>
+      <note><pitch><step>G</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>8</text></lyric></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="2">
+      <direction placement="above"><direction-type><words font-weight="bold">Corrected</words></direction-type></direction>
+      <note><pitch><step>A</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
+      <note><pitch><step>G</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>8</text></lyric></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="3">
+      <direction placement="above"><direction-type><words font-weight="bold">Direct 5th</words></direction-type></direction>
+      <note><pitch><step>E</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>3</text></lyric></note>
+      <note><pitch><step>A</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>5</text></lyric></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="4">
+      <direction placement="above"><direction-type><words font-weight="bold">Top steps</words></direction-type></direction>
+      <note><pitch><step>G</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>6</text></lyric></note>
+      <note><pitch><step>A</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type><lyric number="1"><syllabic>single</syllabic><text>5</text></lyric></note>
+      <barline location="right"><bar-style>light-heavy</bar-style></barline>
+    </measure>
+  </part>
+  <part id="P2">
+    <measure number="1">
+      <attributes><divisions>1</divisions><key><fifths>0</fifths></key><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>F</sign><line>4</line></clef></attributes>
+      <sound tempo="88"/>
+      <note><pitch><step>F</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <note><pitch><step>G</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="2">
+      <note><pitch><step>F</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <note><pitch><step>G</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="3">
+      <note><pitch><step>C</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <note><pitch><step>D</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <barline location="right"><bar-style>light-light</bar-style></barline>
+    </measure>
+    <measure number="4">
+      <note><pitch><step>B</step><octave>2</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <note><pitch><step>D</step><octave>3</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <barline location="right"><bar-style>light-heavy</bar-style></barline>
+    </measure>
+  </part>
+</score-partwise>
