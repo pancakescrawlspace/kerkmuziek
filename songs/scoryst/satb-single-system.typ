@@ -30,15 +30,24 @@
 // uncropped page, i.e. (cropped width / uncropped width) of the text column;
 // `layout` supplies that column width. Above ~2.0 the system starts to exceed
 // the A4 portrait column.
+//
+// `word-space` is Verovio's `lyricWordSpace`: the MINIMUM gap between lyric
+// words, in staff-space units (default 1.2). Doubling it to 2.4 enforces a
+// minimum at least twice the default, opening up the crowded middle words
+// ("now sing with great"). Words the notes already space out stay put, as a
+// minimum should. It is threaded through every `score` call so the width
+// measurements match the final render.
 #let factor = 1.5
+#let word-space = 2.4
 #let music = read("satb-single-system.musicxml")
+#let opts = (adjust-page-width: true, lyric-word-space: word-space)
 #layout(size => {
-  let cropped = measure(score(music, options: (adjust-page-width: true))).width
-  let uncropped = measure(score(music)).width
+  let cropped = measure(score(music, options: opts)).width
+  let uncropped = measure(score(music, options: (lyric-word-space: word-space))).width
   let base = cropped / uncropped * size.width
   align(center, score(
     music,
-    options: (adjust-page-width: true),
+    options: opts,
     width: base * factor,
   ))
 })
