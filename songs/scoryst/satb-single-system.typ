@@ -32,13 +32,13 @@
 // the A4 portrait column.
 //
 // `word-space` is Verovio's `lyricWordSpace`: the MINIMUM gap between lyric
-// words, in staff-space units (default 1.2). Doubling it to 2.4 enforces a
-// minimum at least twice the default, opening up the crowded middle words
+// words, in staff-space units (default 1.2). Raising it to 3.0 (2.5x the
+// default) enforces a wider minimum, opening up the crowded middle words
 // ("now sing with great"). Words the notes already space out stay put, as a
 // minimum should. It is threaded through every `score` call so the width
 // measurements match the final render.
 #let factor = 1.5
-#let word-space = 2.4
+#let word-space = 3.0
 #let music = read("satb-single-system.musicxml")
 #let opts = (adjust-page-width: true, lyric-word-space: word-space)
 #layout(size => {
