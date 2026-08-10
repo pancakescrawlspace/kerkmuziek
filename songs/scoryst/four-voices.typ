@@ -29,7 +29,7 @@
 #v(12pt)
 
 #score(
-  read("four-voices.musicxml"),
+  read("../musicxml/four-voices.musicxml"),
   options: (header: "none", adjust-page-width: true),
   width: 100%,
 )

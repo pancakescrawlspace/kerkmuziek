@@ -14,7 +14,7 @@ gm_program is the 1-based General MIDI program number (default 53). Useful
 voices: 53 Choir Aahs, 54 Voice Oohs, 55 Synth Voice.
 
 Example (how the committed *.choir.mp3 were made):
-    python3 tools/choirify.py songs/scoryst/four-voices.musicxml /tmp/fv.mid 53
+    python3 tools/choirify.py songs/musicxml/four-voices.musicxml /tmp/fv.mid 53
     SOUNDFONT=/path/GeneralUser-GS.sf2 \
         tools/mid2mp3-fluidsynth.sh /tmp/fv.mid four-voices.choir.mp3
 

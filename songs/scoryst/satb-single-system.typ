@@ -10,7 +10,7 @@
 // A single system with two staves: Soprano/Alto on the treble staff,
 // Tenor/Bass on the bass staff, braced together. The music (three measures)
 // is short enough that Verovio lays it out on one system. See
-// satb-single-system.musicxml for how the two staves and the two voices per
+// ../musicxml/satb-single-system.musicxml for how the two staves and the two voices per
 // staff are encoded.
 #align(center, text(weight: "bold", size: 16pt)[A Little SATB Phrase])
 #v(12pt)
@@ -39,7 +39,7 @@
 // measurements match the final render.
 #let factor = 1.5
 #let word-space = 3.0
-#let music = read("satb-single-system.musicxml")
+#let music = read("../musicxml/satb-single-system.musicxml")
 #let opts = (adjust-page-width: true, lyric-word-space: word-space)
 
 // A performance instruction drawn OVER the score rather than encoded in the

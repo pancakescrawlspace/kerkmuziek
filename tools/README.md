@@ -1,7 +1,27 @@
 # tools
 
-Utilities for the scoryst song sources. Currently: turning the generated MIDI
-files into audio you can play (VLC, etc.).
+Utilities for the scoryst song sources: compiling the Typst scores to PDF, and
+turning the generated MIDI files into audio you can play (VLC, etc.).
+
+## Compile the Typst scores → PDF
+
+The scores in `songs/scoryst/*.typ` read their notes from
+`songs/musicxml/*.musicxml` — a *sibling* directory, outside each `.typ`'s own
+folder. Typst sandboxes file reads to the project root, so a bare
+`typst compile songs/scoryst/foo.typ` (whose default root is that file's folder)
+rejects the `../musicxml/` read. Point `--root` at the repo root instead:
+
+```sh
+typst compile --root . songs/scoryst/twinkle-fugue.typ
+```
+
+`compile-scores.sh` does this for you — every score, or just the ones you name —
+writing each PDF next to its `.typ`:
+
+```sh
+tools/compile-scores.sh                          # all songs/scoryst/*.typ
+tools/compile-scores.sh songs/scoryst/four-voices.typ   # just this one
+```
 
 ## Score → MP3 in one step (recommended)
 
@@ -9,8 +29,8 @@ files into audio you can play (VLC, etc.).
 instrument -- the simplest entry point, and portable (Linux/macOS/WSL):
 
 ```sh
-tools/score2mp3.sh songs/scoryst/twinkle-fugue.musicxml            # piano
-tools/score2mp3.sh -p 53 songs/scoryst/four-voices.musicxml out.mp3  # Choir Aahs
+tools/score2mp3.sh songs/musicxml/twinkle-fugue.musicxml            # piano
+tools/score2mp3.sh -p 53 songs/musicxml/four-voices.musicxml out.mp3  # Choir Aahs
 ```
 
 It chains MusicXML → MIDI (Verovio, via `choirify.py` when `-p` is given) →
@@ -93,7 +113,7 @@ The renders default to piano (General MIDI program 1). To render a piece with a
 different instrument -- e.g. a **choir** -- select it in the music, then render:
 
 ```sh
-python3 tools/choirify.py songs/scoryst/four-voices.musicxml /tmp/fv.mid 53
+python3 tools/choirify.py songs/musicxml/four-voices.musicxml /tmp/fv.mid 53
 SOUNDFONT=/path/to/soundfont.sf2 tools/mid2mp3-fluidsynth.sh /tmp/fv.mid four-voices.choir.mp3
 ```
 

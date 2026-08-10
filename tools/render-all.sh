@@ -1,6 +1,6 @@
 #!/bin/sh
 # render-all.sh -- (re)generate the canonical MP3s in songs/scoryst from the
-# MusicXML scores: a piano render of every piece, plus a choir render of the
+# MusicXML scores in songs/musicxml: a piano render of every piece, plus a choir render of the
 # choral pieces (four-voices, twinkle-fugue). Portable -- it drives FluidSynth
 # via score2mp3.sh, so it runs anywhere with fluidsynth + a soundfont + ffmpeg +
 # python-verovio (Linux, macOS, WSL).
@@ -22,7 +22,9 @@
 set -eu
 
 here=$(cd "$(dirname "$0")" && pwd)
-songs=$(cd "$here/.." && pwd)/songs/scoryst
+root=$(cd "$here/.." && pwd)
+scores="$root/songs/musicxml"   # MusicXML sources live here
+songs="$root/songs/scoryst"     # generated MP3s are written here
 s2m="$here/score2mp3.sh"
 
 # Every piece gets a piano render; the choral pieces also get a choir render.
@@ -31,15 +33,15 @@ CHORAL="four-voices twinkle-fugue"
 
 for b in $ALL; do
   echo ">> $b.mp3 (piano)"
-  "$s2m" "$songs/$b.musicxml" "$songs/$b.mp3"
+  "$s2m" "$scores/$b.musicxml" "$songs/$b.mp3"
 done
 
 for b in $CHORAL; do
   echo ">> $b.choir.mp3 (Choir Aahs)"
   if [ -n "${SOUNDFONT_CHOIR:-}" ]; then
-    SOUNDFONT="$SOUNDFONT_CHOIR" "$s2m" -p 53 "$songs/$b.musicxml" "$songs/$b.choir.mp3"
+    SOUNDFONT="$SOUNDFONT_CHOIR" "$s2m" -p 53 "$scores/$b.musicxml" "$songs/$b.choir.mp3"
   else
-    "$s2m" -p 53 "$songs/$b.musicxml" "$songs/$b.choir.mp3"
+    "$s2m" -p 53 "$scores/$b.musicxml" "$songs/$b.choir.mp3"
   fi
 done
 
