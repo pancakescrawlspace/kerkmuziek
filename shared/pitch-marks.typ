@@ -106,15 +106,36 @@
 }
 
 // `count` copies of `stroke`, stacked directly one above another -- for
-// risetwo/risethree. Only the bottom-most copy's own low point and the
-// top-most copy's own high point are the column's overall low/high; the
-// bottom-most copy sits (count - 1) * mark-stack-gap below the column's
-// origin (each copy above it contributes zero layout height of its own,
-// per line()'s own sizing -- see mark-above below), so that offset carries
-// straight through to its low point too.
+// risetwo/risethree. Each copy is boxed to an explicit height equal to its
+// own ink span (stroke.low - stroke.high) before stacking, so the ttb stack
+// advances by a whole stroke plus mark-stack-gap between copies. That boxing
+// is what makes this slope-agnostic: a bare line() only grows its frame
+// *downward* from its origin, so a down-stroke already measures a full span
+// tall (its ink runs down) but an up-stroke measures zero (its ink runs up,
+// into negative y, outside the frame). Stacking the bare shapes therefore
+// worked only for down-stroke -- up-stroke copies, each zero-height, piled
+// up just mark-stack-gap apart, nearly on top of each other (the collapsed
+// risetwo). Forcing every copy to the same span-tall footprint makes
+// up-stroke stack exactly as down-stroke does, so risetwo mirrors falltwo.
+//
+// low/high are unchanged from before: the bottom-most copy's low point sits
+// (count - 1) * mark-stack-gap below the column's origin (its own low), and
+// the top-most copy's high point is the column's high. Like the single
+// strokes, this deliberately under-reserves the true ink span -- the stacked
+// mark bleeds upward into the inter-line leading (see mark-above) rather than
+// reserving its full height -- so a stacked mark's reserved span, and hence
+// the line height, matches fall/rise.
 #let stroke-column(stroke, count: 1) = if count == 1 { stroke } else {
   (
-    shape: stack(dir: ttb, spacing: mark-stack-gap, ..range(count).map(_ => stroke.shape)),
+    shape: context {
+      let w = measure(stroke.shape).width
+      let span = stroke.low - stroke.high
+      stack(
+        dir: ttb,
+        spacing: mark-stack-gap,
+        ..range(count).map(_ => box(width: w, height: span, place(top, stroke.shape))),
+      )
+    },
     low: (count - 1) * mark-stack-gap + stroke.low,
     high: stroke.high,
   )
