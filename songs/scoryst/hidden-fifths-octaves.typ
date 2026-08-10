@@ -5,13 +5,13 @@
 
 // Companion to parallel-fifths-octaves.typ: hidden (direct) fifths and octaves.
 // Soprano + bass on a grand staff; the number under each chord is the interval
-// class between the voices. Notes live in hidden-fifths-octaves.musicxml.
+// class between the voices. Notes live in ../musicxml/hidden-fifths-octaves.musicxml.
 #align(center, text(weight: "bold", size: 16pt)[Hidden (Direct) Fifths & Octaves])
 #align(center, text(size: 11pt, style: "italic")[the subtler cousin of parallels])
 #v(14pt)
 
 #score(
-  read("hidden-fifths-octaves.musicxml"),
+  read("../musicxml/hidden-fifths-octaves.musicxml"),
   width: 100%,
 )
 

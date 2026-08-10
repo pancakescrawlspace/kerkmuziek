@@ -4,7 +4,7 @@
 #set text(font: "Helvetica")
 
 // A three-voice fugal exposition on the subject of "Twinkle, Twinkle, Little
-// Star" (its first four bars). The notes live in twinkle-fugue.musicxml, an
+// Star" (its first four bars). The notes live in ../musicxml/twinkle-fugue.musicxml, an
 // open score (one voice per bracketed staff). As elsewhere, the title is drawn
 // here in Typst rather than encoded as a <work-title> in the MusicXML.
 #align(center, text(weight: "bold", size: 16pt)[Fugue à 3])
@@ -12,6 +12,6 @@
 #v(14pt)
 
 #score(
-  read("twinkle-fugue.musicxml"),
+  read("../musicxml/twinkle-fugue.musicxml"),
   width: 100%,
 )

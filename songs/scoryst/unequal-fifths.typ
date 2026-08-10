@@ -5,7 +5,7 @@
 
 // Voice-leading series (after parallel- and hidden-fifths): unequal fifths --
 // a diminished fifth next to a perfect fifth. Two voices on one staff, the same
-// tritone B-F in each example. Notes live in unequal-fifths.musicxml.
+// tritone B-F in each example. Notes live in ../musicxml/unequal-fifths.musicxml.
 #align(center, text(weight: "bold", size: 16pt)[Unequal Fifths])
 #align(center, text(size: 11pt, style: "italic")[a diminished fifth beside a perfect fifth])
 #v(14pt)
@@ -14,7 +14,7 @@
 // bars then stretch across the full column (rather than clustering on the left),
 // giving the labels room not to collide.
 #score(
-  read("unequal-fifths.musicxml"),
+  read("../musicxml/unequal-fifths.musicxml"),
   options: (adjust-page-width: true),
   width: 100%,
 )

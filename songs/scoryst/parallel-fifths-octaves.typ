@@ -6,7 +6,7 @@
 // A demo of parallel fifths and parallel octaves: why classical part-writing
 // avoids them. Two voices on one staff; the number under each beat is the
 // interval between them. Each faulty example is followed by a corrected one.
-// The notes live in parallel-fifths-octaves.musicxml; play the sibling .mid to
+// The notes live in ../musicxml/parallel-fifths-octaves.musicxml; play ../audio/parallel-fifths-octaves.mid to
 // hear how the parallel perfects make the two voices fuse into a single line.
 #align(center, text(weight: "bold", size: 16pt)[Parallel Fifths & Octaves])
 #align(center, text(size: 11pt, style: "italic")[why they are avoided in part-writing])
@@ -18,7 +18,7 @@
 // only accepts as a string -- so here the labels are kept short enough that the
 // automatic layout does not collide.
 #score(
-  read("parallel-fifths-octaves.musicxml"),
+  read("../musicxml/parallel-fifths-octaves.musicxml"),
   width: 100%,
 )
 
