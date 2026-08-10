@@ -51,6 +51,28 @@ tools/mid2mp3.sh in.mid out.mp3 3                           # 3s reverb/release 
 `midirender.swift` is the underlying offline MIDI → WAV renderer; the script
 compiles it on first use (caching the binary in `$TMPDIR`) and encodes the MP3.
 
+## Choir (or another GM instrument)
+
+The renders default to piano (General MIDI program 1). To render a piece with a
+different instrument -- e.g. a **choir** -- select it in the music, then render:
+
+```sh
+python3 tools/choirify.py songs/scoryst/four-voices.musicxml /tmp/fv.mid 53
+SOUNDFONT=/path/to/soundfont.sf2 tools/mid2mp3-fluidsynth.sh /tmp/fv.mid four-voices.choir.mp3
+```
+
+`choirify.py` injects `<midi-program>N</midi-program>` into each part of a copy
+of the MusicXML (the file on disk is untouched) and exports the MIDI via Verovio.
+Useful General MIDI voices: **53 Choir Aahs**, **54 Voice Oohs**, **55 Synth
+Voice**.
+
+The committed `songs/scoryst/*.choir.mp3` files were made exactly this way -- GM
+program 53 (Choir Aahs), rendered with the **GeneralUser GS** soundfont
+(<https://github.com/mrbumpy409/GeneralUser-GS>). Any GM soundfont works; the
+choir timbre differs from one soundfont to the next. GM "Choir Aahs" is a
+sustained "aah" pad -- atmospheric, but not a lifelike chorus; a dedicated choir
+soundfont gives richer results.
+
 ## Notes
 
 - Both default to the General MIDI **piano** (program 0), which suits the
