@@ -1,0 +1,59 @@
+# tools
+
+Utilities for the scoryst song sources. Currently: turning the generated MIDI
+files into audio you can play (VLC, etc.).
+
+## MIDI → MP3
+
+Two routes render a `.mid` to an `.mp3`. Both need `ffmpeg` (built with
+`libmp3lame`) for the final encode; they differ in the synthesizer.
+
+### `mid2mp3-fluidsynth.sh` — portable (recommended, esp. on Linux)
+
+Uses [FluidSynth](https://www.fluidsynth.org/) with a General MIDI `.sf2`
+soundfont. Runs on Linux, macOS, and Windows/WSL, and lets you swap soundfonts
+for different instrument sounds.
+
+Install (FluidSynth + a GM soundfont + ffmpeg):
+
+| Platform | Command |
+|---|---|
+| Debian/Ubuntu | `sudo apt install fluidsynth fluid-soundfont-gm ffmpeg` |
+| Fedora | `sudo dnf install fluidsynth fluid-soundfont-gm ffmpeg` |
+| Arch | `sudo pacman -S fluidsynth soundfont-fluid ffmpeg` |
+| macOS (Homebrew) | `brew install fluid-synth ffmpeg` (then fetch a `.sf2`) |
+| macOS (MacPorts) | `sudo port install fluidsynth ffmpeg` (then fetch a `.sf2`) |
+
+Usage:
+
+```sh
+tools/mid2mp3-fluidsynth.sh songs/scoryst/twinkle-fugue.mid
+# override the soundfont if autodetection misses it:
+SOUNDFONT=~/soundfonts/FluidR3_GM.sf2 tools/mid2mp3-fluidsynth.sh foo.mid out.mp3
+```
+
+The Linux `fluid-soundfont-gm` package installs `FluidR3_GM.sf2` under
+`/usr/share/sounds/sf2/`, which the script autodetects. On macOS you generally
+download a `.sf2` yourself and point `SOUNDFONT` at it.
+
+### `mid2mp3.sh` — macOS-only, no third-party synth
+
+Uses macOS's built-in General MIDI synth (the system `DLSMusicDevice` audio unit
++ Apple's GM soundfont) via `midirender.swift`, so it needs **no** FluidSynth or
+soundfont — only the Xcode command line tools (`swiftc`) and `ffmpeg`. Handy on a
+stock Mac, but not portable.
+
+```sh
+tools/mid2mp3.sh songs/scoryst/twinkle-fugue.mid           # -> twinkle-fugue.mp3
+tools/mid2mp3.sh in.mid out.mp3 3                           # 3s reverb/release tail
+```
+
+`midirender.swift` is the underlying offline MIDI → WAV renderer; the script
+compiles it on first use (caching the binary in `$TMPDIR`) and encodes the MP3.
+
+## Notes
+
+- Both default to the General MIDI **piano** (program 0), which suits the
+  current pieces. FluidSynth makes it easy to use a richer soundfont.
+- `*.mp3` is tracked with Git LFS (see `.gitattributes`), matching the
+  pdf/png/svg convention.
