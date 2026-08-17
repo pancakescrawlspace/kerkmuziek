@@ -25,28 +25,27 @@
 # are: cocoa"). Nothing about *how* mscore is invoked changes that -- it's
 # a property of this macOS build.
 #
-# LINUX: CONFIRMED, now actually implemented -- see server/Dockerfile's
-# MuseScore install step and server/library/jobs.py's pdf-mscore action,
-# which run this same route inside the Docker web portal. The AppImage
-# *does* bundle Qt's `offscreen` platform plugin, unlike this macOS .app,
-# but that plugin doesn't actually work for MuseScore 4's CLI --
+# LINUX: tested against a real MuseScore 4 AppImage in a throwaway
+# container (this repo doesn't otherwise run MuseScore on Linux, so
+# nothing here depends on the result, but it's worth recording since it
+# contradicts the obvious guess). The AppImage *does* bundle Qt's
+# `offscreen` platform plugin, unlike this macOS .app -- but that plugin
+# doesn't actually work for MuseScore 4's CLI:
 # `mscore4portable --platform offscreen -o out.pdf in.musicxml` still
 # tries to initialize "xcb" and aborts, a known upstream regression
 # (https://github.com/musescore/MuseScore/issues/17247). What actually
-# works, verified against a real MuseScore 4 AppImage in a throwaway
-# container: a virtual X server via `xvfb-run`, no special platform flag
-# at all --
+# works, no special platform flag needed at all, is a virtual X server:
 #
 #     xvfb-run -a mscore4portable -o "$out" "$score_abs"
 #
-# no `open`/LaunchServices equivalent needed on Linux (that machinery is
-# macOS-only, worked around here specifically because the .app must be
-# launched as a real application, not just exec'd). Making *this* script
-# cross-platform would mean branching on `uname`: macOS keeps the
-# `open -W -a` path above, Linux uses `command -v mscore4portable` (or
-# wherever it's installed) + `xvfb-run`. Not done here since this script
-# is macOS-oriented (it launches the locally-installed .app); the Docker
-# route above is where the Linux path actually lives and runs.
+# (needs Xvfb + xauth installed). No `open`/LaunchServices equivalent
+# needed on Linux (that machinery is macOS-only, worked around here
+# specifically because the .app must be launched as a real application,
+# not just exec'd). Making *this* script cross-platform would mean
+# branching on `uname`: macOS keeps the `open -W -a` path above, Linux
+# uses `command -v mscore4portable` (or wherever it's installed) +
+# `xvfb-run`. Not done here since this script is macOS-oriented (it
+# launches the locally-installed .app).
 set -eu
 
 here=$(cd "$(dirname "$0")" && pwd)

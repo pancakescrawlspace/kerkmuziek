@@ -9,9 +9,7 @@ FROM python:3.14-slim
 # fluidsynth + ffmpeg cover score2mp3.sh / mid2mp3-fluidsynth.sh (MIDI -> MP3);
 # librsvg2-bin (rsvg-convert) + poppler-utils (pdfunite) cover the
 # pdf-verovio-direct action (songs/compare-lilypond/verovio-direct-demo.py);
-# curl + xz-utils are only needed to fetch typst/MuseScore/the soundfont
-# below; the rest (xvfb onward) are what MuseScore's AppImage needs at
-# runtime -- see the MuseScore install step further down for why.
+# curl + xz-utils are only needed to fetch typst and the soundfont below.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         fluidsynth \
         ffmpeg \
@@ -20,19 +18,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         xz-utils \
         ca-certificates \
-        xvfb \
-        xauth \
-        libasound2 \
-        libpipewire-0.3-0t64 \
-        libgl1 \
-        libglx0 \
-        libopengl0 \
-        libegl1 \
-        libfontconfig1 \
-        libx11-6 \
-        libglib2.0-0t64 \
-        libfreetype6 \
-        libgpg-error0 \
     && rm -rf /var/lib/apt/lists/*
 
 # typst -- prebuilt static (musl) binary, runs fine on this glibc image.
@@ -54,42 +39,6 @@ RUN case "$TARGETARCH" in \
     && tar -xJf /tmp/typst.tar.xz -C /tmp \
     && mv "/tmp/typst-${typst_arch}-unknown-linux-musl/typst" /usr/local/bin/typst \
     && rm -rf /tmp/typst.tar.xz "/tmp/typst-${typst_arch}-unknown-linux-musl"
-
-# MuseScore 4 -- for the pdf-mscore action, a route independent of Typst
-# entirely (reads the MusicXML directly, no .typ wrapper -- so unlike
-# pdf-scoryst/pdf-typst it renders bare notation only, no title/commentary
-# text, and is available for every MusicXML file, not just ones with a
-# matching .typ). No Debian package for MuseScore 4 exists, so this is the
-# official Linux AppImage, extracted at build time (same reasoning as
-# typst: --appimage-extract avoids needing FUSE, which this container
-# doesn't have, to run an AppImage directly).
-#
-# `mscore4portable --platform offscreen` -- the thing you'd expect to use
-# for headless export -- is a known-broken MuseScore 4 regression
-# (https://github.com/musescore/MuseScore/issues/17247): it still tries to
-# initialize the "xcb" platform and aborts. `xvfb-run` (a real, virtual X
-# server) is the actual working approach, empirically confirmed here and
-# matching what other people running MuseScore 4 in Docker landed on too;
-# see server/README.md's Docker notes and songs/compare-lilypond/
-# musescore-compare.sh, whose own header comment previously guessed
-# offscreen would work on Linux -- it doesn't, this does.
-# MSCORE_TAG is the release tag (github.com/musescore/MuseScore/releases);
-# MSCORE_VERSION is the exact string the asset filename uses, which -- for
-# no documented reason -- has a 4th, build-number component MSCORE_TAG
-# doesn't. Check the actual release's asset names when bumping either.
-ARG MSCORE_TAG=4.7.4
-ARG MSCORE_VERSION=4.7.4.260706075
-RUN case "$TARGETARCH" in \
-        amd64) mscore_arch=x86_64 ;; \
-        arm64) mscore_arch=aarch64 ;; \
-        *) echo "unsupported TARGETARCH: $TARGETARCH" >&2; exit 1 ;; \
-    esac \
-    && curl -fsSL -o /tmp/mscore.AppImage \
-        "https://github.com/musescore/MuseScore/releases/download/v${MSCORE_TAG}/MuseScore-Studio-${MSCORE_VERSION}-${mscore_arch}.AppImage" \
-    && chmod +x /tmp/mscore.AppImage \
-    && cd /tmp && ./mscore.AppImage --appimage-extract >/dev/null \
-    && mv /tmp/squashfs-root /opt/musescore \
-    && rm -f /tmp/mscore.AppImage
 
 # General MIDI soundfont -- same one tools/README.md documents fetching by
 # hand into ~/soundfonts; mid2mp3-fluidsynth.sh autodetects this exact path,

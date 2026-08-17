@@ -77,33 +77,15 @@ def _pdf_verovio_direct_commands(musicxml_abs: Path, name: str) -> list[list[str
     # songs/compare-lilypond/verovio-direct-demo.py: Verovio -> SVG (one per
     # page) -> rsvg-convert -> one-page PDFs -> pdfunite -- the same
     # Verovio-to-SVG step scoryst and the typst pipeline both use
-    # internally, minus Typst, and unlike pdf-mscore this needs no Docker
-    # -specific runtime -- rsvg-convert and pdfunite are plain CLI tools,
-    # already required on macOS by the script itself (see tools/README.md).
+    # internally, minus Typst. No Docker-specific runtime needed --
+    # rsvg-convert and pdfunite are plain CLI tools, already required on
+    # macOS by the script itself (see tools/README.md).
     return [
         [
             "python3",
             "songs/compare-lilypond/verovio-direct-demo.py",
             str(musicxml_abs.relative_to(ROOT)),
             f"songs/verovio-direct-pdf/{name}.pdf",
-        ]
-    ]
-
-
-def _pdf_mscore_commands(musicxml_abs: Path, name: str) -> list[list[str]]:
-    # Only actually works in the Docker image, which installs MuseScore's
-    # AppImage at /opt/musescore -- see server/Dockerfile. Outside Docker
-    # this just fails with "command not found", caught below like any
-    # other missing tool. `--platform offscreen` doesn't work for MuseScore
-    # 4's CLI (see the Dockerfile's MuseScore install step); xvfb-run does.
-    return [
-        [
-            "xvfb-run",
-            "-a",
-            "/opt/musescore/usr/bin/mscore4portable",
-            "-o",
-            f"songs/mscore-pdf/{name}.pdf",
-            str(musicxml_abs.relative_to(ROOT)),
         ]
     ]
 
@@ -125,12 +107,6 @@ ACTIONS = {
         _pdf_typst_commands,
     ),
     "mp3-from-midi": ("Regenerate MP3", "midi", None, _mp3_from_midi_commands),
-    "pdf-mscore": (
-        "Regenerate PDF (MuseScore)",
-        "musicxml",
-        None,
-        _pdf_mscore_commands,
-    ),
     "pdf-verovio-direct": (
         "Regenerate PDF (Verovio direct)",
         "musicxml",
