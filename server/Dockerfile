@@ -58,9 +58,16 @@ ENV SOUNDFONT=/root/soundfonts/GeneralUser-GS.sf2
 # lookup resolve it, matching how songs/typst/fonts/Leipzig.ttf's own
 # naming was handled. Not committed to the repo -- fetched and renamed at
 # build time, same as typst and the soundfont above.
-RUN pip install --no-cache-dir fonttools \
-    && mkdir -p /usr/share/fonts/helvetica \
-    && python3 <<'PY'
+# fonttools is only needed to build these four files -- installed, used,
+# and uninstalled within this ONE RUN/layer deliberately: Docker layers are
+# immutable diffs, so a separate `RUN pip uninstall` in a later layer would
+# leave fonttools's ~40MB permanently baked into the image regardless (it'd
+# vanish from the merged filesystem view but still count toward the
+# image's actual size) -- this was a real bug here until fixed.
+RUN <<'EOF'
+pip install --no-cache-dir fonttools
+mkdir -p /usr/share/fonts/helvetica
+python3 <<'PY'
 import urllib.request
 from fontTools.ttLib import TTFont
 
@@ -82,7 +89,8 @@ for face, (family, subfamily, full, ps) in FACES.items():
         names.setName(value, name_id, 1, 0, 0)  # Mac, Roman
     font.save(f"/usr/share/fonts/helvetica/{face}.otf")
 PY
-RUN pip uninstall -y fonttools
+pip uninstall -y fonttools
+EOF
 
 WORKDIR /app
 
