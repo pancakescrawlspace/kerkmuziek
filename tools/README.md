@@ -99,7 +99,13 @@ instrument). Requires only `python3` with the `verovio` package.
 ## MIDI → MP3
 
 Two routes render a `.mid` to an `.mp3`. Both need `ffmpeg` (built with
-`libmp3lame`) for the final encode; they differ in the synthesizer.
+`libmp3lame`) for the final encode; they differ in the synthesizer. Both
+encode with `ffmpeg -codec:a libmp3lame -q:a 2` -- LAME's VBR quality scale
+(0 best/~245 kbps, 9 worst/~65 kbps), so `-q:a 2` targets roughly 190 kbps.
+An earlier `-q:a 5` (~130 kbps target) was landing as low as 65-115 kbps in
+practice -- MIDI/soundfont renders have low transient complexity, so LAME's
+VBR allocated fewer bits than the nominal target -- and sounded audibly
+compressed on sustained choir/pad content; `-q:a 2` fixed it.
 
 ### `mid2mp3-fluidsynth.sh` — portable (recommended, esp. on Linux)
 
@@ -325,6 +331,18 @@ for voice in soprano alto tenor bass; do
   SOUNDFONT=~/soundfonts/MuseScore_General.sf3 tools/voice-mix.sh -p 1 -P 53 \
     songs/musicxml/four-voices.exploded.musicxml \
     "songs/audio/four-voices.vocal-piano.$voice.mp3" "$voice" 127 75
+done
+```
+
+`songs/audio/four-voices.vocal-piano-arachno.{soprano,alto,tenor,bass}.mp3`
+is the same vocal/piano split again, but with the **Arachno SoundFont**
+(see above) instead of MuseScore General:
+
+```sh
+for voice in soprano alto tenor bass; do
+  SOUNDFONT=~/soundfonts/Arachno-SoundFont-1.0.sf2 tools/voice-mix.sh -p 1 -P 53 \
+    songs/musicxml/four-voices.exploded.musicxml \
+    "songs/audio/four-voices.vocal-piano-arachno.$voice.mp3" "$voice" 127 75
 done
 ```
 

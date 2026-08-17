@@ -26,5 +26,5 @@ fi
 wav="${TMPDIR:-/tmp}/mid2mp3.$$.wav"
 trap 'rm -f "$wav"' EXIT
 "$bin" "$in" "$wav" "$tail"
-ffmpeg -hide_banner -loglevel error -y -i "$wav" -codec:a libmp3lame -q:a 5 "$out"
+ffmpeg -hide_banner -loglevel error -y -i "$wav" -codec:a libmp3lame -q:a 2 "$out"
 echo "wrote $out"

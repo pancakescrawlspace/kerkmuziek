@@ -48,5 +48,5 @@ fi
 wav="${TMPDIR:-/tmp}/mid2mp3.$$.wav"
 trap 'rm -f "$wav"' EXIT
 fluidsynth -ni -g 0.8 -r 44100 -F "$wav" "$sf" "$in"
-ffmpeg -hide_banner -loglevel error -y -i "$wav" -codec:a libmp3lame -q:a 5 "$out"
+ffmpeg -hide_banner -loglevel error -y -i "$wav" -codec:a libmp3lame -q:a 2 "$out"
 echo "wrote $out  (soundfont: $sf)"
