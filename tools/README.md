@@ -232,6 +232,38 @@ alone (useful standalone if you just want the `.mid`); `voice-mix.sh` adds the
 FluidSynth/ffmpeg render, reusing `mid2mp3-fluidsynth.sh`. Needs the `mido`
 package in addition to `verovio` (`pip install verovio mido`).
 
+### Two ways to explode: regex vs. music21
+
+`voice-explode.py` is hand-written regex/XML surgery, scoped to exactly what
+this project's scores use (no chords, no `<forward>`, single-staff parts).
+`voice-explode-music21.py` does the same job -- same CLI, same output
+semantics, same part-naming convention -- via
+[music21](https://www.music21.org/music21docs/)'s `Score.voicesToParts()`
+instead:
+
+```sh
+python3 tools/voice-explode-music21.py songs/musicxml/four-voices.musicxml /tmp/four-voices.exploded-m21.musicxml
+```
+
+Both were verified to produce the same result on `four-voices.musicxml` (62
+notes per voice, 4 parts, correct Soprano/Alto/Tenor/Bass names) and both feed
+`voice-mix.sh` identically -- it resolves parts by name, so it doesn't
+care which route produced the file. The real differences:
+
+|  | `voice-explode.py` (regex) | `voice-explode-music21.py` |
+|---|---|---|
+| Dependency | standard library only | `music21` (`pip install music21`) -- a full notation/analysis library |
+| Scope | handles this project's scores; would need extending for chords, `<forward>`, multi-staff parts | music21's object model already handles those cases generally |
+| Untouched parts | already-single-voice parts pass through **byte-identical** | every part gets rewritten, even ones that didn't need splitting |
+| Output size/style | matches the source file's formatting | ~45% larger, reformatted (multi-line elements, `<divisions>` inflated to music21's internal PPQ, e.g. 1 → 10080) |
+| Part ids | `<original-id>-<voice>`, e.g. `P1-1` | opaque hashes for every part but the first per original id (`Part.id` is set but silently ignored on write -- only `partName` survives) |
+
+For this repo's scores, `voice-explode.py` is the one actually wired into the
+practice-mix workflow above (no extra dependency, output that reads like the
+rest of `songs/musicxml/`); `voice-explode-music21.py` exists to compare
+against and as a fallback if a future score uses a MusicXML feature the regex
+version doesn't handle.
+
 ## Notes
 
 - Both default to the General MIDI **piano** (program 0), which suits the
