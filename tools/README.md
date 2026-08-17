@@ -212,7 +212,10 @@ has any note being exploded that has no lyric of its own borrow one from
 whichever voice/part in the score *does* have lyrics at that position (matched
 by measure + beat offset, not just note index, so it still lines up if a
 voice's rhythm differs). A note that already carries its own lyric is left
-alone.
+alone. `voice-explode-single-lyrics.py` is the same script without this step,
+for when you want the words to stay exactly where the source put them
+(standard engraving practice, or a score you plan to typeset for print rather
+than per-voice study) -- otherwise identical, same CLI, drop-in replacement.
 
 The exploded file is a real, standalone MusicXML score on its own (e.g. one
 staff per voice instead of two), but its purpose here is as input to
