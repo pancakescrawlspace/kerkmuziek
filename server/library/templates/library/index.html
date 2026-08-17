@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>pitchmarks</title>
+  <link rel="stylesheet" href="{% static 'library/app.css' %}">
+</head>
+<body>
+  {% csrf_token %}
+  <script id="actions-data" type="application/json">{{ actions_json|safe }}</script>
+
+  <h1>pitchmarks</h1>
+
+  <nav class="tabs">
+    <button class="tab-button active" data-tab="musicxml">MusicXML</button>
+    <button class="tab-button" data-tab="midi">MIDI</button>
+    <button class="tab-button" data-tab="mp3">MP3</button>
+    <button class="tab-button" data-tab="pdf">PDF</button>
+  </nav>
+
+  <div id="status-bar" class="status-bar" hidden></div>
+
+  <section id="tab-musicxml" class="tab-panel">
+    <table>
+      <thead><tr><th>Name</th><th>Path</th><th>Size</th></tr></thead>
+      <tbody>
+        {% for f in musicxml %}
+        <tr class="file-row" data-kind="musicxml" data-path="{{ f.path }}"
+            data-has-scoryst-typ="{{ f.has_scoryst_typ|yesno:'1,0' }}"
+            data-has-typst-typ="{{ f.has_typst_typ|yesno:'1,0' }}">
+          <td>{{ f.name }}</td><td>{{ f.path }}</td><td>{{ f.size }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section id="tab-midi" class="tab-panel" hidden>
+    <table>
+      <thead><tr><th>Name</th><th>Path</th><th>Size</th></tr></thead>
+      <tbody>
+        {% for f in midi %}
+        <tr class="file-row" data-kind="midi" data-path="{{ f.path }}">
+          <td>{{ f.name }}</td><td>{{ f.path }}</td><td>{{ f.size }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section id="tab-mp3" class="tab-panel" hidden>
+    <table>
+      <thead><tr><th>Name</th><th>Path</th><th>Size</th></tr></thead>
+      <tbody>
+        {% for f in mp3 %}
+        <tr class="file-row" data-kind="mp3" data-path="{{ f.path }}">
+          <td>{{ f.name }}</td><td>{{ f.path }}</td><td>{{ f.size }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section id="tab-pdf" class="tab-panel" hidden>
+    <table>
+      <thead><tr><th>Name</th><th>Pipeline</th><th>Path</th><th>Size</th></tr></thead>
+      <tbody>
+        {% for f in pdf %}
+        <tr class="file-row" data-kind="pdf" data-path="{{ f.path }}">
+          <td>{{ f.name }}</td><td>{{ f.pipeline }}</td><td>{{ f.path }}</td><td>{{ f.size }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <ul id="context-menu" class="context-menu" hidden></ul>
+
+  <script src="{% static 'library/app.js' %}"></script>
+</body>
+</html>
