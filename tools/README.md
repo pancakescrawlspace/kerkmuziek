@@ -171,6 +171,47 @@ music with the **Chorium** soundfont (openwrld, 2003; warmer, fuller vox pads --
 compared (see git history). Only the soundfont changes across them -- a
 demonstration that the instrument choice lives in the music, not the soundfont.
 
+`four-voices.choir-arachno.mp3` is a further comparison with the **Arachno
+SoundFont** (Maxime Abbey, 2000-2026, GM/GS-compatible, free for personal use --
+<https://www.arachnosoft.com/main/soundfont.php>), made the same way. GM
+programs 54 (Voice Oohs) and 55 (Synth Voice) were also tried on this
+soundfont; 53 (Choir Aahs) is the one committed:
+
+```sh
+SOUNDFONT=~/soundfonts/Arachno-SoundFont-1.0.sf2 tools/score2mp3.sh -p 53 \
+  songs/musicxml/four-voices.musicxml songs/audio/four-voices.choir-arachno.mp3
+```
+
+### Real singing voice synthesis (investigated, not used)
+
+Everything above -- "choir", "Voice Oohs", etc. -- is General MIDI sample
+playback: a soundfont's *pad sound* triggered at the right pitches, not the
+lyrics actually being sung. Real **singing voice synthesis (SVS)** -- a
+system that takes a score plus lyrics and produces genuinely sung words --
+was investigated as a further-out alternative and rejected for now, in favor
+of just improving the soundfont (see above). Notes for next time:
+
+- **[Sinsy](http://www.sinsy.jp/)** (Nagoya Institute of Technology) accepts
+  **MusicXML with lyrics directly** -- the closest match to what this repo
+  already produces -- but it's a web form only (no API/CLI), and the current
+  UI reads Japanese-only. Not automatable as-is.
+- **[OpenUtau](https://github.com/openutau/OpenUtau)** (+ classic UTAU
+  voicebanks, or its ENUNU mode for AI-driven ones) is free, actively
+  maintained, and has real English phonemizers/voicebanks, but is GUI-first
+  with no confirmed headless/CLI render, and no direct MusicXML import (would
+  need a MusicXML → `.ustx` converter, or manual MIDI+lyrics import).
+- **[NNSVS](https://github.com/nnsvs/nnsvs)** / **DiffSinger** are the neural
+  engines behind OpenUtau's ENUNU mode and reportedly the best-quality option
+  (one study had NNSVS beating both Sinsy and DiffSinger on MOS), but they're
+  research toolkits: a trained voice model/corpus is generally required, a
+  GPU is preferred, and setup is well beyond `pip install`.
+
+Bottom line: getting real sung words is a different technology stack, not a
+parameter tweak -- real setup cost (voice model acquisition, format
+conversion, possibly a GUI-centric workflow), no fully turnkey free English
+CLI-scriptable option today. If pursued, OpenUtau + a community English
+voicebank is the most realistic starting point.
+
 ## Isolate a single voice
 
 `voice-isolate.py` mutes every voice except the one you name, turning its
