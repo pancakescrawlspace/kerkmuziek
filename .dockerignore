@@ -1,0 +1,9 @@
+.git/
+server/.venv/
+server/db.sqlite3
+**/__pycache__/
+**/*.pyc
+songs/compare-lilypond/*.pdf
+songs/compare-lilypond/*.png
+songs/compare-lilypond/*.ly
+.DS_Store

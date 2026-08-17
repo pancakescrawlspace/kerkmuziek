@@ -6,6 +6,8 @@ terminal. Personal, localhost-only tool -- no login system.
 
 ## Setup
 
+Either a local venv:
+
 ```sh
 cd server
 python3 -m venv .venv
@@ -14,8 +16,18 @@ python3 -m venv .venv
 .venv/bin/python manage.py runserver
 ```
 
-Then open <http://127.0.0.1:8000/>. Right-click a row in the MusicXML or
-MIDI tab for the actions available on it.
+or Docker Compose, from the repo root (builds fluidsynth/ffmpeg/typst/a
+soundfont into the image -- see `Dockerfile` -- and bind-mounts the whole
+repo so regenerated files land back on disk, not inside the container):
+
+```sh
+docker compose up      # http://127.0.0.1:8000/, Ctrl-C to stop
+docker compose up -d   # same, detached
+docker compose down    # stop and remove the container
+```
+
+Either way, open <http://127.0.0.1:8000/>. Right-click a row in the
+MusicXML or MIDI tab for the actions available on it.
 
 ## What it does, and doesn't, cover
 
@@ -48,3 +60,18 @@ not before.
 `source_path` against a fresh directory listing before `jobs.py` is allowed
 to run anything with it -- a client can only ever trigger an action on a
 file the portal itself just listed.
+
+## Docker notes
+
+- `Dockerfile` selects `typst`'s release asset by `TARGETARCH` (amd64/arm64)
+  -- it'll pull the wrong-architecture binary and only work via slow
+  emulation if that ever gets hardcoded to one arch again.
+- Most `.typ` files set `#set text(font: "Helvetica")`, not available on
+  Linux; the image renames a fetched TeX Gyre Heros (a metric-compatible,
+  freely-licensed clone) to "Helvetica" so Typst's font lookup resolves it
+  the same way it does on macOS, rather than silently substituting
+  something else.
+- The `pdf-scoryst` action needs the `@preview/scoryst` Typst package,
+  fetched from Typst's registry on first compile -- the image warms that
+  cache at build time (needs network during `docker compose build`) so it
+  doesn't hit the registry, or fail offline, at runtime.

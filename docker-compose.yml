@@ -1,0 +1,13 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      # The whole repo, not just songs/ -- server/ needs to live one level
+      # below the repo root (see config/settings.py's PROJECT_ROOT), and
+      # regenerated files must land back on the host, not in the container's
+      # writable layer where `docker compose down` would discard them.
+      - .:/app
