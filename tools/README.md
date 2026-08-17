@@ -264,6 +264,34 @@ rest of `songs/musicxml/`); `voice-explode-music21.py` exists to compare
 against and as a fallback if a future score uses a MusicXML feature the regex
 version doesn't handle.
 
+## Emphasize one voice, visually (colored score)
+
+The visual counterpart to `voice-mix.sh`: `voice-colorize.py` colors one
+voice's notes in a MusicXML score instead of muting or spotlighting them in
+audio. It works by setting MusicXML's standard `color` attribute on the
+target `<note>` elements -- Verovio (the engine behind `score2mp3.sh` and the
+`scoryst` Typst package used for `songs/scoryst/*.typ`) renders that note's
+whole glyph -- notehead, stem, ledger lines, and its lyric syllable -- in the
+given color; everything else stays black. Nothing else about the notation
+changes.
+
+```sh
+python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/soprano-red.musicxml soprano
+python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/alto-blue.musicxml alto "#2255CC"
+```
+
+`<voice>` is a `<part-name>` label or an explicit `<part-id>[:<voice-number>]`,
+same matching convention as `voice-isolate.py`/`voice-mix.sh`. It works on
+either an exploded score (from `voice-explode.py`, one voice per part -- name
+the part directly, e.g. `soprano`) or the original un-exploded score (name a
+"/"-separated sub-label, e.g. `tenor` within `<part-name>Tenor/Bass</part-name>`,
+which colors just that voice's notes by their `<voice>` tag).
+
+To see the result, point any `songs/scoryst/*.typ` file's `score(read(...))`
+call at the colorized file instead of the original -- e.g. copy
+`four-voices-exploded.typ` and change its `read(...)` path -- then
+`typst compile --root . songs/scoryst/your-copy.typ`.
+
 ## Notes
 
 - Both default to the General MIDI **piano** (program 0), which suits the
