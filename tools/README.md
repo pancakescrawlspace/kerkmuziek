@@ -171,6 +171,23 @@ music with the **Chorium** soundfont (openwrld, 2003; warmer, fuller vox pads --
 compared (see git history). Only the soundfont changes across them -- a
 demonstration that the instrument choice lives in the music, not the soundfont.
 
+## Isolate a single voice
+
+`voice-isolate.py` mutes every voice except the one you name, turning its
+notes into same-duration rests -- render the result and you hear only that
+line, useful for rehearsal tracks:
+
+```sh
+python3 tools/voice-isolate.py songs/musicxml/four-voices.musicxml /tmp/soprano.musicxml soprano
+tools/score2mp3.sh /tmp/soprano.musicxml soprano.mp3
+```
+
+The voice can be a `<part-name>` label from the score (`Soprano`, `Alto`,
+`Tenor`, `Bass` for `four-voices.musicxml`, matched case-insensitively) or an
+explicit `<part-id>:<voice-number>` like `P1:1`. As with `choirify.py`, it
+rewrites a copy of the MusicXML -- the file on disk is untouched -- and needs
+only the standard library (no `verovio` required for this step).
+
 ## Notes
 
 - Both default to the General MIDI **piano** (program 0), which suits the
