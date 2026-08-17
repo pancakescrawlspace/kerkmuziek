@@ -3,6 +3,52 @@
 Utilities for the scoryst song sources: compiling the Typst scores to PDF, and
 turning the generated MIDI files into audio you can play (VLC, etc.).
 
+## Dependencies
+
+### Essential
+
+Needed for the core score → audio pipeline (`score2mp3.sh` and friends), which
+is what most of these tools are for:
+
+- **Python 3** — every tool below is a Python script or a shell script that
+  calls one.
+- **[`verovio`](https://www.verovio.org/)** (`pip install verovio`) — the
+  MusicXML → MIDI/SVG engine behind `choirify.py`, `score2midi.sh`,
+  `score2mp3.sh`, `voice-mix.py`/`voice-mix.sh`, `musicxml2svg.py`, and
+  `render-all.sh`. Not needed by `voice-isolate.py`, `voice-explode.py`, or
+  `voice-colorize.py` — those three only rewrite MusicXML text and use
+  nothing beyond the standard library.
+- **`ffmpeg`** (built with `libmp3lame`) — the final MP3 encode in
+  `score2mp3.sh`, `mid2mp3-fluidsynth.sh`, and `mid2mp3.sh`.
+- **[FluidSynth](https://www.fluidsynth.org/)** + a General MIDI `.sf2`/`.sf3`
+  soundfont — the portable MIDI → WAV route used by `mid2mp3-fluidsynth.sh`
+  and thus `score2mp3.sh`; see [MIDI → MP3](#mid2mp3-fluidsynthsh--portable-recommended-esp-on-linux)
+  below for install commands and soundfont sources. On macOS, `mid2mp3.sh`
+  substitutes the system synth instead — see Non-essential.
+
+### Non-essential
+
+Each of these is scoped to one feature, and most have an alternative already
+listed above or elsewhere in this file:
+
+- **Typst** — only for compiling `songs/scoryst/*.typ` / `songs/typst/*.typ`
+  to PDF (`compile-scores.sh`, and the `musicxml2svg.py` pipeline it depends
+  on for the latter). Alternative: LilyPond, below.
+- **LilyPond** (`lilypond`, plus its bundled `musicxml2ly` script) — an
+  alternative MusicXML → PDF/engraving route to Typst, and needed to compile
+  `xml2ly.sh`'s `.ly` output to a score.
+- **[`xml2ly`](https://github.com/jacques-menu/musicformats)** — alternative
+  to LilyPond's own bundled `musicxml2ly`; see
+  [MusicXML → LilyPond](#musicxml--lilypond-xml2lysh).
+- **`swiftc`** (Xcode command line tools) — only for `mid2mp3.sh`, the
+  macOS-only alternative to FluidSynth (no soundfont needed, uses the system
+  GM synth instead).
+- **`mido`** (`pip install mido`) — only for `voice-mix.py`/`voice-mix.sh`
+  (sets MIDI Channel Volume for the practice-mix spotlight feature).
+- **`music21`** (`pip install music21`) — only for
+  `voice-explode-music21.py`, an alternative to the stdlib-only
+  `voice-explode.py`.
+
 ## Compile the Typst scores → PDF
 
 The scores in `songs/scoryst/*.typ` read their notes from
