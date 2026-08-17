@@ -47,15 +47,10 @@ def list_mp3() -> list[dict]:
 
 def list_pdfs() -> list[dict]:
     entries = []
-    for pipeline, directory in (
-        ("scoryst", SCORYST_DIR),
-        ("typst", TYPST_DIR),
-        ("verovio-direct", VEROVIO_DIRECT_PDF_DIR),
-    ):
-        for path in sorted(directory.glob("*.pdf")):
-            entry = _entry(path)
-            entry["pipeline"] = pipeline
-            entries.append(entry)
+    for path in sorted(VEROVIO_DIRECT_PDF_DIR.glob("*.pdf")):
+        entry = _entry(path)
+        entry["pipeline"] = "verovio-direct"
+        entries.append(entry)
     return entries
 
 
