@@ -291,7 +291,13 @@ changes.
 ```sh
 python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/soprano-red.musicxml soprano
 python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/alto-blue.musicxml alto "#2255CC"
+python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/soprano-red.musicxml soprano --notes-only
 ```
+
+`--notes-only` keeps the lyrics black regardless of voice: Verovio nests a
+note's lyric syllable inside that note's SVG group, so it inherits the note's
+color by default (colored words included) unless overridden -- the flag adds
+an explicit `color="#000000"` on each `<lyric>` the colored note carries.
 
 `<voice>` is a `<part-name>` label or an explicit `<part-id>[:<voice-number>]`,
 same matching convention as `voice-isolate.py`/`voice-mix.sh`. It works on

@@ -6,6 +6,12 @@ MusicXML's standard `color` attribute on <note>, rendering that note's whole
 glyph -- notehead, stem, ledger lines -- in the given color; everything else
 stays black.
 
+Verovio nests a note's lyric syllable inside that same SVG group, so by
+default the lyric inherits the note's color too (its whole line, words
+included). Pass --notes-only to keep lyrics black regardless of voice: this
+adds an explicit color="#000000" on each <lyric> the colored note carries,
+overriding the inherited color for just that element.
+
 Works on any MusicXML, but is most useful on the output of voice-explode.py,
 where each voice is already its own part: naming that part's label (e.g.
 "Soprano") colors every note in it. On a score where voices still share a
@@ -13,7 +19,7 @@ part (e.g. <part-name>Soprano/Alto</part-name>), naming a "/"-separated
 sub-label colors just the matching <voice>-tagged notes within that part.
 
 Usage:
-    python3 tools/voice-colorize.py <input.musicxml> <output.musicxml> <voice> [color=#FF0000]
+    python3 tools/voice-colorize.py <input.musicxml> <output.musicxml> <voice> [color=#FF0000] [--notes-only]
 
 <voice> is a <part-name> label (matched case-insensitively; whole-name first,
 then "/"-separated sub-label) or an explicit "<part-id>[:<voice-number>]".
@@ -22,6 +28,7 @@ Examples:
     python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/soprano-red.musicxml soprano
     python3 tools/voice-colorize.py songs/musicxml/four-voices.musicxml /tmp/soprano-red.musicxml soprano
     python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/alto-blue.musicxml alto "#2255CC"
+    python3 tools/voice-colorize.py songs/musicxml/four-voices.exploded.musicxml /tmp/soprano-red.musicxml soprano --notes-only
 
 Then render/typeset it like any other score, e.g. with the scoryst Typst
 package, or tools/score2mp3.sh for an audio check.
@@ -32,6 +39,7 @@ import re
 import sys
 
 NOTE_RE = re.compile(r"<note\b[^>]*>.*?</note>", re.S)
+LYRIC_OPEN_RE = re.compile(r"<lyric\b")
 VOICE_RE = re.compile(r"<voice>(\d+)</voice>")
 PART_RE = re.compile(r'(<part id="([^"]+)">)(.*?)(</part>)', re.S)
 SCORE_PART_RE = re.compile(r'<score-part id="([^"]+)">\s*<part-name[^>]*>([^<]*)</part-name>', re.S)
@@ -62,7 +70,7 @@ def resolve(xml: str, spec: str) -> tuple:
     sys.exit(f"no part/voice matches {spec!r} -- known parts: {listing}")
 
 
-def colorize(xml: str, target_part: str, target_voice, color: str) -> str:
+def colorize(xml: str, target_part: str, target_voice, color: str, notes_only: bool) -> str:
     def do_part(m: "re.Match") -> str:
         open_tag, part_id, body, close_tag = m.groups()
         if part_id != target_part:
@@ -74,7 +82,10 @@ def colorize(xml: str, target_part: str, target_voice, color: str) -> str:
                 vm = VOICE_RE.search(note)
                 if vm is None or vm.group(1) != target_voice:
                     return note
-            return re.sub(r"^<note\b", f'<note color="{color}"', note, count=1)
+            note = re.sub(r"^<note\b", f'<note color="{color}"', note, count=1)
+            if notes_only:
+                note = LYRIC_OPEN_RE.sub('<lyric color="#000000"', note)
+            return note
 
         return open_tag + NOTE_RE.sub(do_note, body) + close_tag
 
@@ -82,15 +93,23 @@ def colorize(xml: str, target_part: str, target_voice, color: str) -> str:
 
 
 def main() -> None:
-    if len(sys.argv) < 4:
-        sys.exit("usage: voice-colorize.py <input.musicxml> <output.musicxml> <voice> [color=#FF0000]")
-    inp, outp, spec = sys.argv[1:4]
-    color = sys.argv[4] if len(sys.argv) > 4 else "#FF0000"
+    args = sys.argv[1:]
+    notes_only = "--notes-only" in args
+    if notes_only:
+        args.remove("--notes-only")
+    if len(args) < 3:
+        sys.exit(
+            "usage: voice-colorize.py <input.musicxml> <output.musicxml> <voice> "
+            "[color=#FF0000] [--notes-only]"
+        )
+    inp, outp, spec = args[0:3]
+    color = args[3] if len(args) > 3 else "#FF0000"
     xml = open(inp).read()
     part_id, voice = resolve(xml, spec)
-    open(outp, "w").write(colorize(xml, part_id, voice, color))
+    open(outp, "w").write(colorize(xml, part_id, voice, color, notes_only))
     where = f"part {part_id}" + (f", voice {voice}" if voice is not None else " (whole part)")
-    print(f"wrote {outp} (colorized {spec!r} -> {where}, {color})")
+    scope = "notes only" if notes_only else "notes + lyrics"
+    print(f"wrote {outp} (colorized {spec!r} -> {where}, {color}, {scope})")
 
 
 if __name__ == "__main__":
