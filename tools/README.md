@@ -33,10 +33,14 @@ listed above or elsewhere in this file:
 
 - **Typst** — only for compiling `songs/scoryst/*.typ` / `songs/typst/*.typ`
   to PDF (`compile-scores.sh`, and the `musicxml2svg.py` pipeline it depends
-  on for the latter). Alternative: LilyPond, below.
+  on for the latter). Alternatives: LilyPond or `musicxml2pdf.sh`, below.
 - **LilyPond** (`lilypond`, plus its bundled `musicxml2ly` script) — an
   alternative MusicXML → PDF/engraving route to Typst, and needed to compile
   `xml2ly.sh`'s `.ly` output to a score.
+- **`rsvg-convert`** (librsvg) + **`pdfunite`** (poppler) — only for
+  `musicxml2pdf.sh`, a third MusicXML → PDF route independent of both Typst
+  and LilyPond; see
+  [MusicXML → SVG / PDF directly](#musicxml--svg--pdf-directly-no-typst-no-scoryst).
 - **[`xml2ly`](https://github.com/jacques-menu/musicformats)** — alternative
   to LilyPond's own bundled `musicxml2ly`; see
   [MusicXML → LilyPond](#musicxml--lilypond-xml2lysh).
@@ -108,6 +112,44 @@ writing each PDF next to its `.typ`:
 tools/compile-scores.sh                          # all songs/scoryst/*.typ
 tools/compile-scores.sh songs/scoryst/four-voices.typ   # just this one
 ```
+
+## MusicXML → SVG / PDF directly (no Typst, no scoryst)
+
+`musicxml2svg.py` renders a MusicXML score to one SVG per page via
+Verovio's Python bindings directly -- what `scoryst`'s `score()` call does
+internally, minus the third-party wrapper. This is what `songs/typst/*.typ`
+uses (see `songs/typst/svg-score.typ`), which wants each page cropped
+tightly to its own content for embedding as a Typst image
+(`adjustPageHeight` on by default), and rewrites Verovio's hardcoded
+`font-family="Times, serif"` to `"Helvetica"` on every page, since no
+toolkit option controls that (see the script's docstring for what was
+checked and ruled out):
+
+```sh
+python3 tools/musicxml2svg.py songs/musicxml/four-voices.musicxml songs/musicxml-svg/four-voices
+python3 tools/musicxml2svg.py songs/musicxml/unequal-fifths.musicxml songs/musicxml-svg/unequal-fifths --option adjustPageWidth=true
+# -> songs/musicxml-svg/four-voices-1.svg [, -2.svg, ...], songs/musicxml-svg/four-voices.pages
+```
+
+`--option` accepts any Verovio toolkit option, camelCase, repeatable.
+
+`musicxml2pdf.sh` builds a real, standalone PDF on top of that -- no
+Typst, no scoryst, no MuseScore: calls `musicxml2svg.py` (overriding its
+`adjustPageHeight` default back off, since a real PDF wants real, uniform
+pages -- A4 by default, Verovio's own -- not each page cropped to its own
+content), then librsvg's `rsvg-convert` turns each page into a one-page
+PDF (at 254dpi, matching Verovio's SVG units -- see the script's header
+comment for why), and poppler's `pdfunite` stitches multi-page scores
+together:
+
+```sh
+tools/musicxml2pdf.sh songs/musicxml/four-voices.musicxml four-voices.pdf
+tools/musicxml2pdf.sh songs/musicxml/twinkle-twinkle.musicxml twinkle-twinkle.pdf --option lyricWordSpace=1.6
+# output defaults to <input-basename>.pdf; --option is forwarded to musicxml2svg.py
+```
+
+Requires the `verovio` Python package, plus `rsvg-convert` (librsvg) and
+`pdfunite` (poppler) on PATH.
 
 ## MusicXML → LilyPond (`xml2ly.sh`)
 

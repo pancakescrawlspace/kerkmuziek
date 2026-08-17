@@ -39,9 +39,9 @@ hand shows up too.
 
 Regenerate actions are the one-step defaults only: `score2midi.sh`,
 `score2mp3.sh`, `compile-scores.sh` (scoryst PDF), `musicxml2svg.py` +
-`typst compile` (typst PDF), `songs/compare-lilypond/verovio-direct-demo.py`
-(Verovio -> SVG -> `rsvg-convert` -> `pdfunite`, no Typst/scoryst
-involved at all), and `mid2mp3-fluidsynth.sh`. The scoryst/typst PDF
+`typst compile` (typst PDF), `musicxml2pdf.sh` (`musicxml2svg.py` -> `rsvg-convert`
+-> `pdfunite`, no Typst/scoryst involved at all), and `mid2mp3-fluidsynth.sh`.
+The scoryst/typst PDF
 actions only appear for a MusicXML file that already has a matching
 `songs/scoryst/<name>.typ` / `songs/typst/<name>.typ` -- the portal can't
 author a new `.typ` from scratch. The Verovio-direct PDF action has no
@@ -82,16 +82,18 @@ file the portal itself just listed.
   cache at build time (needs network during `docker compose build`) so it
   doesn't hit the registry, or fail offline, at runtime.
 - `pdf-verovio-direct` needs `rsvg-convert`/`pdfunite` (`librsvg2-bin` +
-  `poppler-utils`), and surfaced a real bug in
-  `verovio-direct-demo.py` along the way: its single-page fast path used
-  `Path.rename()`, which fails with `OSError: Invalid cross-device link`
-  when the script's temp directory and the output path are on different
-  filesystems -- true here, since the temp dir is the container's own
-  writable layer and `songs/` is the bind-mounted volume. Fixed to
-  `shutil.move()`, which falls back to copy+delete across filesystems;
-  this was a latent bug outside Docker too (any `$TMPDIR` on a different
-  filesystem/mount than the target repo would have hit it), not something
-  Docker-specific that got special-cased around.
+  `poppler-utils`), and an earlier version of this route (a standalone
+  script since replaced by `tools/musicxml2pdf.sh`) surfaced a real bug
+  along the way: its single-page fast path used Python's `Path.rename()`,
+  which fails with `OSError: Invalid cross-device link` when the temp
+  directory and the output path are on different filesystems -- true
+  here, since the temp dir is the container's own writable layer and
+  `songs/` is the bind-mounted volume. `musicxml2pdf.sh` uses the shell
+  `mv` command instead, which falls back to copy+delete across
+  filesystems on its own; this was a latent bug outside Docker too (any
+  `$TMPDIR` on a different filesystem/mount than the target repo would
+  have hit it), not something Docker-specific that got special-cased
+  around.
 - The image is `python:3.14-slim` (Debian trixie) -- Debian isn't a
   deliberate choice, it's what the official Python image family is built
   on; `-slim` was picked for a smaller image and because `verovio`'s

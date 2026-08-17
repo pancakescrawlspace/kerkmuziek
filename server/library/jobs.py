@@ -74,16 +74,14 @@ def _mp3_from_midi_commands(midi_abs: Path, name: str) -> list[list[str]]:
 
 
 def _pdf_verovio_direct_commands(musicxml_abs: Path, name: str) -> list[list[str]]:
-    # songs/compare-lilypond/verovio-direct-demo.py: Verovio -> SVG (one per
-    # page) -> rsvg-convert -> one-page PDFs -> pdfunite -- the same
-    # Verovio-to-SVG step scoryst and the typst pipeline both use
-    # internally, minus Typst. No Docker-specific runtime needed --
-    # rsvg-convert and pdfunite are plain CLI tools, already required on
-    # macOS by the script itself (see tools/README.md).
+    # tools/musicxml2pdf.sh: calls musicxml2svg.py for the Verovio -> SVG
+    # step (one per page, same step scoryst and the typst pipeline both use
+    # internally), then rsvg-convert -> one-page PDFs -> pdfunite. No
+    # Docker-specific runtime needed -- rsvg-convert and pdfunite are plain
+    # CLI tools, already required on macOS too (see tools/README.md).
     return [
         [
-            "python3",
-            "songs/compare-lilypond/verovio-direct-demo.py",
+            "tools/musicxml2pdf.sh",
             str(musicxml_abs.relative_to(ROOT)),
             f"songs/verovio-direct-pdf/{name}.pdf",
         ]

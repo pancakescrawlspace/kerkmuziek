@@ -10,8 +10,8 @@
 # touching the MusicXML sources, or the comparison goes stale.
 #
 # Requires everything the individual scripts require: musicxml2ly + lilypond,
-# MuseScore 4, the verovio Python package + rsvg-convert + pdfunite, and
-# pdftoppm (poppler) for the PNG renders.
+# MuseScore 4, tools/musicxml2pdf.sh's own deps (verovio Python package +
+# rsvg-convert + pdfunite), and pdftoppm (poppler) for the PNG renders.
 set -eu
 
 here=$(cd "$(dirname "$0")" && pwd)
@@ -20,9 +20,9 @@ mxml="$root/songs/musicxml"
 
 "$here/lilypond-compare.sh" "$mxml/four-voices.musicxml" "$mxml/twinkle-fugue.musicxml"
 "$here/musescore-compare.sh" "$mxml/four-voices.musicxml" "$mxml/twinkle-fugue.musicxml"
-python3 "$here/verovio-direct-demo.py" "$mxml/four-voices.musicxml" "$here/four-voices-verovio-direct.pdf"
-python3 "$here/verovio-direct-demo.py" "$mxml/four-voices.exploded.musicxml" "$here/four-voices-exploded-verovio-direct.pdf"
-python3 "$here/verovio-direct-demo.py" "$mxml/twinkle-fugue.musicxml" "$here/twinkle-fugue-verovio-direct.pdf"
+"$root/tools/musicxml2pdf.sh" "$mxml/four-voices.musicxml" "$here/four-voices-verovio-direct.pdf"
+"$root/tools/musicxml2pdf.sh" "$mxml/four-voices.exploded.musicxml" "$here/four-voices-exploded-verovio-direct.pdf"
+"$root/tools/musicxml2pdf.sh" "$mxml/twinkle-fugue.musicxml" "$here/twinkle-fugue-verovio-direct.pdf"
 
 # the canonical pipelines' own output, copied here for side-by-side viewing
 for name in four-voices twinkle-fugue; do
