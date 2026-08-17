@@ -54,6 +54,34 @@ that font, extracted once from the `verovio` package's bundled Leipzig.css
 
     typst compile --root . --font-path songs/typst/fonts songs/typst/foo.typ
 
+KNOWN COSMETIC ISSUE -- plain SVG text (e.g. the "= 100" half of a tempo
+mark, font-family="Times, serif") renders visibly bolder/heavier here than
+in the scoryst pipeline, making it look like it sits closer to the staff.
+Investigated and it is NOT a spacing bug: the tempo mark's baseline sits at
+the same offset above the staff in the raw SVG regardless of Verovio version
+(tried 6.0.1 and 6.2.1) or option (dynamDist, harmDist, justificationStaff,
+spacingStaff, pageMarginTop all tried, none move it), and MusicXML's
+default-y position hint is ignored entirely by Verovio's auto-layout here
+(confirmed on both the tempo mark and the already-encoded default-y="48" on
+the "Parallel fifths"/"Corrected" labels in parallel-fifths-octaves.musicxml
+-- no visible effect from changing that value either). The actual cause:
+Typst's SVG-image font resolution does not do real name-based font-family
+matching -- tried pointing --font-path at real "Times"/"Times New Roman"
+files (both the literal name Verovio requests and stamped directly on the
+text element, bypassing inheritance), and none of it changed the render;
+removing Leipzig.ttf from --font-path turns the plain digits to tofu too,
+even with a real Times font still present, which rules out name-based
+lookup happening at all. It looks like whichever font gets loaded to supply
+the Leipzig glyph (the one glyph that has no alternative) becomes a blanket
+substitute for all other undeclared-family text in the same image,
+regardless of what font-family is actually declared. No fix found via
+Verovio options, font files, or MusicXML-side positioning; a real fix would
+mean not routing this text through Typst's SVG font matching at all (e.g.
+extracting these text runs and placing them as native Typst text on top of
+the image instead of leaving them inside the embedded SVG) -- a bigger
+change than a font swap, and worth doing for lyrics/dynamics too if done at
+all, not just tempo marks. Left as a known cosmetic gap for now.
+
 Requires the `verovio` Python package.
 """
 import sys

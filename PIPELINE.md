@@ -1,8 +1,8 @@
 # Tools → songs/ pipeline
 
 How the scripts in `tools/` turn the MusicXML sources in `songs/musicxml/`
-into the notation PDFs in `songs/scoryst/` and the MIDI/MP3 files in
-`songs/audio/`. See `tools/README.md` for full CLI usage of every tool
+into notation PDFs (`songs/scoryst/`, `songs/typst/`) and the MIDI/MP3 files
+in `songs/audio/`. See `tools/README.md` for full CLI usage of every tool
 mentioned here.
 
 Legend: cylinders are file groups (an artifact directory or glob), rectangles
@@ -36,19 +36,59 @@ one, for a quick rehearsal-track listen via the audio pipeline.
 
 ## 2. Notation: MusicXML → PDF
 
+Three routes from the same MusicXML sources, kept side by side rather than
+one replacing another -- see `tools/README.md`'s Dependencies section for
+what each needs, and why some are essential and some aren't.
+
 ```mermaid
 flowchart LR
     MXML[("songs/musicxml/*.musicxml<br/>incl. exploded / colored")]
-    TYP[("songs/scoryst/*.typ<br/>scoryst package")]
-    CS["compile-scores.sh<br/>typst compile --root ."]
-    PDF[("songs/scoryst/*.pdf")]
 
-    MXML --> TYP --> CS --> PDF
+    subgraph scoryst ["scoryst"]
+        TYP[("songs/scoryst/*.typ<br/>scoryst package")]
+        CS["compile-scores.sh<br/>typst compile --root ."]
+    end
+    MXML --> TYP --> CS --> PDF1[("songs/scoryst/*.pdf")]
+
+    subgraph typst_direct ["scoryst-free Typst"]
+        SVG2["musicxml2svg.py<br/>verovio Python bindings"]
+        SVGS[("songs/musicxml-svg/*.svg")]
+        TYP2[("songs/typst/*.typ<br/>svg-score.typ helper")]
+    end
+    MXML --> SVG2 --> SVGS --> TYP2 -- "typst compile<br/>--font-path songs/typst/fonts" --> PDF2[("songs/typst/*.pdf")]
+
+    subgraph lilypond ["LilyPond"]
+        X2LY["xml2ly.sh<br/>MusicFormats xml2ly"]
+        LY[(".ly")]
+    end
+    MXML --> X2LY --> LY -- "lilypond" --> PDF3[("*.pdf<br/>ad hoc, not committed")]
 ```
 
-Each `.typ` file `read()`s a MusicXML sibling and renders it via the
-`scoryst` Typst package (a Verovio-to-SVG wrapper); `compile-scores.sh`
-drives `typst compile` over some or all of `songs/scoryst/*.typ`.
+- **scoryst** -- the original route. Each `.typ` file `read()`s a MusicXML
+  sibling and renders it via the `scoryst` Typst package (a Verovio-to-SVG
+  wrapper bundled as WASM); `compile-scores.sh` drives `typst compile` over
+  some or all of `songs/scoryst/*.typ`.
+- **scoryst-free Typst** -- the same idea without the `scoryst` package
+  in between. `musicxml2svg.py` calls Verovio's Python bindings directly
+  and writes one SVG per page to `songs/musicxml-svg/` (plus a `.pages`
+  count), looping over every page itself -- fixing a `scoryst` bug where a
+  score tall enough to need more than one page silently lost everything past
+  page 1. `songs/typst/svg-score.typ`'s `svg-pages()`/`svg-score()` read
+  those files back in, as a drop-in-ish replacement for `scoryst`'s
+  `pages()`/`score()`, from `songs/typst/*.typ`. Compiling needs
+  `--font-path songs/typst/fonts` -- Typst's SVG embedding doesn't honour
+  the font `@font-face`/data-URI declarations Verovio's SVG already embeds
+  for text-based glyphs (e.g. a tempo mark's note symbol), only real,
+  discoverable font files. Known cosmetic gap: tempo marks render visibly
+  bolder here than in scoryst, reading as if they sit closer to the staff --
+  investigated and it's a Typst SVG font-matching quirk, not an actual
+  spacing difference; see `musicxml2svg.py`'s docstring for the full
+  writeup.
+- **LilyPond** -- a non-Typst route. `xml2ly.sh` wraps the MusicFormats
+  project's `xml2ly` to convert a MusicXML file to a `.ly`, which `lilypond`
+  then engraves to PDF directly (`tools/README.md` has the two-command
+  usage). Not wired into a `songs/` directory of its own yet -- output goes
+  wherever you point it.
 
 ## 3. Audio: MusicXML/MIDI → MP3
 
