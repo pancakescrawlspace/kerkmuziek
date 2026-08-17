@@ -23,6 +23,25 @@ tools/compile-scores.sh                          # all songs/scoryst/*.typ
 tools/compile-scores.sh songs/scoryst/four-voices.typ   # just this one
 ```
 
+## MusicXML → LilyPond (`xml2ly.sh`)
+
+`xml2ly.sh` converts a `.musicxml` score to a `.ly` file via
+[`xml2ly`](https://github.com/jacques-menu/musicformats), the
+musicxml2lilypond converter from the MusicFormats project. It's a different
+implementation than the `musicxml2ly` script bundled with LilyPond itself,
+with its own option set and coverage of MusicXML's feature surface.
+
+```sh
+tools/xml2ly.sh songs/musicxml/four-voices.musicxml /tmp/four-voices.ly
+lilypond -o /tmp /tmp/four-voices.ly
+```
+
+`xml2ly` is not vendored in this repo — it's a single-platform ~25MB binary,
+which doesn't fit how this project treats external engraving tools (`typst`,
+`lilypond`, `fluidsynth`, MuseScore are all expected to be installed by the
+user, not checked in). Install it yourself and put it on `PATH`; see
+`xml2ly.sh`'s header comment for the download/extract steps.
+
 ## Score → MP3 in one step (recommended)
 
 `score2mp3.sh` renders a MusicXML score straight to MP3, optionally choosing the
