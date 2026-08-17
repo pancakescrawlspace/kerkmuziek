@@ -65,6 +65,7 @@ ENV SOUNDFONT=/root/soundfonts/GeneralUser-GS.sf2
 # vanish from the merged filesystem view but still count toward the
 # image's actual size) -- this was a real bug here until fixed.
 RUN <<'EOF'
+set -eu
 pip install --no-cache-dir fonttools
 mkdir -p /usr/share/fonts/helvetica
 python3 <<'PY'

@@ -16,14 +16,29 @@ python3 -m venv .venv
 .venv/bin/python manage.py runserver
 ```
 
-or Docker Compose, from the repo root (builds fluidsynth/ffmpeg/typst/a
+or a container, from the repo root (builds fluidsynth/ffmpeg/typst/a
 soundfont into the image -- see `Dockerfile` -- and bind-mounts the whole
-repo so regenerated files land back on disk, not inside the container):
+repo so regenerated files land back on disk, not inside the container).
+Docker:
 
 ```sh
 docker compose up      # http://127.0.0.1:8000/, Ctrl-C to stop
 docker compose up -d   # same, detached
 docker compose down    # stop and remove the container
+```
+
+Podman is a drop-in alternative -- no separate Podman-specific files
+needed, `Dockerfile`/`docker-compose.yml` work as-is (verified: built,
+ran, published the port, bind-mounted, and ran a real regenerate job
+successfully under Podman 5.7.1, unmodified). On macOS, Podman needs its
+own VM running first (`podman machine init` once, then `podman machine
+start`; Docker Desktop manages this step for you automatically, which is
+why it isn't needed above):
+
+```sh
+podman compose up -d   # delegates to a docker-compose binary if one is on
+                        # PATH; otherwise install podman-compose instead
+podman compose down
 ```
 
 Either way, open <http://127.0.0.1:8000/>. Right-click a row in the
@@ -67,7 +82,7 @@ not before.
 to run anything with it -- a client can only ever trigger an action on a
 file the portal itself just listed.
 
-## Docker notes
+## Container notes
 
 - `Dockerfile` selects `typst`'s release asset by `TARGETARCH` (amd64/arm64)
   -- it'll pull the wrong-architecture binary and only work via slow
@@ -105,3 +120,14 @@ file the portal itself just listed.
   way). The one Windows-specific risk isn't Docker at all: see
   `../tools/README.md`'s "Line endings on Windows" section for why
   `.gitattributes` forces LF on `*.sh`.
+- Verifying this under Podman caught a real bug in the Helvetica-font
+  build step: it's a single `RUN` with a multi-line heredoc script (install
+  fonttools, generate four font files, uninstall fonttools -- one layer,
+  see the step's own comment for why), but had no `set -e`, so a failed
+  command partway through (a flaky download from the CTAN mirror, hit
+  several times in practice) didn't stop the rest of the script --
+  `pip uninstall` still ran, and the layer got committed with some font
+  files silently missing. Fixed by adding `set -eu` as the script's first
+  line, same as every `tools/*.sh` script already does; confirmed the fix
+  by triggering the same flaky download again and watching the build
+  correctly fail instead of silently producing a broken image.
