@@ -1,4 +1,4 @@
-#import "@preview/scoryst:0.1.3": score
+#import "@preview/scoryst:0.1.3": score, pages
 
 #set page(paper: "a4", margin: 1in, numbering: none)
 
@@ -10,8 +10,13 @@
 #align(center, text(size: 10pt, style: "italic")[SATB, Soprano highlighted])
 #v(12pt)
 
-#score(
-  read("../musicxml/four-voices.exploded.soprano.musicxml"),
-  options: (header: "none", adjust-page-width: true),
-  width: 100%,
-)
+// Four staves per system need more vertical space than this file's scores
+// elsewhere, so Verovio paginates internally past 1 page -- score() only
+// ever renders the page you ask for, so loop over all of them or lose
+// everything past page 1. See four-voices-exploded.typ for the long version.
+#let data = read("../musicxml/four-voices.exploded.soprano.musicxml")
+#let opts = (header: "none", adjust-page-width: true)
+#for p in range(1, pages(data, options: opts) + 1) [
+  #if p > 1 [ #pagebreak() ]
+  #score(data, options: opts, page: p, width: 100%)
+]
