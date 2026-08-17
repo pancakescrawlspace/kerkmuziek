@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """choirify.py -- export a MusicXML score's MIDI with a chosen General MIDI
-instrument (default Choir Aahs) instead of the default piano.
+instrument.
 
 It injects a <midi-instrument><midi-program>N</midi-program> into every
 <score-part> of a *copy* of the MusicXML (the file on disk is not modified),
@@ -10,8 +10,9 @@ tools/mid2mp3-fluidsynth.sh (portable) or tools/mid2mp3.sh (macOS).
 Usage:
     python3 tools/choirify.py <input.musicxml> <output.mid> [gm_program]
 
-gm_program is the 1-based General MIDI program number (default 53). Useful
-voices: 53 Choir Aahs, 54 Voice Oohs, 55 Synth Voice.
+gm_program is the 1-based General MIDI program number (default 1, Acoustic
+Grand Piano -- matching score2midi.sh/score2mp3.sh's "omit -p for piano"
+default). Useful voices: 53 Choir Aahs, 54 Voice Oohs, 55 Synth Voice.
 
 Example (how the committed *.choir.mp3 were made):
     python3 tools/choirify.py songs/musicxml/four-voices.musicxml /tmp/fv.mid 53
@@ -25,7 +26,7 @@ import re
 import base64
 import verovio
 
-GM_NAMES = {53: "Choir Aahs", 54: "Voice Oohs", 55: "Synth Voice"}
+GM_NAMES = {1: "Acoustic Grand Piano", 53: "Choir Aahs", 54: "Voice Oohs", 55: "Synth Voice"}
 
 
 def choirify(xml: str, program: int) -> str:
@@ -49,9 +50,9 @@ def choirify(xml: str, program: int) -> str:
 
 def main() -> None:
     if len(sys.argv) < 3:
-        sys.exit("usage: choirify.py <input.musicxml> <output.mid> [gm_program=53]")
+        sys.exit("usage: choirify.py <input.musicxml> <output.mid> [gm_program=1]")
     inp, outp = sys.argv[1], sys.argv[2]
-    program = int(sys.argv[3]) if len(sys.argv) > 3 else 53
+    program = int(sys.argv[3]) if len(sys.argv) > 3 else 1
     xml = open(inp).read()
     tk = verovio.toolkit()
     if not tk.loadData(choirify(xml, program)):
