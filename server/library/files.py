@@ -14,6 +14,7 @@ AUDIO_DIR = SONGS / "audio"
 SCORYST_DIR = SONGS / "scoryst"
 TYPST_DIR = SONGS / "typst"
 MSCORE_PDF_DIR = SONGS / "mscore-pdf"
+VEROVIO_DIRECT_PDF_DIR = SONGS / "verovio-direct-pdf"
 
 
 def _entry(path: Path) -> dict:
@@ -51,6 +52,7 @@ def list_pdfs() -> list[dict]:
         ("scoryst", SCORYST_DIR),
         ("typst", TYPST_DIR),
         ("mscore", MSCORE_PDF_DIR),
+        ("verovio-direct", VEROVIO_DIRECT_PDF_DIR),
     ):
         for path in sorted(directory.glob("*.pdf")):
             entry = _entry(path)

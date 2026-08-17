@@ -33,22 +33,25 @@ MusicXML or MIDI tab for the actions available on it.
 
 The four tabs are live directory listings (`songs/musicxml`, `songs/audio`
 split into MIDI/MP3, and `songs/scoryst` + `songs/typst` + `songs/mscore-pdf`
-together for PDF, one row per pipeline) -- there's no database of files, so
-anything dropped into those directories by hand shows up too.
++ `songs/verovio-direct-pdf` together for PDF, one row per pipeline) --
+there's no database of files, so anything dropped into those directories by
+hand shows up too.
 
 Regenerate actions are the one-step defaults only: `score2midi.sh`,
 `score2mp3.sh`, `compile-scores.sh` (scoryst PDF), `musicxml2svg.py` +
 `typst compile` (typst PDF), MuseScore's CLI (mscore PDF -- Docker only,
-see below), and `mid2mp3-fluidsynth.sh`. The scoryst/typst PDF actions only
+see below), `songs/compare-lilypond/verovio-direct-demo.py` (Verovio ->
+SVG -> `rsvg-convert` -> `pdfunite`, no Typst/scoryst/MuseScore involved
+at all), and `mid2mp3-fluidsynth.sh`. The scoryst/typst PDF actions only
 appear for a MusicXML file that already has a matching
 `songs/scoryst/<name>.typ` / `songs/typst/<name>.typ` -- the portal can't
-author a new `.typ` from scratch. The MuseScore PDF action has no such
-gate (it reads the MusicXML directly, no `.typ` involved) but also has no
-access to the title/commentary text those `.typ` files add -- its PDFs are
-bare notation only. Everything else in `tools/`
-(voice-isolate/explode/colorize/mix, `xml2ly.sh`, the
-`songs/compare-lilypond/` comparison scripts, GM-instrument overrides)
-stays CLI-only for now; see `../tools/README.md`.
+author a new `.typ` from scratch. The MuseScore and Verovio-direct PDF
+actions have no such gate (both read the MusicXML directly, no `.typ`
+involved) but also have no access to the title/commentary text those
+`.typ` files add -- their PDFs are bare notation only. Everything else in
+`tools/` (voice-isolate/explode/colorize/mix, `xml2ly.sh`, the rest of
+`songs/compare-lilypond/`'s scripts, GM-instrument overrides) stays
+CLI-only for now; see `../tools/README.md`.
 
 ## How regeneration runs
 
@@ -89,6 +92,17 @@ file the portal itself just listed.
   choice but is a known-broken MuseScore 4 CLI regression (still tries to
   init "xcb" and aborts); see `server/Dockerfile`'s MuseScore install step
   and `songs/compare-lilypond/musescore-compare.sh` for the full story.
+- `pdf-verovio-direct` needs `rsvg-convert`/`pdfunite` (`librsvg2-bin` +
+  `poppler-utils`), and surfaced a real bug in
+  `verovio-direct-demo.py` along the way: its single-page fast path used
+  `Path.rename()`, which fails with `OSError: Invalid cross-device link`
+  when the script's temp directory and the output path are on different
+  filesystems -- true here, since the temp dir is the container's own
+  writable layer and `songs/` is the bind-mounted volume. Fixed to
+  `shutil.move()`, which falls back to copy+delete across filesystems;
+  this was a latent bug outside Docker too (any `$TMPDIR` on a different
+  filesystem/mount than the target repo would have hit it), not something
+  Docker-specific that got special-cased around.
 - The image is `python:3.14-slim` (Debian trixie) -- Debian isn't a
   deliberate choice, it's what the official Python image family is built
   on; `-slim` was picked for a smaller image and because `verovio`'s

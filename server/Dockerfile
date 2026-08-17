@@ -7,12 +7,16 @@
 FROM python:3.14-slim
 
 # fluidsynth + ffmpeg cover score2mp3.sh / mid2mp3-fluidsynth.sh (MIDI -> MP3);
+# librsvg2-bin (rsvg-convert) + poppler-utils (pdfunite) cover the
+# pdf-verovio-direct action (songs/compare-lilypond/verovio-direct-demo.py);
 # curl + xz-utils are only needed to fetch typst/MuseScore/the soundfont
 # below; the rest (xvfb onward) are what MuseScore's AppImage needs at
 # runtime -- see the MuseScore install step further down for why.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         fluidsynth \
         ffmpeg \
+        librsvg2-bin \
+        poppler-utils \
         curl \
         xz-utils \
         ca-certificates \

@@ -9,6 +9,7 @@
     "pdf-scoryst": "pdf",
     "pdf-typst": "pdf",
     "pdf-mscore": "pdf",
+    "pdf-verovio-direct": "pdf",
     "mp3-from-midi": "mp3",
   };
 
