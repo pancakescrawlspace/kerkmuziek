@@ -16,17 +16,25 @@ MIDI via Verovio, then inserts one Control Change #7 (Channel Volume) event
 per channel at time 0 -- confirmed against this project's FluidSynth
 rendering to give roughly a 32 dB spread between CC7 values of 20 and 127.
 
+The spotlighted part and the background parts can also carry different GM
+instruments -- e.g. the voice you're studying stays a choir "ah" while the
+other three become piano, for a clearer foreground/background split than
+volume alone gives you.
+
 Usage:
     python3 tools/voice-mix.py <input.musicxml> <output.mid> <spotlight-voice> \
-        [spotlight-volume=127] [background-volume=40] [gm-program=1]
+        [spotlight-volume=127] [background-volume=40] [background-program=1] [spotlight-program=background-program]
 
 <spotlight-voice> is a <part-name> label (matched case-insensitively) or an
 explicit <part-id>, as in voice-isolate.py. Volumes are MIDI Channel Volume
-values, 0-127.
+values, 0-127. Programs are 1-based General MIDI program numbers (1 piano,
+53 Choir Aahs, ...); omitting spotlight-program keeps every part on
+background-program, i.e. one uniform instrument as before.
 
 Example:
     python3 tools/voice-explode.py songs/musicxml/four-voices.musicxml /tmp/exploded.musicxml
     python3 tools/voice-mix.py /tmp/exploded.musicxml /tmp/soprano-mix.mid soprano
+    python3 tools/voice-mix.py /tmp/exploded.musicxml /tmp/soprano-mix.mid soprano 127 40 1 53
 
 Requires the `verovio` and `mido` packages (`pip install verovio mido`).
 """
@@ -50,10 +58,11 @@ def resolve_part(xml: str, spec: str) -> str:
     sys.exit(f"no part matches {spec!r} -- known parts: {listing}")
 
 
-def assign_channels(xml: str, program: int) -> tuple:
+def assign_channels(xml: str, spotlight_id: str, spotlight_program: int, background_program: int) -> tuple:
     """Strip any existing <midi-instrument>, give every <score-part> a fresh
-    1-based MIDI channel, and return the modified XML plus a
-    {part_id: channel} map."""
+    1-based MIDI channel and its GM program (spotlight_program for
+    spotlight_id, background_program for everyone else), and return the
+    modified XML plus a {part_id: channel} map."""
     xml = re.sub(r"<midi-instrument.*?</midi-instrument>", "", xml, flags=re.S)
     known = [(pid, name) for _, pid, name in SCORE_PART_RE.findall(xml)]
     if len(known) > MAX_MIDI_CHANNELS:
@@ -62,6 +71,7 @@ def assign_channels(xml: str, program: int) -> tuple:
 
     def add(m):
         whole, pid, _ = m.groups()
+        program = spotlight_program if pid == spotlight_id else background_program
         instr = (
             f'\n    <midi-instrument id="{pid}-I1">'
             f"<midi-channel>{channels[pid]}</midi-channel>"
@@ -95,16 +105,18 @@ def main() -> None:
     if len(sys.argv) < 4:
         sys.exit(
             "usage: voice-mix.py <input.musicxml> <output.mid> <spotlight-voice> "
-            "[spotlight-volume=127] [background-volume=40] [gm-program=1]"
+            "[spotlight-volume=127] [background-volume=40] [background-program=1] "
+            "[spotlight-program=background-program]"
         )
     inp, outp, spotlight = sys.argv[1:4]
     spot_vol = int(sys.argv[4]) if len(sys.argv) > 4 else 127
     bg_vol = int(sys.argv[5]) if len(sys.argv) > 5 else 40
-    program = int(sys.argv[6]) if len(sys.argv) > 6 else 1
+    bg_program = int(sys.argv[6]) if len(sys.argv) > 6 else 1
+    spot_program = int(sys.argv[7]) if len(sys.argv) > 7 else bg_program
 
     xml = open(inp).read()
     spotlight_id = resolve_part(xml, spotlight)
-    xml, channels = assign_channels(xml, program)
+    xml, channels = assign_channels(xml, spotlight_id, spot_program, bg_program)
 
     # channels above is 1-based (MusicXML convention); mido channels are 0-based.
     channel_volume = {
@@ -113,8 +125,8 @@ def main() -> None:
 
     mid = set_volumes(render_midi(xml), channel_volume)
     mid.save(outp)
-    print(f"wrote {outp} (spotlight={spotlight!r} -> part {spotlight_id} @ {spot_vol}, "
-          f"others @ {bg_vol})")
+    print(f"wrote {outp} (spotlight={spotlight!r} -> part {spotlight_id} @ {spot_vol} "
+          f"(program {spot_program}), others @ {bg_vol} (program {bg_program}))")
 
 
 if __name__ == "__main__":

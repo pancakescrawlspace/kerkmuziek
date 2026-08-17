@@ -239,6 +239,18 @@ un-exploded `four-voices.musicxml`), `voice-mix.sh` still works but only at
 part granularity -- run `voice-explode.py` first for independent control of
 every voice.
 
+`-p` sets the GM instrument for every part, but the spotlighted part can also
+carry a *different* instrument than the background via `-P` -- e.g. the voice
+you're studying stays a choir "ah" while the other three drop to piano, a
+starker foreground/background split than volume alone:
+
+```sh
+tools/voice-mix.sh -p 1 -P 53 /tmp/four-voices.exploded.musicxml soprano-vocal-piano-bg.mp3 soprano
+```
+
+`-P` defaults to whatever `-p` is (one uniform instrument, the original
+behaviour) when omitted.
+
 Under the hood, `voice-mix.py` does the MusicXML → MIDI + Channel Volume step
 alone (useful standalone if you just want the `.mid`); `voice-mix.sh` adds the
 FluidSynth/ffmpeg render, reusing `mid2mp3-fluidsynth.sh`. Needs the `mido`
@@ -254,6 +266,24 @@ for voice in soprano alto tenor bass; do
   SOUNDFONT=~/soundfonts/MuseScore_General.sf3 tools/voice-mix.sh -p 53 \
     songs/musicxml/four-voices.exploded.musicxml \
     "songs/audio/four-voices.choir.$voice.mp3" "$voice"
+done
+```
+
+`songs/audio/four-voices.vocal-piano.{soprano,alto,tenor,bass}.mp3` are the
+`-p`/`-P` split-instrument version of the same set: the spotlighted voice
+stays Choir Aahs, the other three drop to piano, same soundfont. Background
+volume is raised to 70 (from the 40 default) -- at equal Channel Volume the
+piano patch in this soundfont isn't noticeably quieter than the choir patch,
+so with the default 40 the background piano read as too soft; a solo A/B of
+the piano part alone measured ~18 dB below the spotlighted choir part at
+127/40 versus ~9 dB at 127/70, which sounded like a better balance without
+losing the spotlight effect:
+
+```sh
+for voice in soprano alto tenor bass; do
+  SOUNDFONT=~/soundfonts/MuseScore_General.sf3 tools/voice-mix.sh -p 1 -P 53 \
+    songs/musicxml/four-voices.exploded.musicxml \
+    "songs/audio/four-voices.vocal-piano.$voice.mp3" "$voice" 127 70
 done
 ```
 

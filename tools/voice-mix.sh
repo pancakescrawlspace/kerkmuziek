@@ -9,10 +9,15 @@
 # a part (staff) with another voice -- Verovio assigns one MIDI channel per
 # <part>, not per <voice>, so per-voice volume needs one part per voice.
 #
-# Usage: tools/voice-mix.sh [-p GM_PROGRAM] <score.musicxml> <output.mp3> \
-#          <spotlight-voice> [spotlight-volume=127] [background-volume=40]
-#   -p N    General MIDI program for every part, 1-based (default 1 piano;
-#           e.g. 53 Choir Aahs).
+# Usage: tools/voice-mix.sh [-p GM_PROGRAM] [-P SPOTLIGHT_GM_PROGRAM] \
+#          <score.musicxml> <output.mp3> <spotlight-voice> \
+#          [spotlight-volume=127] [background-volume=40]
+#   -p N    General MIDI program for the background parts, 1-based (default
+#           1 piano; e.g. 53 Choir Aahs).
+#   -P N    General MIDI program for the spotlighted part only, if it should
+#           differ from -p -- e.g. -p 1 -P 53 keeps the voice you're
+#           studying a choir "ah" while the other three become piano.
+#           Defaults to whatever -p is, i.e. one uniform instrument.
 #   <spotlight-voice>  a <part-name> label (matched case-insensitively) or an
 #           explicit <part-id>, as in voice-isolate.py.
 #   volumes are MIDI Channel Volume values, 0-127 (default 127 spotlight, 40
@@ -22,6 +27,7 @@
 # Example:
 #   python3 tools/voice-explode.py songs/musicxml/four-voices.musicxml /tmp/exploded.musicxml
 #   tools/voice-mix.sh /tmp/exploded.musicxml soprano-mix.mp3 soprano
+#   tools/voice-mix.sh -p 1 -P 53 /tmp/exploded.musicxml soprano-mix.mp3 soprano   # vocal spotlight, piano background
 #
 # Env:
 #   SOUNDFONT=/path/to.sf2   pick the soundfont (else autodetected; see
@@ -33,16 +39,19 @@
 set -eu
 
 here=$(cd "$(dirname "$0")" && pwd)
-usage="usage: voice-mix.sh [-p GM_PROGRAM] <score.musicxml> <output.mp3> <spotlight-voice> [spotlight-volume=127] [background-volume=40]"
+usage="usage: voice-mix.sh [-p GM_PROGRAM] [-P SPOTLIGHT_GM_PROGRAM] <score.musicxml> <output.mp3> <spotlight-voice> [spotlight-volume=127] [background-volume=40]"
 
-prog=1
-while getopts "p:" opt; do
+bg_prog=1
+spot_prog=""
+while getopts "p:P:" opt; do
   case "$opt" in
-    p) prog=$OPTARG ;;
+    p) bg_prog=$OPTARG ;;
+    P) spot_prog=$OPTARG ;;
     *) echo "$usage" >&2; exit 2 ;;
   esac
 done
 shift $((OPTIND - 1))
+[ -n "$spot_prog" ] || spot_prog=$bg_prog
 
 score=${1:?$usage}
 out=${2:?$usage}
@@ -53,5 +62,5 @@ bg_vol=${5:-40}
 mid="${TMPDIR:-/tmp}/voice-mix.$$.mid"
 trap 'rm -f "$mid"' EXIT
 
-python3 "$here/voice-mix.py" "$score" "$mid" "$spotlight" "$spot_vol" "$bg_vol" "$prog"
+python3 "$here/voice-mix.py" "$score" "$mid" "$spotlight" "$spot_vol" "$bg_vol" "$bg_prog" "$spot_prog"
 "$here/mid2mp3-fluidsynth.sh" "$mid" "$out"
