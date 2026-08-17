@@ -13,6 +13,7 @@ MUSICXML_DIR = SONGS / "musicxml"
 AUDIO_DIR = SONGS / "audio"
 SCORYST_DIR = SONGS / "scoryst"
 TYPST_DIR = SONGS / "typst"
+MSCORE_PDF_DIR = SONGS / "mscore-pdf"
 
 
 def _entry(path: Path) -> dict:
@@ -46,7 +47,11 @@ def list_mp3() -> list[dict]:
 
 def list_pdfs() -> list[dict]:
     entries = []
-    for pipeline, directory in (("scoryst", SCORYST_DIR), ("typst", TYPST_DIR)):
+    for pipeline, directory in (
+        ("scoryst", SCORYST_DIR),
+        ("typst", TYPST_DIR),
+        ("mscore", MSCORE_PDF_DIR),
+    ):
         for path in sorted(directory.glob("*.pdf")):
             entry = _entry(path)
             entry["pipeline"] = pipeline

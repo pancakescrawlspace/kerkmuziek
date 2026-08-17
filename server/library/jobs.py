@@ -73,6 +73,24 @@ def _mp3_from_midi_commands(midi_abs: Path, name: str) -> list[list[str]]:
     return [["tools/mid2mp3-fluidsynth.sh", str(midi_abs.relative_to(ROOT))]]
 
 
+def _pdf_mscore_commands(musicxml_abs: Path, name: str) -> list[list[str]]:
+    # Only actually works in the Docker image, which installs MuseScore's
+    # AppImage at /opt/musescore -- see server/Dockerfile. Outside Docker
+    # this just fails with "command not found", caught below like any
+    # other missing tool. `--platform offscreen` doesn't work for MuseScore
+    # 4's CLI (see the Dockerfile's MuseScore install step); xvfb-run does.
+    return [
+        [
+            "xvfb-run",
+            "-a",
+            "/opt/musescore/usr/bin/mscore4portable",
+            "-o",
+            f"songs/mscore-pdf/{name}.pdf",
+            str(musicxml_abs.relative_to(ROOT)),
+        ]
+    ]
+
+
 # action key -> (label, source category, availability check, command builder)
 ACTIONS = {
     "midi": ("Regenerate MIDI", "musicxml", None, _midi_commands),
@@ -90,6 +108,12 @@ ACTIONS = {
         _pdf_typst_commands,
     ),
     "mp3-from-midi": ("Regenerate MP3", "midi", None, _mp3_from_midi_commands),
+    "pdf-mscore": (
+        "Regenerate PDF (MuseScore)",
+        "musicxml",
+        None,
+        _pdf_mscore_commands,
+    ),
 }
 
 _LISTER_BY_KIND = {"musicxml": list_musicxml, "midi": list_midi}

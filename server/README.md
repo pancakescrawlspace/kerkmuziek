@@ -32,16 +32,20 @@ MusicXML or MIDI tab for the actions available on it.
 ## What it does, and doesn't, cover
 
 The four tabs are live directory listings (`songs/musicxml`, `songs/audio`
-split into MIDI/MP3, and `songs/scoryst` + `songs/typst` together for PDF)
--- there's no database of files, so anything dropped into those directories
-by hand shows up too.
+split into MIDI/MP3, and `songs/scoryst` + `songs/typst` + `songs/mscore-pdf`
+together for PDF, one row per pipeline) -- there's no database of files, so
+anything dropped into those directories by hand shows up too.
 
 Regenerate actions are the one-step defaults only: `score2midi.sh`,
 `score2mp3.sh`, `compile-scores.sh` (scoryst PDF), `musicxml2svg.py` +
-`typst compile` (typst PDF), and `mid2mp3-fluidsynth.sh`. The PDF actions
-only appear for a MusicXML file that already has a matching
+`typst compile` (typst PDF), MuseScore's CLI (mscore PDF -- Docker only,
+see below), and `mid2mp3-fluidsynth.sh`. The scoryst/typst PDF actions only
+appear for a MusicXML file that already has a matching
 `songs/scoryst/<name>.typ` / `songs/typst/<name>.typ` -- the portal can't
-author a new `.typ` from scratch. Everything else in `tools/`
+author a new `.typ` from scratch. The MuseScore PDF action has no such
+gate (it reads the MusicXML directly, no `.typ` involved) but also has no
+access to the title/commentary text those `.typ` files add -- its PDFs are
+bare notation only. Everything else in `tools/`
 (voice-isolate/explode/colorize/mix, `xml2ly.sh`, the
 `songs/compare-lilypond/` comparison scripts, GM-instrument overrides)
 stays CLI-only for now; see `../tools/README.md`.
@@ -75,6 +79,16 @@ file the portal itself just listed.
   fetched from Typst's registry on first compile -- the image warms that
   cache at build time (needs network during `docker compose build`) so it
   doesn't hit the registry, or fail offline, at runtime.
+- The `pdf-mscore` action only works here, in Docker -- it needs
+  `/opt/musescore`, which the image installs from MuseScore's official
+  Linux AppImage (no Debian package exists for MuseScore 4); the local-venv
+  setup above has no MuseScore install step at all, so the action is
+  present in the UI either way but fails with "command not found" outside
+  Docker. It runs via `xvfb-run` (a virtual X server), not
+  `--platform offscreen` -- that flag looks like the obvious headless
+  choice but is a known-broken MuseScore 4 CLI regression (still tries to
+  init "xcb" and aborts); see `server/Dockerfile`'s MuseScore install step
+  and `songs/compare-lilypond/musescore-compare.sh` for the full story.
 - The image is `python:3.14-slim` (Debian trixie) -- Debian isn't a
   deliberate choice, it's what the official Python image family is built
   on; `-slim` was picked for a smaller image and because `verovio`'s
