@@ -148,6 +148,17 @@ tools/musicxml2pdf.sh songs/musicxml/twinkle-twinkle.musicxml twinkle-twinkle.pd
 # output defaults to <input-basename>.pdf; --option is forwarded to musicxml2svg.py
 ```
 
+Because this route renders the real, full page rather than cropping to
+content, it's also the one place in this project where Verovio's
+"MEI engraved with Verovio" footer survives (`songs/typst`/`songs/scoryst`
+happen to crop it away, as a side effect of cropping to content, not on
+purpose -- see git history for the investigation). It's Verovio's own
+`footer` toolkit option, default `auto`; turn it off per-render with:
+
+```sh
+tools/musicxml2pdf.sh songs/musicxml/four-voices.musicxml four-voices.pdf --option footer=none
+```
+
 Requires the `verovio` Python package, plus `rsvg-convert` (librsvg) and
 `pdfunite` (poppler) on PATH.
 
