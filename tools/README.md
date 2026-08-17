@@ -259,31 +259,31 @@ package in addition to `verovio` (`pip install verovio mido`).
 The committed `songs/audio/four-voices.choir.{soprano,alto,tenor,bass}.mp3` --
 one per voice, spotlighted in turn -- were made from the already-exploded
 `songs/musicxml/four-voices.exploded.musicxml`, GM program 53 (Choir Aahs),
-with the same **MuseScore General** soundfont as `four-voices.choir.mp3`:
+with the same **MuseScore General** soundfont as `four-voices.choir.mp3`.
+Background volume is raised to 75 (from the 40 default) -- at equal Channel
+Volume this soundfont's patches aren't inherently quieter or louder than one
+another (confirmed by soloing background vs. spotlight at the same CC7 value
+and comparing loudness), so the intended spotlight/background split was
+entirely down to the CC7 gap, and the default 40 read as too soft:
 
 ```sh
 for voice in soprano alto tenor bass; do
   SOUNDFONT=~/soundfonts/MuseScore_General.sf3 tools/voice-mix.sh -p 53 \
     songs/musicxml/four-voices.exploded.musicxml \
-    "songs/audio/four-voices.choir.$voice.mp3" "$voice"
+    "songs/audio/four-voices.choir.$voice.mp3" "$voice" 127 75
 done
 ```
 
 `songs/audio/four-voices.vocal-piano.{soprano,alto,tenor,bass}.mp3` are the
 `-p`/`-P` split-instrument version of the same set: the spotlighted voice
-stays Choir Aahs, the other three drop to piano, same soundfont. Background
-volume is raised to 70 (from the 40 default) -- at equal Channel Volume the
-piano patch in this soundfont isn't noticeably quieter than the choir patch,
-so with the default 40 the background piano read as too soft; a solo A/B of
-the piano part alone measured ~18 dB below the spotlighted choir part at
-127/40 versus ~9 dB at 127/70, which sounded like a better balance without
-losing the spotlight effect:
+stays Choir Aahs, the other three drop to piano, same soundfont and same
+127/75 balance:
 
 ```sh
 for voice in soprano alto tenor bass; do
   SOUNDFONT=~/soundfonts/MuseScore_General.sf3 tools/voice-mix.sh -p 1 -P 53 \
     songs/musicxml/four-voices.exploded.musicxml \
-    "songs/audio/four-voices.vocal-piano.$voice.mp3" "$voice" 127 70
+    "songs/audio/four-voices.vocal-piano.$voice.mp3" "$voice" 127 75
 done
 ```
 
