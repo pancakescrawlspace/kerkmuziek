@@ -75,3 +75,14 @@ file the portal itself just listed.
   fetched from Typst's registry on first compile -- the image warms that
   cache at build time (needs network during `docker compose build`) so it
   doesn't hit the registry, or fail offline, at runtime.
+- The image is `python:3.14-slim` (Debian trixie) -- Debian isn't a
+  deliberate choice, it's what the official Python image family is built
+  on; `-slim` was picked for a smaller image and because `verovio`'s
+  prebuilt wheels are `manylinux` (glibc), which Alpine's musl libc
+  wouldn't satisfy without a from-source build.
+- This should build and run identically on Windows (Docker Desktop runs a
+  real Linux kernel there too, via WSL2 -- same as the macOS Docker
+  Desktop VM, so the container never touches the host OS directly either
+  way). The one Windows-specific risk isn't Docker at all: see
+  `../tools/README.md`'s "Line endings on Windows" section for why
+  `.gitattributes` forces LF on `*.sh`.

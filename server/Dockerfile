@@ -4,7 +4,7 @@
 # the regenerate actions in library/jobs.py shell out to ../tools/*.sh|py
 # against ../songs/, both of which need to be present (and, at runtime,
 # bind-mounted so writes land back on the host -- see docker-compose.yml).
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 # fluidsynth + ffmpeg cover score2mp3.sh / mid2mp3-fluidsynth.sh (MIDI -> MP3);
 # curl + xz-utils are only needed to fetch typst and the soundfont below.

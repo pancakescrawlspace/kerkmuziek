@@ -49,6 +49,46 @@ listed above or elsewhere in this file:
   `voice-explode-music21.py`, an alternative to the stdlib-only
   `voice-explode.py`.
 
+## Line endings on Windows
+
+Every script here (`tools/*.sh`, `songs/compare-lilypond/*.sh`) is a POSIX
+shell script: `#!/bin/sh` on the first line, LF-only line endings. That
+first line is not decorative — it's how the OS knows what interpreter to
+run the file with. If the file's line endings get changed to CRLF, that
+shebang line becomes `#!/bin/sh\r`, an interpreter path that doesn't exist,
+and every attempt to run the script fails with something like:
+
+```
+bash: tools/score2mp3.sh: /bin/sh^M: bad interpreter: No such file or directory
+```
+
+This is not a hypothetical: it is exactly what a default Windows Git
+checkout does, unprompted. Git for Windows commonly installs with
+`core.autocrlf=true`, which -- unless a repo overrides it -- rewrites every
+text file's line endings to CRLF *on checkout*, because that's the native
+convention for plain-text files on Windows (Notepad, `.bat` files, etc.).
+Git can't tell "this LF is meaningful" from "this LF is just how someone's
+editor happened to save it" on its own; `core.autocrlf` is a blanket,
+repo-unaware setting, and it does exactly what it says for every text file
+it sees, executable shell scripts included.
+
+`.gitattributes`' `*.sh text eol=lf` line overrides that on a per-repo,
+per-pattern basis: it tells Git "these files are text (so still get normal
+diffing), but always check them out with LF, on every platform, regardless
+of `core.autocrlf`." This isn't specific to Docker or WSL -- it matters for
+running these scripts directly from Git Bash on Windows too, anywhere a
+POSIX shell is what actually executes the `#!/bin/sh` file. It's also why
+this is the right permanent fix rather than a one-time `dos2unix` pass: a
+one-time conversion only fixes files already checked out; `core.autocrlf`
+would just re-introduce CRLF on the *next* checkout (a fresh clone, a
+branch switch, `git stash pop`, and so on) without an `.gitattributes` rule
+in place to override it going forward.
+
+Committed `.sh` files in this repo already use LF (verified via `file`
+reporting plain "ASCII text", not "... with CRLF line terminators"), so
+this rule is preventive -- it doesn't rewrite anything that exists today,
+it just keeps a Windows checkout from silently breaking it later.
+
 ## Compile the Typst scores → PDF
 
 The scores in `songs/scoryst/*.typ` read their notes from
