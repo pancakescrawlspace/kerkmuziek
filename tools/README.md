@@ -244,6 +244,19 @@ alone (useful standalone if you just want the `.mid`); `voice-mix.sh` adds the
 FluidSynth/ffmpeg render, reusing `mid2mp3-fluidsynth.sh`. Needs the `mido`
 package in addition to `verovio` (`pip install verovio mido`).
 
+The committed `songs/audio/four-voices.choir.{soprano,alto,tenor,bass}.mp3` --
+one per voice, spotlighted in turn -- were made from the already-exploded
+`songs/musicxml/four-voices.exploded.musicxml`, GM program 53 (Choir Aahs),
+with the same **MuseScore General** soundfont as `four-voices.choir.mp3`:
+
+```sh
+for voice in soprano alto tenor bass; do
+  SOUNDFONT=~/soundfonts/MuseScore_General.sf3 tools/voice-mix.sh -p 53 \
+    songs/musicxml/four-voices.exploded.musicxml \
+    "songs/audio/four-voices.choir.$voice.mp3" "$voice"
+done
+```
+
 ### Two ways to explode: regex vs. music21
 
 `voice-explode.py` is hand-written regex/XML surgery, scoped to exactly what
