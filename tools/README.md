@@ -207,12 +207,30 @@ so an independent volume per voice requires a per-voice part first.
 
 The exploded file is a real, standalone MusicXML score on its own (e.g. one
 staff per voice instead of two), but its purpose here is as input to
-`voice-mix.sh` (a render step, not yet built), which will assign each part a
-channel, set a louder volume on the voice you're studying and quieter volumes
-on the rest via MIDI Control Change #7 (Channel Volume -- confirmed to work
-with this project's FluidSynth-based rendering, roughly a 32 dB spread
-between CC7 values of 20 and 127), then render through the existing
-MIDI → WAV → MP3 pipeline.
+`voice-mix.sh`, which assigns each part a MIDI channel, sets a louder volume
+on the voice you're studying and quieter volumes on the rest via MIDI Control
+Change #7 (Channel Volume -- confirmed to give roughly a 32 dB spread between
+CC7 values of 20 and 127 with this project's FluidSynth rendering), then
+renders through the existing MIDI → WAV → MP3 pipeline:
+
+```sh
+tools/voice-mix.sh /tmp/four-voices.exploded.musicxml soprano-mix.mp3 soprano
+tools/voice-mix.sh /tmp/four-voices.exploded.musicxml soprano-mix.mp3 soprano 127 60   # subtler background
+tools/voice-mix.sh -p 53 /tmp/four-voices.exploded.musicxml soprano-mix.mp3 soprano    # Choir Aahs instead of piano
+```
+
+`<spotlight-voice>` is a `<part-name>` label (matched case-insensitively, as
+in `voice-isolate.py`) or an explicit `<part-id>`; the two trailing numbers
+are the spotlight and background MIDI Channel Volumes (0-127, default 127/40).
+If the voice you want shares a part with another (as in the original,
+un-exploded `four-voices.musicxml`), `voice-mix.sh` still works but only at
+part granularity -- run `voice-explode.py` first for independent control of
+every voice.
+
+Under the hood, `voice-mix.py` does the MusicXML → MIDI + Channel Volume step
+alone (useful standalone if you just want the `.mid`); `voice-mix.sh` adds the
+FluidSynth/ffmpeg render, reusing `mid2mp3-fluidsynth.sh`. Needs the `mido`
+package in addition to `verovio` (`pip install verovio mido`).
 
 ## Notes
 
