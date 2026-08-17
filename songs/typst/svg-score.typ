@@ -7,7 +7,7 @@
 // songs/scoryst/*.typ -- that directory and its scoryst dependency are
 // untouched). Typical use:
 //
-//   #import "../../tools/typst/svg-score.typ": svg-score, svg-pages
+//   #import "svg-score.typ": svg-score, svg-pages
 //   #let prefix = "/songs/musicxml-svg/four-voices"
 //   #for p in range(1, svg-pages(prefix) + 1) [
 //     #if p > 1 [ #pagebreak() ]
@@ -16,7 +16,7 @@
 //
 // songs/musicxml-svg/ is where the SVGs musicxml2svg.py writes actually live.
 //
-// IMPORTANT -- compile with --font-path tools/typst/fonts (see
+// IMPORTANT -- compile with --font-path songs/typst/fonts (see
 // tools/musicxml2svg.py's docstring for why): Verovio's SVG text elements
 // -- a tempo mark's note symbol, for instance -- reference the Leipzig
 // engraving font by name, and Typst's image() only resolves that against a
@@ -25,7 +25,7 @@
 // render as a missing-glyph box instead of failing loudly, so it's easy to
 // miss:
 //
-//   typst compile --root . --font-path tools/typst/fonts songs/typst/four-voices.typ
+//   typst compile --root . --font-path songs/typst/fonts songs/typst/four-voices.typ
 //
 // `prefix` is whatever path was passed to musicxml2svg.py as its
 // <output-prefix> argument -- this expects `prefix-N.svg` and
@@ -35,7 +35,7 @@
 // relative one -- Typst resolves read()/image() paths against the file
 // where the call is *written* (here, i.e. always this file's directory),
 // not the file that calls svg-pages()/svg-score(), so a relative prefix
-// would be resolved from tools/typst/ regardless of where you call this
+// would be resolved from songs/typst/ regardless of where you call this
 // from.
 
 /// Number of pages musicxml2svg.py rendered for this prefix.

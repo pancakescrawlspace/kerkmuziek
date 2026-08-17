@@ -22,7 +22,7 @@ score's rendering matches what it asked scoryst for.
 
 Writes <output-prefix>-1.svg, -2.svg, ... and <output-prefix>.pages (a
 plain-text page count), so a Typst file can loop over exactly as many pages
-as were written without probing the filesystem -- see tools/typst/svg-score.typ,
+as were written without probing the filesystem -- see songs/typst/svg-score.typ,
 a small svg-pages()/svg-score() pair that reads what this script writes, as
 a drop-in-ish replacement for scoryst's pages()/score().
 
@@ -44,15 +44,15 @@ IMPORTANT -- font: Verovio's SVG text elements (tempo marks, and potentially
 other text-based annotations) reference the engraving font -- Leipzig by
 default -- by name via `font-family`. Verovio's own output DOES already
 carry a matching `@font-face { ... url(data:...) }` rule, but Typst's SVG
-embedding (plain image(), as tools/typst/svg-score.typ uses) does not honour
+embedding (plain image(), as songs/typst/svg-score.typ uses) does not honour
 embedded @font-face/data-URI declarations -- it resolves font-family names
 against real, discoverable font files only. Without the font available that
 way, any Leipzig-glyph text (e.g. the note symbol in a metronome mark)
-silently renders as a missing-glyph box. tools/typst/fonts/Leipzig.ttf is
+silently renders as a missing-glyph box. songs/typst/fonts/Leipzig.ttf is
 that font, extracted once from the `verovio` package's bundled Leipzig.css
 (see git history for the extraction commands); pass it to Typst explicitly:
 
-    typst compile --root . --font-path tools/typst/fonts songs/typst/foo.typ
+    typst compile --root . --font-path songs/typst/fonts songs/typst/foo.typ
 
 Requires the `verovio` Python package.
 """

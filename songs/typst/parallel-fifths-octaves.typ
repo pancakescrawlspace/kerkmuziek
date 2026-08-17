@@ -1,4 +1,4 @@
-#import "../../tools/typst/svg-score.typ": svg-score, svg-pages
+#import "svg-score.typ": svg-score, svg-pages
 
 #set page(paper: "a4", margin: 1in, numbering: none)
 #set text(font: "Helvetica")
