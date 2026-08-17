@@ -205,6 +205,15 @@ left untouched. This matters because Verovio assigns each `<part>` its own
 MIDI channel on export but does not split channels *within* a part by voice,
 so an independent volume per voice requires a per-voice part first.
 
+Choral scores conventionally print the lyrics only once (usually under the
+top voice), since every voice sings the same syllable at the same moment --
+once split onto separate staves that's no longer implicit, so `voice-explode.py`
+has any note being exploded that has no lyric of its own borrow one from
+whichever voice/part in the score *does* have lyrics at that position (matched
+by measure + beat offset, not just note index, so it still lines up if a
+voice's rhythm differs). A note that already carries its own lyric is left
+alone.
+
 The exploded file is a real, standalone MusicXML score on its own (e.g. one
 staff per voice instead of two), but its purpose here is as input to
 `voice-mix.sh`, which assigns each part a MIDI channel, sets a louder volume
@@ -245,9 +254,9 @@ instead:
 python3 tools/voice-explode-music21.py songs/musicxml/four-voices.musicxml /tmp/four-voices.exploded-m21.musicxml
 ```
 
-Both were verified to produce the same result on `four-voices.musicxml` (62
-notes per voice, 4 parts, correct Soprano/Alto/Tenor/Bass names) and both feed
-`voice-mix.sh` identically -- it resolves parts by name, so it doesn't
+Both were verified to produce the same notes/rhythms on `four-voices.musicxml`
+(62 notes per voice, 4 parts, correct Soprano/Alto/Tenor/Bass names) and both
+feed `voice-mix.sh` identically -- it resolves parts by name, so it doesn't
 care which route produced the file. The real differences:
 
 |  | `voice-explode.py` (regex) | `voice-explode-music21.py` |
@@ -255,6 +264,7 @@ care which route produced the file. The real differences:
 | Dependency | standard library only | `music21` (`pip install music21`) -- a full notation/analysis library |
 | Scope | handles this project's scores; would need extending for chords, `<forward>`, multi-staff parts | music21's object model already handles those cases generally |
 | Untouched parts | already-single-voice parts pass through **byte-identical** | every part gets rewritten, even ones that didn't need splitting |
+| Lyrics | notes with no lyric of their own borrow one from another voice/part at the same position (see above) | not implemented -- only the voice that already had lyrics in the source keeps them |
 | Output size/style | matches the source file's formatting | ~45% larger, reformatted (multi-line elements, `<divisions>` inflated to music21's internal PPQ, e.g. 1 → 10080) |
 | Part ids | `<original-id>-<voice>`, e.g. `P1-1` | opaque hashes for every part but the first per original id (`Part.id` is set but silently ignored on write -- only `partName` survives) |
 
