@@ -54,33 +54,30 @@ that font, extracted once from the `verovio` package's bundled Leipzig.css
 
     typst compile --root . --font-path songs/typst/fonts songs/typst/foo.typ
 
-KNOWN COSMETIC ISSUE -- plain SVG text (e.g. the "= 100" half of a tempo
-mark, font-family="Times, serif") renders visibly bolder/heavier here than
-in the scoryst pipeline, making it look like it sits closer to the staff.
-Investigated and it is NOT a spacing bug: the tempo mark's baseline sits at
-the same offset above the staff in the raw SVG regardless of Verovio version
-(tried 6.0.1 and 6.2.1) or option (dynamDist, harmDist, justificationStaff,
-spacingStaff, pageMarginTop all tried, none move it), and MusicXML's
-default-y position hint is ignored entirely by Verovio's auto-layout here
-(confirmed on both the tempo mark and the already-encoded default-y="48" on
-the "Parallel fifths"/"Corrected" labels in parallel-fifths-octaves.musicxml
--- no visible effect from changing that value either). The actual cause:
-Typst's SVG-image font resolution does not do real name-based font-family
-matching -- tried pointing --font-path at real "Times"/"Times New Roman"
-files (both the literal name Verovio requests and stamped directly on the
-text element, bypassing inheritance), and none of it changed the render;
-removing Leipzig.ttf from --font-path turns the plain digits to tofu too,
-even with a real Times font still present, which rules out name-based
-lookup happening at all. It looks like whichever font gets loaded to supply
-the Leipzig glyph (the one glyph that has no alternative) becomes a blanket
-substitute for all other undeclared-family text in the same image,
-regardless of what font-family is actually declared. No fix found via
-Verovio options, font files, or MusicXML-side positioning; a real fix would
-mean not routing this text through Typst's SVG font matching at all (e.g.
-extracting these text runs and placing them as native Typst text on top of
-the image instead of leaving them inside the embedded SVG) -- a bigger
-change than a font swap, and worth doing for lyrics/dynamics too if done at
-all, not just tempo marks. Left as a known cosmetic gap for now.
+FONT -- plain SVG text (lyrics, tempo digits, part labels, dynamics --
+anything that isn't a music glyph) is rendered as bare <text>/<tspan>
+elements with no font-family of their own, inheriting Verovio's SVG-root
+default, which is hardcoded to font-family="Times, serif" with no toolkit
+option to change it (checked every font-related option, including
+fontTextLiberation, which sounds like it should but doesn't touch this).
+This script rewrites that to font-family="Helvetica" in every page's SVG
+before writing it out, matching what songs/scoryst/*.typ's `#set text(font:
+"Helvetica")` already asks for elsewhere in this project.
+
+This once looked like it wouldn't matter -- an earlier investigation into
+why tempo-mark text rendered bolder here than in the scoryst pipeline
+concluded Typst's SVG-image font resolution ignores declared font-family
+entirely once Leipzig.ttf is loaded via --font-path (see git history:
+tried pointing --font-path at real "Times"/"Times New Roman" files, no
+change; removing Leipzig.ttf turned even the plain digits to tofu). That
+conclusion turned out to be incomplete: switching the declared family to
+"Helvetica" (rather than "Times, serif" or a literal "Times"/"Times New
+Roman" file, what was tried before) visibly changes the render -- clean
+sans-serif text instead of a heavier serif -- with no other change to
+--font-path, i.e. still only songs/typst/fonts/Leipzig.ttf provided. So
+the family name given clearly does matter in at least some cases; exactly
+which names Typst's SVG font matching special-cases and why is still not
+fully understood, just no longer assumed to be "none of them, ever."
 
 Requires the `verovio` Python package.
 """
@@ -129,7 +126,14 @@ def render_pages(xml: str, extra_options: dict) -> list:
     tk.setOptions({**DEFAULT_OPTIONS, **extra_options})
     if not tk.loadData(xml):
         sys.exit("verovio failed to load the score")
-    return [tk.renderToSVG(p) for p in range(1, tk.getPageCount() + 1)]
+    pages = [tk.renderToSVG(p) for p in range(1, tk.getPageCount() + 1)]
+    # Verovio hardcodes font-family="Times, serif" on the SVG root for
+    # everything that isn't a music glyph -- lyrics, dynamics, tempo
+    # digits, part labels -- with no toolkit option to change it (checked
+    # every font-related option, including fontTextLiberation, which
+    # sounds like it should but doesn't touch this). Post-processing the
+    # SVG text is the only lever available.
+    return [svg.replace('font-family="Times, serif"', 'font-family="Helvetica"') for svg in pages]
 
 
 def main() -> None:
