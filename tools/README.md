@@ -188,6 +188,32 @@ explicit `<part-id>:<voice-number>` like `P1:1`. As with `choirify.py`, it
 rewrites a copy of the MusicXML -- the file on disk is untouched -- and needs
 only the standard library (no `verovio` required for this step).
 
+## Emphasize one voice (practice mix)
+
+To study one voice while still hearing the others in the background -- rather
+than muting them entirely, as `voice-isolate.py` does -- split the score's
+multi-voice parts into one part per voice with `voice-explode.py`:
+
+```sh
+python3 tools/voice-explode.py songs/musicxml/four-voices.musicxml /tmp/four-voices.exploded.musicxml
+```
+
+A part like `<part-name>Soprano/Alto</part-name>` carrying `<voice>1</voice>`
+and `<voice>2</voice>` notes on one staff becomes two full parts (`Soprano`,
+`Alto`), nothing muted or dropped -- just regrouped. Single-voice parts are
+left untouched. This matters because Verovio assigns each `<part>` its own
+MIDI channel on export but does not split channels *within* a part by voice,
+so an independent volume per voice requires a per-voice part first.
+
+The exploded file is a real, standalone MusicXML score on its own (e.g. one
+staff per voice instead of two), but its purpose here is as input to
+`voice-mix.sh` (a render step, not yet built), which will assign each part a
+channel, set a louder volume on the voice you're studying and quieter volumes
+on the rest via MIDI Control Change #7 (Channel Volume -- confirmed to work
+with this project's FluidSynth-based rendering, roughly a 32 dB spread
+between CC7 values of 20 and 127), then render through the existing
+MIDI → WAV → MP3 pipeline.
+
 ## Notes
 
 - Both default to the General MIDI **piano** (program 0), which suits the
