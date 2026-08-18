@@ -18,37 +18,13 @@
 #show "ю́": accented("ю", 0.305em)
 #show "я́": accented("я", 0.156em)
 
-// Typst's own default-margin rule (2.5/21 of the smaller page dimension),
-// spelled out so the footer sizing below can build on the exact same value.
-#let page-margin = 2.5 / 21 * 148mm
-
-// Symmetric gap above and below the new footer rule.
-#let footer-rule-gap = 10pt
-#let footer-rule-height = 2 * footer-rule-gap
-
-// By default (footer-descent: 30%), Typst's footer sits 30% of the bottom
-// margin below the body, so the page number always had 0.3 * page-margin of
-// unused space above it. We set footer-descent to 0% and reclaim that space
-// as an explicit gap, then grow the margin by exactly what the rule adds on
-// top of it — so the number ends up exactly where it always was, and the
-// body shrinks by exactly the rule's footprint (and nothing else).
 #set page(
   paper: "a5",
   numbering: "1",
-  margin: (bottom: page-margin * 70% + footer-rule-height),
-  footer-descent: 0%,
   header: block(width: 100%)[
     #align(center, text(style: "italic", size: 11pt)[Канон молебный ко Пресвятой Богородице])
     #v(-0.6em)
     #line(length: 100%)
-  ],
-  footer: block(width: 100%)[
-    #stack(dir: ttb, spacing: 0pt,
-      v(footer-rule-gap),
-      line(length: 100%),
-      v(footer-rule-gap),
-      align(center)[#context counter(page).display("1")],
-    )
   ],
 )
 
@@ -63,7 +39,7 @@
 // is also fully portable, since it doesn't depend on any installed font.
 #let maltese-cross(size: 20pt) = image("maltese-cross.svg", width: size, height: size)
 
-#page(numbering: none, header: none, footer: none)[
+#page(numbering: none, header: none)[
   #set par(justify: false)
   #v(1fr)
   #align(center)[
@@ -83,7 +59,7 @@
   #v(3em)
 ]
 
-#page(numbering: none, header: none, footer: none)[]
+#page(numbering: none, header: none)[]
 
 #set text(size: 12pt)
 
