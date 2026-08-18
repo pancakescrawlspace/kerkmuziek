@@ -4,7 +4,7 @@
   paper: "a5",
   numbering: "1",
   header: block(width: 100%)[
-    #align(center, text(style: "italic", size: 10pt)[Канон молебный ко Пресвятой Богородице])
+    #align(center, text(style: "italic", size: 11pt)[Канон молебный ко Пресвятой Богородице])
     #v(-0.6em)
     #line(length: 100%)
   ],
