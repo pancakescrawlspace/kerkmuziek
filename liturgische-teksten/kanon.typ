@@ -1,5 +1,9 @@
 #set par(justify: true)
 
+// The default font lacks proper Cyrillic mark positioning, so а combining
+// acute over "и" renders visibly off-center; this overlays it by hand.
+#show "и́": box[и#place(top + left, dx: 0.2em)[´]]
+
 #set page(
   paper: "a5",
   numbering: "1",
