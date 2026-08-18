@@ -1,8 +1,22 @@
 #set par(justify: true)
 
-// The default font lacks proper Cyrillic mark positioning, so а combining
-// acute over "и" renders visibly off-center; this overlays it by hand.
-#show "и́": box[и#place(top + left, dx: 0.2em)[´]]
+// The default font lacks proper Cyrillic mark positioning, so a combining
+// acute over a vowel renders visibly off-center (worst on и, у, ы, ю);
+// this overlays it by hand for every vowel instead, both to fix that and
+// to make the positioning consistent and font-independent everywhere.
+// The word-joiners glue the resulting box to its neighbors — without them
+// Typst treats the box as a valid line-break point, splitting words apart
+// mid-syllable wherever one lands near a justified line's wrap point.
+#let accented(base, dx) = [#sym.wj#box[#base#place(top + left, dx: dx)[´]]#sym.wj]
+#show "а́": accented("а", 0.145em)
+#show "е́": accented("е", 0.112em)
+#show "и́": accented("и", 0.2em)
+#show "о́": accented("о", 0.148em)
+#show "у́": accented("у", 0.196em)
+#show "ы́": accented("ы", 0.305em)
+#show "э́": accented("э", 0.112em)
+#show "ю́": accented("ю", 0.305em)
+#show "я́": accented("я", 0.156em)
 
 #set page(
   paper: "a5",
