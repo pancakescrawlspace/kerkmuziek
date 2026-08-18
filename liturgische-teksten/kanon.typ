@@ -22,25 +22,20 @@
 // spelled out so the footer sizing below can build on the exact same value.
 #let page-margin = 2.5 / 21 * 148mm
 
-// Gap between the rule and the number below it: unchanged since the rule
-// was introduced, and kept fixed here so the rule and number don't move.
-#let footer-gap-below-rule = 10pt
-// Gap between the body and the rule above it. Widened (from 10pt) to match
-// the corresponding gap above the header's rule — matching the *minimum*
-// gap seen across pages, since on a full page body text lands a few points
-// past the nominal body-bottom edge (its line's descenders overshoot it).
-#let footer-gap-above-rule = 11pt
+// Symmetric gap above and below the new footer rule.
+#let footer-rule-gap = 10pt
+#let footer-rule-height = 2 * footer-rule-gap
 
 // By default (footer-descent: 30%), Typst's footer sits 30% of the bottom
 // margin below the body, so the page number always had 0.3 * page-margin of
 // unused space above it. We set footer-descent to 0% and reclaim that space
-// as explicit gaps, then grow the margin by exactly what those gaps and the
-// rule add on top of it — so the rule and number end up exactly where they
-// always were, and the body shrinks by exactly the added footprint.
+// as an explicit gap, then grow the margin by exactly what the rule adds on
+// top of it — so the number ends up exactly where it always was, and the
+// body shrinks by exactly the rule's footprint (and nothing else).
 #set page(
   paper: "a5",
   numbering: "1",
-  margin: (bottom: page-margin * 70% + footer-gap-above-rule + footer-gap-below-rule),
+  margin: (bottom: page-margin * 70% + footer-rule-height),
   footer-descent: 0%,
   header: block(width: 100%)[
     #align(center, text(style: "italic", size: 11pt)[Канон молебный ко Пресвятой Богородице])
@@ -49,9 +44,9 @@
   ],
   footer: block(width: 100%)[
     #stack(dir: ttb, spacing: 0pt,
-      v(footer-gap-above-rule),
+      v(footer-rule-gap),
       line(length: 100%),
-      v(footer-gap-below-rule),
+      v(footer-rule-gap),
       align(center)[#context counter(page).display("1")],
     )
   ],
