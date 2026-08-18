@@ -14,6 +14,7 @@ AUDIO_DIR = SONGS / "audio"
 SCORYST_DIR = SONGS / "scoryst"
 TYPST_DIR = SONGS / "typst"
 VEROVIO_DIRECT_PDF_DIR = SONGS / "verovio-direct-pdf"
+MUSICXML_SVG_DIR = SONGS / "musicxml-svg"
 
 
 def _entry(path: Path) -> dict:
@@ -54,10 +55,15 @@ def list_pdfs() -> list[dict]:
     return entries
 
 
+def list_svg() -> list[dict]:
+    return [_entry(path) for path in sorted(MUSICXML_SVG_DIR.glob("*.svg"))]
+
+
 LISTERS = {
     "musicxml": list_musicxml,
     "midi": list_midi,
     "mp3": list_mp3,
+    "svg": list_svg,
     "pdf": list_pdfs,
 }
 

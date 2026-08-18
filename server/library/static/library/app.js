@@ -118,6 +118,7 @@
   const COLUMNS = {
     midi: (f) => [f.name, f.path, f.size],
     mp3: (f) => [f.name, f.path, f.size],
+    svg: (f) => [f.name, f.path, f.size],
     pdf: (f) => [f.name, f.pipeline, f.path, f.size],
   };
 

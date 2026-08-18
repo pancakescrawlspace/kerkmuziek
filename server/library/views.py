@@ -18,6 +18,7 @@ def index(request):
         "musicxml": LISTERS["musicxml"](),
         "midi": LISTERS["midi"](),
         "mp3": LISTERS["mp3"](),
+        "svg": LISTERS["svg"](),
         "pdf": LISTERS["pdf"](),
         "actions_json": json.dumps(action_meta),
     }

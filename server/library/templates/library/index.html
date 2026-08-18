@@ -16,6 +16,7 @@
     <button class="tab-button active" data-tab="musicxml">MusicXML</button>
     <button class="tab-button" data-tab="midi">MIDI</button>
     <button class="tab-button" data-tab="mp3">MP3</button>
+    <button class="tab-button" data-tab="svg">SVG</button>
     <button class="tab-button" data-tab="pdf">PDF</button>
   </nav>
 
@@ -55,6 +56,19 @@
       <tbody>
         {% for f in mp3 %}
         <tr class="file-row" data-kind="mp3" data-path="{{ f.path }}">
+          <td>{{ f.name }}</td><td>{{ f.path }}</td><td>{{ f.size }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section id="tab-svg" class="tab-panel" hidden>
+    <table>
+      <thead><tr><th>Name</th><th>Path</th><th>Size</th></tr></thead>
+      <tbody>
+        {% for f in svg %}
+        <tr class="file-row" data-kind="svg" data-path="{{ f.path }}">
           <td>{{ f.name }}</td><td>{{ f.path }}</td><td>{{ f.size }}</td>
         </tr>
         {% endfor %}
