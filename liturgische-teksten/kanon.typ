@@ -31,7 +31,6 @@
   ]
   #v(3em)
 ]
-#counter(page).update(1)
 
 #subtitle[Пе́снь 1]
 
