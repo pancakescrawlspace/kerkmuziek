@@ -19,9 +19,9 @@
   #v(1fr)
   #align(center)[
     #text(weight: "bold", size: 22pt)[Канон молебный ко Пресвятой Богородице]
-    #v(1em)
-    #text(font: "Apple Symbols", size: 16pt)[✠]
-    #v(1em + 1.5pt) // nudge to visually center the cross between title and subtitle
+    #v(1em + 1.5pt)
+    #text(font: "Zapf Dingbats", size: 28pt)[✠]
+    #v(1em - 1.5pt) // nudge to visually center the cross between title and subtitle
     #text(style: "italic", size: 13pt)[Kerkslavische tekst van \ de Smeekcanon tot de Moeder Gods] // dummy subtitle
   ]
   #v(1fr)
@@ -33,6 +33,8 @@
   ]
   #v(3em)
 ]
+
+#set text(size: 12pt)
 
 #subtitle[Пе́снь 1]
 
