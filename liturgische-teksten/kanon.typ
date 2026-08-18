@@ -18,14 +18,31 @@
   align(center, text(weight: "bold", size: 14pt, body))
 }
 
+// Drawn by hand instead of using a font glyph: Unicode's "Maltese Cross"
+// (U+2720) is drawn wildly differently across fonts — some straight-edged
+// like a true Maltese cross, others closer to a rounded cross pattée — so
+// no font choice reliably reproduces the intended shape everywhere. This
+// is also fully portable, since it doesn't depend on any installed font.
+#let maltese-cross(size: 20pt, fill: black) = {
+  let r = size / 2
+  let w = r * 0.6
+  let pts = (
+    (r, r), (r - w, 0pt), (r + w, 0pt),
+    (r, r), (size, r - w), (size, r + w),
+    (r, r), (r + w, size), (r - w, size),
+    (r, r), (0pt, r + w), (0pt, r - w),
+  )
+  box(width: size, height: size, polygon(fill: fill, ..pts))
+}
+
 #page(numbering: none, header: none)[
   #set par(justify: false)
   #v(1fr)
   #align(center)[
     #text(weight: "bold", size: 22pt)[Канон молебный ко Пресвятой Богородице]
-    #v(1em - 0.5pt)
-    #text(font: "DejaVu Sans Mono", size: 28pt)[✠]
-    #v(1em + 0.5pt) // nudge to visually center the cross between title and subtitle
+    #v(1em - 3.15pt)
+    #maltese-cross()
+    #v(1em + 3.15pt) // nudge to visually center the cross between title and subtitle
     #text(style: "italic", size: 13pt)[Kerkslavische tekst van \ de Smeekcanon tot de Moeder Gods] // dummy subtitle
   ]
   #v(1fr)
