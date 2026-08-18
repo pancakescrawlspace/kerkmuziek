@@ -48,6 +48,17 @@ def _pdf_scoryst_commands(musicxml_abs: Path, name: str) -> list[list[str]]:
     return [["tools/compile-scores.sh", f"songs/scoryst/{name}.typ"]]
 
 
+def _svg_commands(musicxml_abs: Path, name: str) -> list[list[str]]:
+    return [
+        [
+            "python3",
+            "tools/musicxml2svg.py",
+            str(musicxml_abs.relative_to(ROOT)),
+            f"songs/musicxml-svg/{name}",
+        ]
+    ]
+
+
 def _pdf_typst_commands(musicxml_abs: Path, name: str) -> list[list[str]]:
     return [
         [
@@ -92,6 +103,7 @@ def _pdf_verovio_direct_commands(musicxml_abs: Path, name: str) -> list[list[str
 ACTIONS = {
     "midi": ("Regenerate MIDI", "musicxml", None, _midi_commands),
     "mp3": ("Regenerate MP3", "musicxml", None, _mp3_commands),
+    "svg": ("Regenerate SVG", "musicxml", None, _svg_commands),
     "pdf-scoryst": (
         "Regenerate PDF (scoryst)",
         "musicxml",

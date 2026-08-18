@@ -6,6 +6,7 @@
   const REFRESH_TARGET = {
     midi: "midi",
     mp3: "mp3",
+    svg: "svg",
     "pdf-scoryst": "pdf",
     "pdf-typst": "pdf",
     "pdf-verovio-direct": "pdf",
