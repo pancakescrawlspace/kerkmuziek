@@ -61,7 +61,7 @@
   // `sticky` glues this block to the one right after it, so a page break
   // can't land between a subtitle and the text it introduces — the same
   // trick Typst's own headings use to avoid ending a page on a heading.
-  block(width: 100%, sticky: true, align(center, text(weight: "bold", size: 14pt, body)))
+  block(sticky: true, align(center, text(weight: "bold", size: 14pt, body)))
 }
 
 // An SVG image instead of a font glyph: Unicode's "Maltese Cross"
