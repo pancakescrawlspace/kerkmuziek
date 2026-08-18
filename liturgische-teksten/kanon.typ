@@ -18,22 +18,12 @@
   align(center, text(weight: "bold", size: 14pt, body))
 }
 
-// Drawn by hand instead of using a font glyph: Unicode's "Maltese Cross"
+// An SVG image instead of a font glyph: Unicode's "Maltese Cross"
 // (U+2720) is drawn wildly differently across fonts — some straight-edged
 // like a true Maltese cross, others closer to a rounded cross pattée — so
 // no font choice reliably reproduces the intended shape everywhere. This
 // is also fully portable, since it doesn't depend on any installed font.
-#let maltese-cross(size: 20pt, fill: black) = {
-  let r = size / 2
-  let w = r * 0.6
-  let pts = (
-    (r, r), (r - w, 0pt), (r + w, 0pt),
-    (r, r), (size, r - w), (size, r + w),
-    (r, r), (r + w, size), (r - w, size),
-    (r, r), (0pt, r + w), (0pt, r - w),
-  )
-  box(width: size, height: size, polygon(fill: fill, ..pts))
-}
+#let maltese-cross(size: 20pt) = image("maltese-cross.svg", width: size, height: size)
 
 #page(numbering: none, header: none)[
   #set par(justify: false)
