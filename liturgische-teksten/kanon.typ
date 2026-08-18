@@ -39,7 +39,7 @@
   #align(center)[
     #text(size: 9pt)[
       Russisch-Orthodoxe Parochie \ van de Heilige Transfiguratie \ te Groningen#v(-3pt)
-      2026
+      #emph[2026]
     ] // dummy publisher information
   ]
   #v(3em)
