@@ -22,12 +22,12 @@
     #v(1em)
     #text(font: "Apple Symbols", size: 16pt)[✠]
     #v(1em + 1.5pt) // nudge to visually center the cross between title and subtitle
-    #text(style: "italic", size: 13pt)[Kerkslavische tekst van de Smeekcanon tot de Moeder Gods] // dummy subtitle
+    #text(style: "italic", size: 13pt)[Kerkslavische tekst van \ de Smeekcanon tot de Moeder Gods] // dummy subtitle
   ]
   #v(1fr)
   #align(center)[
     #text(size: 9pt)[
-      Russisch-Orthodoxe Parochie van de \ Heilige Transfiguratie te Groningen#v(-3pt)
+      Russisch-Orthodoxe Parochie \ van de Heilige Transfiguratie \ te Groningen#v(-3pt)
       2026
     ] // dummy publisher information
   ]
