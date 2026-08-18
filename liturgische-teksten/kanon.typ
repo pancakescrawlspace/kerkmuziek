@@ -34,6 +34,8 @@
   #v(3em)
 ]
 
+#page(numbering: none, header: none)[]
+
 #set text(size: 12pt)
 
 #subtitle[Пе́снь 1]
