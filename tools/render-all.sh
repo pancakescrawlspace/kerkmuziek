@@ -13,8 +13,9 @@
 #   piano  GeneralUser-GS.sf2   https://github.com/mrbumpy409/GeneralUser-GS
 #   choir  MuseScore_General.sf3
 #          https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/
-# Drop those two files into ~/soundfonts and this script picks them up
-# automatically (see below); pass SOUNDFONT / SOUNDFONT_CHOIR to override.
+# Drop those two files into MuseScore's soundfont folder,
+# ~/Documents/MuseScore4/SoundFonts (or ~/soundfonts), and this script picks
+# them up automatically (see below); pass SOUNDFONT / SOUNDFONT_CHOIR to override.
 # Because different soundfonts produce different audio, a rebuild with some
 # other soundfont will show the .mp3 files as changed -- that is expected.
 #
@@ -31,16 +32,18 @@ songs="$root/songs/audio"       # generated MP3s are written here
 s2m="$here/score2mp3.sh"
 
 # Prefer the canonical soundfonts (see the provenance note above) when they are
-# installed under ~/soundfonts, so a default rebuild reproduces the committed
+# installed in one of those folders, so a default rebuild reproduces the committed
 # set. An explicit SOUNDFONT / SOUNDFONT_CHOIR in the environment still wins; if
 # the files are absent (another machine), we leave them unset and score2mp3.sh
 # falls back to whatever mid2mp3-fluidsynth.sh autodetects.
-if [ -z "${SOUNDFONT:-}" ] && [ -f "$HOME/soundfonts/GeneralUser-GS.sf2" ]; then
-  SOUNDFONT="$HOME/soundfonts/GeneralUser-GS.sf2"
-fi
-if [ -z "${SOUNDFONT_CHOIR:-}" ] && [ -f "$HOME/soundfonts/MuseScore_General.sf3" ]; then
-  SOUNDFONT_CHOIR="$HOME/soundfonts/MuseScore_General.sf3"
-fi
+for dir in "$HOME/Documents/MuseScore4/SoundFonts" "$HOME/soundfonts"; do
+  if [ -z "${SOUNDFONT:-}" ] && [ -f "$dir/GeneralUser-GS.sf2" ]; then
+    SOUNDFONT="$dir/GeneralUser-GS.sf2"
+  fi
+  if [ -z "${SOUNDFONT_CHOIR:-}" ] && [ -f "$dir/MuseScore_General.sf3" ]; then
+    SOUNDFONT_CHOIR="$dir/MuseScore_General.sf3"
+  fi
+done
 [ -n "${SOUNDFONT:-}" ] && export SOUNDFONT || true
 
 # Every piece gets a piano render; the choral pieces also get a choir render.
