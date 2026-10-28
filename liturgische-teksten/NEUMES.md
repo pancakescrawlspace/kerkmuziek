@@ -11,6 +11,9 @@ Bucharest, pp. 17–19 of
 notated in full. The other odes give just the first words of the irmos,
 because there only the troparia are sung.
 
+The pictures in `neumes/` are cropped from that score, each showing one
+neume as printed on the syllable named in its caption.
+
 ## The idea
 
 Byzantine notation (the Chrysanthine system used in Romanian and Greek
@@ -19,16 +22,16 @@ step up", "two steps down", and so on, relative to the previous note. That
 is what this repo's pitch marks say too, so the conversion is mostly one
 neume per syllable, read straight across:
 
-| Neume | Looks like (in this score) | Step | Mark |
-|---|---|---|---|
-| ison | short bar with a hook at its left end | 0 | *(none)* |
-| oligon | plain straight bar | +1 | `rise` |
-| petasti | cup (◡) with a curl | +1 | `rise` |
-| kentimata | two short ticks (ıı) | +1 | `rise` |
-| kentima | one short tick, on or next to an oligon | +2 | `risetwo` |
-| apostrophos | small curve, like ")" | −1 | `fall` |
-| elaphron | arch (◠) with a hook at its left end | −2 | `falltwo` |
-| elaphron + apostrophos | the arch with a curl inside it | −3 | `fallthree` |
+| Neume | In this score | Looks like | Step | Mark |
+|---|---|---|---|---|
+| ison | ![ison](neumes/ison.png) | short bar with a hook at its left end (*Mân*, Ode 9) | 0 | *(none)* |
+| oligon | ![oligon](neumes/oligon.png) | plain straight bar (*iți*, Ode 9) | +1 | `rise` |
+| petasti | ![petasti](neumes/petasti.png) | cup (◡) with a curl (*cioa*, Ode 9) | +1 | `rise` |
+| kentimata | ![kentimata](neumes/kentimata.png) | two short ticks (*-i-* in "ti-i-ne", Ode 9) | +1 | `rise` |
+| kentima | *(see below)* | one short tick, on or next to an oligon | +2 | `risetwo` |
+| apostrophos | ![apostrophos](neumes/apostrophos.png) | small curve, like ")" (*tu*, Ode 9) | −1 | `fall` |
+| elaphron | ![elaphron](neumes/elaphron.png) | arch (◠) with a hook at its left end (*fi*, Ode 9) | −2 | `falltwo` |
+| elaphron + apostrophos | ![elaphron + apostrophos](neumes/elaphron-apostrophos.png) | the arch with a curl inside it (*ce* in "ce-e-te", Ode 8) | −3 | `fallthree` |
 
 - **Ison gets no mark.** That follows `makrina.typ` and the other meneon/
   files, where an unmarked syllable stays on the same note.
@@ -42,27 +45,41 @@ neume per syllable, read straight across:
 A neume written above, below or beside an oligon changes what the oligon
 means:
 
+| Combination | In this score | Step | Mark |
+|---|---|---|---|
+| kentima on top of an oligon (*și*, Ode 8) | ![oligon with kentima on top](neumes/oligon-kentima-above.png) | +2 | `risetwo` |
+| kentima just right of an oligon (*Dum*, Ode 9) | ![oligon with kentima to its right](neumes/oligon-kentima-right.png) | +2 | `risetwo` |
+| kentimata below an oligon (*-a* in "Împăra-a-atul", Ode 8) | ![oligon with kentimata below](neumes/oligon-kentimata-below.png) | +1, +1 | `risetwice` |
+| kentimata above an oligon (*zeu*, Ode 9) | ![oligon with kentimata above](neumes/oligon-kentimata-above.png) | +1, +1 | `risetwice` |
+| oligon with a flat hook below, the antikenoma (*te* in "ce-e-te", Ode 8) | ![oligon with antikenoma](neumes/oligon-antikenoma.png) | +1 | `rise` |
+| oligon with a long swoosh below (*ti* in "pe tine", Ode 9) | ![oligon with a swoosh below](neumes/oligon-swoosh.png) | +1 | `rise` |
+
 - **Kentima on an oligon** (a tick on top, or just to its right): the
-  oligon itself is silent and the kentima gives the step, +2 in total,
-  marked `risetwo`. Examples: *și* (Ode 8) and *Dum* (Ode 9).
+  oligon itself is silent and the kentima gives the step, +2 in total.
 - **Kentimata below or above an oligon:** two notes on one syllable, each
-  a step up, marked `risetwice` (two strokes side by side). Examples: *-a*
-  in "Împăra-a-atul", and *zeu* and *veș* (Ode 9).
-- **An oligon with a stroke underneath** (a flat hook, the antikenoma, or
-  a long swoosh) is still just +1, marked `rise`. These under-strokes say
-  how to sing the note, not where it goes. At first I read the swoosh as a
-  second, falling note, and the martyria check (below) showed that was
-  wrong.
+  a step up, so two strokes side by side.
+- **An oligon with a stroke underneath** (the antikenoma or the swoosh) is
+  still just +1. These under-strokes say how to sing the note, not where
+  it goes. At first I read the swoosh as a second, falling note, and the
+  martyria check (below) showed that was wrong. The kentimata picture
+  above shows the same swoosh, under *zeu*.
 
 ## Signs that don't become marks
+
+| Sign | In this score | Meaning | In the marks |
+|---|---|---|---|
+| klasma, on an ison (*ne* in "ti-i-ne", Ode 9) | ![ison with klasma](neumes/ison-klasma.png) | lengthens the note | `hold` |
+| klasma, on an apostrophos (*tul*, Ode 8) | ![apostrophos with klasma](neumes/apostrophos-klasma.png) | lengthens the note | `hold` |
+| dipli, under an apostrophos (*te*, end of Ode 9) | ![apostrophos with dipli](neumes/apostrophos-dipli.png) | lengthens the note | `hold` |
+| phthora (under *ves*, Ode 9) | ![phthora](neumes/phthora.png) | changes the scale's intervals | ignored |
 
 - **Klasma, apli, dipli:** a small arc (˘) or dots below or above a neume.
   They lengthen the note, so the syllable gets `hold`, the red underline.
   The step is still that of the neume they're attached to.
 - **Vareia, psifiston:** small strokes that give a note emphasis. Ignored.
-- **Phthorae:** red signs inside the line (for example ⚦ under *ves* and
-  *nic* in Ode 9). They change the scale's intervals from that point on,
-  but not which way the melody goes, so they're ignored.
+- **Phthorae:** red signs inside the line (under *ves* and *mă* in Ode 9).
+  They change the scale's intervals from that point on, but not which way
+  the melody goes, so they're ignored.
 - **Martyriae:** the red signs after a phrase, made of a letter and a sign
   below it. They're checkpoints, described next.
 
@@ -79,7 +96,13 @@ Start from the martyria at the heading (Ga: a Γ over its sign) and add up
 the steps syllable by syllable. At each red martyria the total must equal
 that note. In this score:
 
-- **Γ** over its sign is Ga, **Δ** is Di, **ν** is Ni.
+| Ga | Ke | Ni |
+|---|---|---|
+| ![martyria Ga](neumes/martyria-ga.png) | ![martyria Ke](neumes/martyria-ke.png) | ![martyria Ni](neumes/martyria-ni.png) |
+| after *toți*, Ode 9 | after *tul*, Ode 8 | after *cântați-L*, Ode 8 |
+
+- **Γ** over its sign is Ga, **ν** is Ni, and **Δ** (not used in these
+  two irmoi) is Di.
 - **χ** over a λ-like sign is Ke. I couldn't recognize this letter on its
   own; I identified it because the first phrases of both irmoi add up to
   Ke there.
@@ -98,9 +121,12 @@ Results:
 | Ode 9 | "de Dumnezeu … mărindu-te" | Ga → Ga | yes |
 
 The one gap is in the last phrase of the Ode 8 irmos. Two neumes there
-aren't in the table above:
-- on *ța*, a petasti with a small stroke beneath it;
-- on *roa*, an oligon over a petasti.
+aren't in the tables above:
+
+| On | In this score | Read as | Mark |
+|---|---|---|---|
+| *ța* | ![petasti with a small stroke below](neumes/petasti-stroke-below.png) | a petasti with a small stroke beneath it, +1 | `rise` |
+| *roa* | ![oligon over a petasti](neumes/oligon-over-petasti.png) | an oligon over a petasti, +1, +1 | `risetwice` |
 
 Marked as one rise and two rises, the phrase ends one step below its
 martyria, so one of them rises one step more than marked. A chanter who
