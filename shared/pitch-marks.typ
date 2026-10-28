@@ -18,9 +18,12 @@
 
 // ---- tunable parameters ---------------------------------------------------
 
+// Sizes are in em, so a mark scales with the text it sits on. They were
+// tuned for layout.typ's 18pt body text, so each one is written as its
+// point size there divided by 18: `7em / 18` is 7pt at 18pt, 4.67pt at 12pt.
 #let mark-color = luma(90)
-#let mark-thickness = 1.3pt
-#let mark-length = 7pt        // horizontal run of one stroke
+#let mark-thickness = 1.3em / 18
+#let mark-length = 7em / 18   // horizontal run of one stroke
 #let mark-slope = 0.5         // rise/run of one stroke (0.5 => ~27deg, 1 => 45deg)
 // State, not a plain length: mark-above reads it back via .get() inside its
 // own context block, so a caller can override it with mark-clearance.update()
@@ -29,9 +32,9 @@
 // *importing* file's own scope -- mark-above's closure was defined in this
 // module and keeps resolving mark-clearance to this module's own binding
 // regardless, so the override would silently do nothing.
-#let mark-clearance = state("pitch-marks-mark-clearance", 3pt) // gap between the syllable's top and the mark
-#let mark-stack-gap = .75pt   // vertical gap between stacked strokes (risetwo/risethree)
-#let mark-spaced-gap = 3pt    // horizontal gap between side-by-side strokes over one syllable
+#let mark-clearance = state("pitch-marks-mark-clearance", 3em / 18) // gap between the syllable's top and the mark
+#let mark-stack-gap = .75em / 18  // vertical gap between stacked strokes (risetwo/risethree)
+#let mark-spaced-gap = 3em / 18   // horizontal gap between side-by-side strokes over one syllable
 
 // ---- stroke primitives ------------------------------------------------------
 

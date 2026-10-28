@@ -53,10 +53,12 @@
 // thickness added on top of hold-clearance because the stroke is centered
 // on the line's path, not drawn above it -- otherwise half the stroke
 // would still eat into that gap.
+// Sizes are in em, written as their point size at layout.typ's 18pt body
+// text divided by 18 -- see the same note in pitch-marks.typ.
 #let hold-color = red
-#let hold-thickness = 2pt
-#let hold-clearance = 1.5pt   // gap between the syllable's own bottom edge and the rule
-#let hold-gap = 4pt           // shrink/extend the rule by this much in total
+#let hold-thickness = 2em / 18
+#let hold-clearance = 1.5em / 18  // gap between the syllable's own bottom edge and the rule
+#let hold-gap = 4em / 18          // shrink/extend the rule by this much in total
 
 #let hold-below(delta, body) = context {
   let w = measure(body).width

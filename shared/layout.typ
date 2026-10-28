@@ -50,8 +50,8 @@
 // body-size measures 12.91pt, so a plain line reserves 12.91 + 3.5 above.
 #let default-edges = (top-edge: "cap-height", bottom-edge: "baseline")
 #let text-cap-height = 12.91pt        // Helvetica body-size, baseline -> cap-height (the default top edge)
-#let mark-reserve = 3.5pt             // = rise-height in pitch-marks.typ
-#let hold-reserve = 3.5pt             // = hold-clearance + hold-thickness in hold.typ
+#let mark-reserve = 3.5pt             // = rise-height in pitch-marks.typ, at body-size
+#let hold-reserve = 3.5pt             // = hold-clearance + hold-thickness in hold.typ, at body-size
 
 // Prose that is not sung -- the spoken intro before a hymn -- should keep the
 // font's natural line height, not the mark/hold reservation. Wrap it in this.
