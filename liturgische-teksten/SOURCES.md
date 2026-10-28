@@ -19,7 +19,9 @@ reconstruction.
   (*Primul Paraclis al Preasfintei Născătoarei de Dumnezeu*), in neumes,
   as sung at Stavropoleos. Only the irmoi of Odes 8 and 9 are notated in
   full. The Ode 8 irmos, *Pe Împăratul ceresc…*, starts at the bottom of
-  p. 17 and continues on p. 18:
+  p. 17 and continues on p. 18; the Ode 9 irmos, *Mântuiți prin tine
+  fiind…*, is on p. 19. See `NEUMES.md` for how they were turned into
+  pitch marks:
   <https://www.stavropoleos.ro/wp-content/uploads/Psaltica/Rugaciuni/paraclis_primul.pdf>
 - **Stavropoleos Monastery — Great Paraclis**
   (*Paraclisul Preasfintei Născătoarei de Dumnezeu*, set to notes by

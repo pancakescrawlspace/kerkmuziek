@@ -1,5 +1,5 @@
 // Layout test: kanon-ro.typ reproduced exactly, with pitch marks added to
-// one irmos only (Ode 8, "Pe Îmăratul ceresc..."), to judge how the shared
+// two irmoi only (Odes 8 and 9), to judge how the shared
 // pitch-mark and hold macros fit the kanon booklet layout. Compile from the
 // repo root, since it imports ../shared:
 //   typst compile --root . liturgische-teksten/kanon-ro-markings.typ
@@ -187,44 +187,43 @@ De neputințele trupești și de păcatele sufletești, Născătoare de Dumnezeu
 
 #subtitle[Cântarea a 8-a]
 
-// The marks are reconstructed from the psaltic (Byzantine neume) score as
-// sung at Stavropoleos Monastery, Bucharest -- pp. 17-18 of
+// The marks on this irmos and the Ode 9 one are reconstructed from the
+// psaltic (Byzantine neume) score as sung at Stavropoleos Monastery,
+// Bucharest, pp. 17-19 of
 // https://www.stavropoleos.ro/wp-content/uploads/Psaltica/Rugaciuni/paraclis_primul.pdf
-// (see SOURCES.md). The words therefore follow that score rather than the
-// Râmnic text used everywhere else in this file: Stavropoleos sings
-// "...Îl laudă îngereștile cete, cântați-L și preaînălțați-L, noroade,
-// totdeauna" where Râmnic has "...Îl laudă oștile îngerești, lăudați-L și-L
-// preaînălțați întru toți vecii".
+// (see SOURCES.md); NEUMES.md explains the conversion. The words follow
+// that score rather than the Râmnic text used everywhere else in this
+// file: Stavropoleos sings "...Îl laudă îngereștile cete, cântați-L și
+// preaînălțați-L, noroade, totdeauna" where Râmnic has "...Îl laudă oștile
+// îngerești, lăudați-L și-L preaînălțați întru toți vecii".
 //
-// Neumes record steps, not absolute pitches, so each one maps directly onto
-// a mark: ison (same note) gets no mark, as in makrina.typ; oligon,
-// petasti and kentimata (+1) get rise; kentima (+2) risetwo; apostrophos
-// (-1) fall; elaphron (-2) falltwo; chamili (-4) fallthree, the most strokes
-// pitch-marks.typ has. A syllable carrying two notes gets two side-by-side
-// strokes (risetwice/falltwice), and klasma or dipli (lengthen the note)
-// get hold. Syllable by syllable, as read from the score:
+// Syllable by syllable, as read from the score (| = martyria, the
+// score's pitch checkpoint; ✓ = the steps add up to it):
 //
 //   Pe ison · Îm ison · pă apostrophos · ra oligon ·
 //   -a oligon + kentimata below (two notes up) · -a oligon + antikenoma ·
-//   tul apostrophos + klasma | martyria Ke
-//   Ce elaphron · resc oligon · pe oligon · Ca oligon + yporroi (?) ·
+//   tul apostrophos + klasma | Ke ✓
+//   Ce elaphron · resc oligon · pe oligon · Ca oligon + under-stroke ·
 //   re apostrophos · Îl apostrophos · la oligon · u ison ·
 //   dă apostrophos + klasma
 //   în ison · ge ison · reș petasti · ti apostrophos · le ison ·
-//   ce chamili (?) · -e kentimata · te oligon + antikenoma ·
-//   cân apostrophos · ta, ți-L apostrophos + klasma | martyria Ni
+//   ce elaphron + apostrophos (three down) · -e- kentimata ·
+//   te oligon + antikenoma · cân apostrophos ·
+//   ta, ți-L apostrophos + klasma | Ni ✓
 //   și oligon + kentima · prea ison · î oligon · năl oligon ·
-//   ța yporroi (?) · ți-L, no apostrophos · roa oligon + yporroi (?) ·
-//   de apostrophos · tot ison · dea elaphron · u oligon + klasma ·
-//   na apostrophos + dipli | martyria Ga
+//   ța petasti with a small stroke below (?) · ți-L, no apostrophos ·
+//   roa oligon over petasti (?) · de apostrophos · tot ison ·
+//   dea elaphron · u oligon + klasma · na apostrophos + dipli | Ga
 //
-// UNVERIFIED. Adding the steps up phrase by phrase should land on the red
-// martyriae (pitch checkpoints) printed in the score. That works for the
-// first phrase (Ga to Ke) but not for the later ones, so at least one neume
-// marked (?) above is misread. The directions of the marks are more
-// reliable than the number of strokes. A chanter should check this against
-// the score before it is used.
-#text(weight: 700)[Irmosul:] Pe Îm#fall[pă]#rise[ra]#risetwice[-a]#rise[-a]#fall[#hold[tul]] #falltwo(clearance: 0.25em)[Ce]#rise[resc], #rise[pe] #falltwice[Ca]#fall[re] #fall[Îl] #rise[la]u#fall[#hold[dă]] înge#rise[reș]#fall[ti]le #box[#fallthree(clearance: 0.4em)[ce]#rise[-e-]#rise[te]], #fall[cân]#fall[#hold[ta]]#fall[#hold[ți-L]] #risetwo(clearance: 0.25em)[și] prea#rise[î]#rise[năl]#falltwice[ța]#fall[ți-L], #fall[no]#falltwice[roa]#fall[de], tot#falltwo(clearance: 0.25em)[dea]#rise[#hold[u]]#fall[#hold[na]].
+// The last phrase ends one step below its martyria, so one of the two
+// neumes marked (?) rises one step more than marked here.
+//
+// The dashes before and after each irmos give its first and last note
+// relative to DO, as in makrina.typ, where the marks are read in a major
+// scale on DO. These irmoi are built on a major scale on Ga, so Ga is DO.
+// Both start on Ga (the martyria at the ode heading) and end on Ga (the
+// final martyria), so the dashes carry no mark.
+#text(weight: 700)[Irmosul:] --- Pe Îm#fall[pă]#rise[ra]#risetwice[-a]#rise[-a]#fall[#hold[tul]] #falltwo(clearance: 0.25em)[Ce]#rise[resc], #rise[pe] #rise[Ca]#fall[re] #fall[Îl] #rise[la]u#fall[#hold[dă]] înge#rise[reș]#fall[ti]le #box[#fallthree(clearance: 0.4em)[ce]#rise[-e-]#rise[te]], #fall[cân]#fall[#hold[ta]]#fall[#hold[ți-L]] #risetwo(clearance: 0.25em)[și] prea#rise[î]#rise[năl]#rise[ța]#fall[ți-L], #fall[no]#risetwice[roa]#fall[de], tot#falltwo(clearance: 0.25em)[dea]#rise[#hold[u]]#fall[#hold[na]]. ---
 
 -- Preasfântă Născătoare de Dumnezeu, miluiește-ne pe noi.
 
@@ -244,7 +243,24 @@ Tirania ispitelor și năvala patimilor tu le izgonești, Fecioară; pentru acea
 
 #subtitle[Cântarea a 9-a]
 
-#text(weight: 700)[Irmosul:] Cu adevărat, Născătoare de Dumnezeu, te mărturisim pe tine Fecioară curată, noi cei izbăviți prin tine, slăvindu-te cu cetele fără de trup.
+// Marked like the Ode 8 irmos above; the Râmnic text has "Cu adevărat,
+// Născătoare de Dumnezeu, te mărturisim pe tine Fecioară curată, noi cei
+// izbăviți prin tine, slăvindu-te cu cetele fără de trup". As read from
+// the score:
+//
+//   Mân ison · tu apostrophos · iți oligon · prin oligon · ti ison ·
+//   -i- kentimata · ne ison + klasma | Ke ✓
+//   fi elaphron · ind oligon · Fe oligon · cioa petasti · ră apostrophos ·
+//   pe ison · ti oligon + under-stroke · ne apostrophos · ves apostrophos ·
+//   ti oligon + under-stroke · -i- apostrophos · mu apostrophos · te ison ·
+//   toți ison + klasma | Ga ✓
+//   de ison · Dum oligon + kentima · ne oligon ·
+//   zeu oligon + kentimata above (two notes up) ·
+//   Năs, că, toa, re apostrophos ·
+//   veș oligon + kentimata above (two notes up) · nic, mă apostrophos ·
+//   rin oligon + under-stroke · du apostrophos ·
+//   te apostrophos + dipli | Ga ✓
+#text(weight: 700)[Irmosul:] --- Mân#fall[tu]#rise[iți] #rise[prin] ti#rise[-i-]#hold[ne] #falltwo(clearance: 0.25em)[fi]#rise[ind], #rise[Fe]#rise[cioa]#fall[ră], pe #rise[ti]#fall[ne] #box[#fall[ves]#rise[ti]#fall[-i-]#fall[mu]-te] #hold[toți] de #risetwo(clearance: 0.25em)[Dum]#rise[ne]#risetwice[zeu] #fall[Năs]#fall[că]#fall[toa]#fall[re], #risetwice[veș]#fall[nic] #fall[mă]#rise[rin]#fall[du]-#fall[#hold[te]]. ---
 
 -- Preasfântă Născătoare de Dumnezeu, miluiește-ne pe noi.
 
