@@ -22,8 +22,13 @@
   ],
 )
 
+// `sticky` keeps the subtitle on the same page as the text after it, so a
+// page can't end on a subtitle -- the same mechanism Typst's own headings
+// use. The block needs the full width, or align(center) has nothing to
+// centre the subtitle in, and sits inside text() so that its spacing above
+// and below is measured at the subtitle's 14pt, as before it was a block.
 #let subtitle(body) = {
-  align(center, text(weight: "bold", size: 14pt, body))
+  text(weight: "bold", size: 14pt, block(width: 100%, sticky: true, align(center, body)))
 }
 
 // See kanon.typ for why this is an SVG image rather than a font glyph.
