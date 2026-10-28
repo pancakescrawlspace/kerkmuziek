@@ -224,7 +224,7 @@ De neputințele trupești și de păcatele sufletești, Născătoare de Dumnezeu
 // marked (?) above is misread. The directions of the marks are more
 // reliable than the number of strokes. A chanter should check this against
 // the score before it is used.
-#text(weight: 700)[Irmosul:] Pe Îm#fall[pă]#rise[ra]#risetwice[-a]#rise[-a]#fall[#hold[tul]] #falltwo(clearance: 0.25em)[Ce]#rise[resc], #rise[pe] #falltwice[Ca]#fall[re] #fall[Îl] #rise[la]u#fall[#hold[dă]] înge#rise[reș]#fall[ti]le #fallthree(clearance: 0.4em)[ce]#rise[-e-]#rise[te], #fall[cân]#fall[#hold[ta]]#fall[#hold[ți-L]] #risetwo(clearance: 0.25em)[și] prea#rise[î]#rise[năl]#falltwice[ța]#fall[ți-L], #fall[no]#falltwice[roa]#fall[de], tot#falltwo(clearance: 0.25em)[dea]#rise[#hold[u]]#fall[#hold[na]].
+#text(weight: 700)[Irmosul:] Pe Îm#fall[pă]#rise[ra]#risetwice[-a]#rise[-a]#fall[#hold[tul]] #falltwo(clearance: 0.25em)[Ce]#rise[resc], #rise[pe] #falltwice[Ca]#fall[re] #fall[Îl] #rise[la]u#fall[#hold[dă]] înge#rise[reș]#fall[ti]le #box[#fallthree(clearance: 0.4em)[ce]#rise[-e-]#rise[te]], #fall[cân]#fall[#hold[ta]]#fall[#hold[ți-L]] #risetwo(clearance: 0.25em)[și] prea#rise[î]#rise[năl]#falltwice[ța]#fall[ți-L], #fall[no]#falltwice[roa]#fall[de], tot#falltwo(clearance: 0.25em)[dea]#rise[#hold[u]]#fall[#hold[na]].
 
 -- Preasfântă Născătoare de Dumnezeu, miluiește-ne pe noi.
 
